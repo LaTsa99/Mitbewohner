@@ -8,10 +8,10 @@ A dokumentumok számozása a **2**-es indextől zajlik, a tárgyhonlap szerinti 
 ### Code
 _A későbbiekben itt található majd a szkeletonhoz, a prototípushoz és a grafikus változathoz elkészült kódok és a fejlesztés folyamán is itt osztjuk meg egymással a készülő szoftvert._\
 \
-A **Code** könyvtár a következő alkönyvtárakat tartalmazza: 
-#### Szkeleton
-TBA
-#### Prototípus
-TBA
-#### Grafikus változat
-TBA
+A **Code** könyvtár a következő alkönyvtárakat tartalmazza _majd_: 
+#### _Szkeleton_
+\~Currently in development\~
+#### _Prototípus_
+
+#### _Grafikus változat_
+
