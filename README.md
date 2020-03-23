@@ -1,7 +1,7 @@
 # Marci und die Mitbewohner
 
 ## Mappák
-### Bugyi
+### [Bugyi](Bugyi)
 _Itt elérhető az összes véglegesített dokumentum._\
 \
 A dokumentumok számozása a **2**-es indextől zajlik, a tárgyhonlap szerinti számozást követjük.
