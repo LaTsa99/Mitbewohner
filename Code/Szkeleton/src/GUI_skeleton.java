@@ -80,7 +80,7 @@ public class GUI_skeleton {
     }
 
     //This class holds the unique exceptions of this class in order to differentiate from simple exceptions.
-    public class GUI_skeletonException extends Exception{
+    public static class GUI_skeletonException extends Exception{
         public GUI_skeletonException(String message){ super(message); }
     }
 }
