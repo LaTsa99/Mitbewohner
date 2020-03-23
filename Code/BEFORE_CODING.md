@@ -22,9 +22,8 @@
     >Ha jól csináltátok, kék lett a mappa színe.
 
 5. `Compiler output beállítása`\
-   
-   5.1 Project ablakban jobb klikk a Mitbewohnerre\
-   5.2 Open Module Settings\                                       
+    5.1 Project ablakban jobb klikk a Mitbewohnerre\
+   5.2 Open Module Settings\
    (OR Bal klikk a Mitbewohnerre és **F4**)\
    5.3 Project fül -> Project compiler output\
    Itt adjátok meg a *Code\Szkeleton\out* mappát. Nagy valószínűséggel ez 
