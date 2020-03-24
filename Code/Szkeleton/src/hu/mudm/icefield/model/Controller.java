@@ -1,7 +1,6 @@
 package hu.mudm.icefield.model;
 
 import hu.mudm.icefield.model.field.IceFloat;
-import hu.mudm.icefield.Game;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
 package hu.mudm.icefield.model.field;
 
 import hu.mudm.icefield.model.item.Item;
-import hu.mudm.icefield.Game;
 
 import java.util.ArrayList;
 

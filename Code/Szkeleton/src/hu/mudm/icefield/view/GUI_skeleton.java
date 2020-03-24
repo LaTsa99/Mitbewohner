@@ -1,4 +1,4 @@
-//List of used imports
+package hu.mudm.icefield.view;//List of used imports
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
