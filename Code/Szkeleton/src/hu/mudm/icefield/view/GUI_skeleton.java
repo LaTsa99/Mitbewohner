@@ -1,6 +1,8 @@
 package hu.mudm.icefield.view;
 //List of used imports
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,9 +20,11 @@ public class GUI_skeleton {
     public static void raiseTabCnt() { tabCnt++; } //raises tabCnt with one.
     public static void decreaseTabCnt() { tabCnt--; } //decreases tabCnt with one.
     //With this function you can write the appropriate amount of tabs and your text on the console.
-    public static void printlnWithTabs(String text) {
+
+
+    public static void printlnWithTabs(Class className, String text) {
         for (int i = 0; i < tabCnt; i++) System.out.print("\t");
-        System.out.println(text);
+        System.out.println(className.getSimpleName() + "." + text);
     }
 
     //List of choices and their descriptions
