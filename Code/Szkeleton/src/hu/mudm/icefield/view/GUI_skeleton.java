@@ -1,12 +1,28 @@
-package hu.mudm.icefield.view;//List of used imports
+package hu.mudm.icefield.view;
+//List of used imports
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//This class is to get one character from console between given choices.
+//This class is to get one character from console between given choices.d
 //There is two static methods in this class, which are frequent cases of usage of this class.
 //Current version of this class is case sensitive.
+//Added feature to class is a static parameter named tabCnt
+//With this parameter and its functions you can write the messages from skeleton with the proper amount of tabs.
 public class GUI_skeleton {
+
+    //This static variable makes possible to keep count of how many tabs you need to write before a function-call in the program.
+    private static int tabCnt = 0;
+    public static int getTabCnt(){ return tabCnt; } //Getter to tabCnt
+    public static void setTabCnt(int newValue){ tabCnt = newValue; } //Setter to tabCnt
+    public static void raiseTabCnt() { tabCnt++; } //raises tabCnt with one.
+    public static void decreaseTabCnt() { tabCnt--; } //decreases tabCnt with one.
+    //With this function you can write the appropriate amount of tabs and your text on the console.
+    public static void printlnWithTabs(String text) {
+        for (int i = 0; i < tabCnt; i++) System.out.print("\t");
+        System.out.println(text);
+    }
+
     //List of choices and their descriptions
     private ArrayList<Character> choices;
     private ArrayList<String> descriptions;
