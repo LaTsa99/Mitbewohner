@@ -3,7 +3,8 @@
 1. `Ellenőrizzétek, hogy a legfrisebb **master** ág legyen meg.` \
     (ez a _reshaped folders_ commit, amikor ezt a fájlt írom)
     
-2. `Töröljétek ki a Mitbewohner\out, Mitbewohner\src, Mitbewohner\.idea mappákat!`\
+2. `Töröljétek ki a Mitbewohner\out, Mitbewohner\src, Mitbewohner\.idea mappákat!`\ *Tomi megjegyzése: a .idea mappát újra legenerálja,
+                                                                                     anélkül nem fordul -> csak egyszer törölni (?)
     (ebből nem biztos, hogy mind ott van, a lényeg, hogy ne maradjon ott semelyik:) 
 
     **Érdemes a fenti lépéseknél még sima fájlkezelőt és git basht használni, és csak 
@@ -43,6 +44,14 @@ Sok sikert mindenkinek!
 
 Domi
 
+---------------------------
+Ide betolakszom, mivel lehet nem csak nekem nem hajlandó lefordulni a projekt semmilyen Language Levellel.
+**"Error:java: invalid source release: 12"** hibát kapok, a szám 9-13 között tetszőleges, a beállításaimtól függően
+(Stackoverflow, újraindítás, ... eddig nem segített).
+Ha valakinek működik, kérem írja le, neki mi van a Project Settins/Project/Project language level-be beállítva.
+Ha valakinek szintén nem működik, az is jelezheti.
+
+Tomi
 
 
    
