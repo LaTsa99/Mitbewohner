@@ -19,6 +19,8 @@ class Main {
 
         Test_5_3_4();
 
+        Test_5_3_5();
+
         Test_5_3_6();
 
         Test_5_3_7();
@@ -52,6 +54,12 @@ class Main {
         System.out.println("TEST 5.3.4");
         Eskimo e = new Eskimo(new UnstableIceFloat(new Food()));
         Action ma = new PickupAction(e);
+        ma.performAction();
+    }
+
+    static void Test_5_3_5() { //Test for 5.3.5 - Player picks up rope(/diving suit/shovel) - Kriszti
+        System.out.println("TEST 5.3.5");
+        Action ma = new PickupAction();
         ma.performAction();
     }
 
@@ -98,7 +106,7 @@ class Main {
     }
 
     static void Test_5_3_14() {  //Test for 5.3.14 - Game lost
-        System.out.println("TEST 5.3.15");
+        System.out.println("TEST 5.3.14");
         Game g = new Game();
         g.lose();
     }
@@ -113,6 +121,5 @@ class Main {
         System.out.println("TEST 5.3.16");
         Controller c = new Controller();
         c.snowstorm();
-        g.win();
     }
 }
