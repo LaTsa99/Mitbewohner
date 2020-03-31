@@ -1,11 +1,8 @@
 package hu.mudm.icefield;
 
 import hu.mudm.icefield.model.action.Action;
-import hu.mudm.icefield.model.action.BuildRocketAction;
 import hu.mudm.icefield.model.action.MoveAction;
-import hu.mudm.icefield.model.action.ShovelAction;
 import hu.mudm.icefield.model.field.Hole;
-import hu.mudm.icefield.model.field.InstableIceFloat;
 import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.item.Rope;
 import hu.mudm.icefield.model.player.Eskimo;
@@ -16,6 +13,8 @@ class Main {
 
         Test_5_3_1();
 
+        Test_5_3_2();
+
         Test_5_3_13();
 
         Test_5_3_15();
@@ -23,16 +22,14 @@ class Main {
         Test_5_3_7();
 
         Test_5_3_6();
-
-        //System.out.println("Hello");
     }
 
-    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat
+    static void Test_5_3_1() { //Test for 5.3.1
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
     }
 
-    static void Test_5_3_13() {  //Test for 5.3.13 - Player gets rescued
+    static void Test_5_3_13() {  //Test for 5.3.13
         StableIceFloat one=new StableIceFloat();
         Hole two = new Hole();
         StableIceFloat three=new StableIceFloat();
@@ -61,4 +58,10 @@ class Main {
         ShovelAction s = new ShovelAction(r);
         s.performAction();
     }
+    static void Test_5_3_2() {  //Test for 5.3.13
+        System.out.printf("TEST 5.3.2");
+        Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
+        ma.performAction();
+    }
+
 }
