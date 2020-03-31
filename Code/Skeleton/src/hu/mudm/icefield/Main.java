@@ -27,6 +27,8 @@ class Main {
 
         Test_5_3_8();
 
+        Test_5_3_11();
+
         Test_5_3_12();
 
         Test_5_3_13();
@@ -59,7 +61,7 @@ class Main {
 
     static void Test_5_3_5() { //Test for 5.3.5 - Player picks up rope(/diving suit/shovel) - Kriszti
         System.out.println("TEST 5.3.5");
-        Action ma = new PickupAction();
+        Action ma = new PickupAction(new Eskimo(new StableIceFloat()));
         ma.performAction();
     }
 
@@ -83,8 +85,18 @@ class Main {
         ca.performAction();
     }
 
+    static void Test_5_3_11() {  //Test for 5.3.11 - Player drowns
+        System.out.println("TEST 5.3.11");
+        Hole one = new Hole();
+
+        //StableIceFloat two = new StableIceFloat();
+
+        Action ma = new MoveAction(new Researcher(new UnstableIceFloat()), one);
+        ma.performAction();
+    }
+
     static void Test_5_3_12() {  //Test for 5.3.12 - Player swims back
-        System.out.println("TEST 5.3.13");
+        System.out.println("TEST 5.3.12");
         Hole one = new Hole();
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), one);
         ma.performAction();

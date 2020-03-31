@@ -13,6 +13,9 @@ public class UnstableIceFloat extends IceFloat {
         super(item);
     }
 
+    public UnstableIceFloat() {
+    }
+
     @Override
     public Boolean stepOn(Character ch, IceFloat prev) {
         throw new UnsupportedOperationException();
