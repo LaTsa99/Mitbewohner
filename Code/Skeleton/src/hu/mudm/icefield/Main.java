@@ -33,6 +33,15 @@ class Main {
         ma.performAction();
     }
 
+    static void Test_5_3_3() {
+        System.out.println("TEST 5.3.3");;
+        IceFloat h = new Hole();
+        IceFloat s = new StableIceFloat();
+        s.setNeighbors(h);
+        Action ma = new MoveAction(new Researcher(new StableIceFloat()),h);
+        ma.performAction();
+    }
+
     static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
         System.out.printf("TEST 5.3.6");
         Researcher r = new Researcher(new UnstableIceFloat());
