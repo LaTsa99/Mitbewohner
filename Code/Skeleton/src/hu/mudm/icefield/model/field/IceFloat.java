@@ -44,11 +44,15 @@ public abstract class IceFloat {
         }
     }
 
-    public void removeSnow(int layerCount){}
+    public void removeSnow(int layerCount){
+        GUI_skeleton.printlnWithTabs(this.getClass(), "removeSnow(int layerCount)");
+        snowLevel = snowLevel - layerCount;
+    }
 
     public void addSnow(){}
 
     public int getCapacity(){
+        GUI_skeleton.printlnWithTabs(this.getClass(), "getCapacity()");
         return capacity;
     }
 
