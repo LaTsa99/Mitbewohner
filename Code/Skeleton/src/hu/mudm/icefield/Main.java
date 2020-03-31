@@ -21,13 +21,13 @@ class Main {
         Test_5_3_6();
     }
 
-    static void Test_5_3_1() { //Test for 5.3.1
+    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat
         System.out.printf("TEST 5.3.1");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
     }
 
-    static void Test_5_3_2() {  //Test for 5.3.13
+    static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat
         System.out.printf("TEST 5.3.2");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
         ma.performAction();
@@ -45,6 +45,12 @@ class Main {
         Eskimo e = new Eskimo(new StableIceFloat());
         BuildRocketAction bra = new BuildRocketAction(e);
         bra.performAction();
+    }
+
+    static void Test_5_3_8() { //Test for 5.3.8 - Player examines icefloat
+        System.out.printf("TEST 5.3.8");
+        CheckAction ca = new CheckAction(new Researcher(new StableIceFloat()), new Hole()); //We should be able to add Eskimos to a CheckAction as long as they are able to perform one
+        ca.performAction();
     }
 
     static void Test_5_3_13() {  //Test for 5.3.13
@@ -65,21 +71,6 @@ class Main {
         System.out.printf("TEST 5.3.15");
         Game g = new Game();
         g.win();
-    }
-
-
-
-
-
-    static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
-        Researcher r = new Researcher(new InstableIceFloat());
-        ShovelAction sa = new ShovelAction(r);
-        s.performAction();
-    }
-
-    static void Test_5_3_8() { //Test for 5.3.8 - Player examines icefloat
-        CheckAction ca = new CheckAction(new Researcher(), new Hole()); //We should be able to add Eskimos to a CheckAction as long as they are able to perform one
-        ca.performAction();
     }
 
 }
