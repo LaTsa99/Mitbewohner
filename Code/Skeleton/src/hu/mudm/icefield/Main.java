@@ -73,4 +73,10 @@ class Main {
         g.win();
     }
 
+    static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food
+        System.out.println("TEST 5.3.4");
+        Action ma = new PerformAction();
+        ma.performAction();
+    }
+
 }
