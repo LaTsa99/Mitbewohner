@@ -1,5 +1,7 @@
 package hu.mudm.icefield.model.item;
 
+import hu.mudm.icefield.model.player.Character;
+
 public abstract class Item {
 
     public abstract void onPickup(Character ch);

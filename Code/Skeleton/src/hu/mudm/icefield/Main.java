@@ -92,6 +92,12 @@ class Main {
         ca.performAction();
     }
 
+    static void Test_5_3_9() { //Test for 5.3.9 - Player builds igloo - Kriszti
+        System.out.println("TEST 5.3.9");
+        Action ba = new BuildAction(new Eskimo(new StableIceFloat()));
+        ba.performAction();
+    }
+
     static void Test_5_3_11() {  //Test for 5.3.11 - Player drowns
         System.out.println("TEST 5.3.11");
         Hole one = new Hole();
@@ -141,4 +147,12 @@ class Main {
         Controller c = new Controller();
         c.snowstorm();
     }
+
+
+    static void Test_5_3_17() { //Test for 5.3.17 - Game generates iceFloat - Kriszti
+        System.out.println("TEST 5.3.17");
+        Game g = new Game();
+        g.init();
+    }
+
 }
