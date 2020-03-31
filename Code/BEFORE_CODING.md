@@ -51,6 +51,8 @@ Ide betolakszom, mivel lehet nem csak nekem nem hajlandó lefordulni a projekt s
 Ha valakinek működik, kérem írja le, neki mi van a Project Settins/Project/Project language level-be beállítva.
 Ha valakinek szintén nem működik, az is jelezheti.
 
+**MEGOLDÁS:** A hiba nem a language levelben, hanem az SDK-ban rejlik, le kell tölteni a
+legfrisebb kiadást (13.0.1 vagy 13.0.2) és azt beállítani.
 Tomi
 
 
