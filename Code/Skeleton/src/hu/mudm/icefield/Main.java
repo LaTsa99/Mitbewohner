@@ -93,7 +93,7 @@ class Main {
         g.win();
     }
 
-    static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food
+    static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food - Kriszti
         System.out.println("TEST 5.3.4");
         Action ma = new PickupAction();
         ma.performAction();
@@ -103,6 +103,11 @@ class Main {
         System.out.println("TEST 5.3.16");
         Controller c = new Controller();
         c.snowstorm();
-        g.win();
     }
+    static void Test_5_3_5() { //Test for 5.3.5 - Player picks up rope(/diving suit/shovel) - Kriszti
+        System.out.println("TEST 5.3.5");
+        Action ma = new PickupAction();
+        ma.performAction();
+    }
+
 }
