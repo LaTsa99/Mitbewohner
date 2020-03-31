@@ -14,7 +14,7 @@ public class Game {
     }
 
     // Ez a konstruktor
-    private Game(){}
+    Game(){}
 
     private Controller controller;
 

@@ -35,4 +35,9 @@ class Main {
         Action ma_13 = new MoveAction(r, two);
         ma_13.performAction();
     }
+
+    static void Test_5_3_15() {  //Test for 5.3.15
+        Game g = new Game();
+        g.win();
+    }
 }
