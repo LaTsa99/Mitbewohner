@@ -3,6 +3,7 @@ package hu.mudm.icefield.model.player;
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.item.Item;
+import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public abstract class Character {
 
     public void removeAction(Action action){}
 
-    public Character(){}
+    public Character(IceFloat startPosition){position = startPosition;}
 
     public Boolean canSwim() {
         throw new UnsupportedOperationException();
@@ -40,6 +41,15 @@ public abstract class Character {
 
     public void addItem(Item it){}
 
-    public void moveTo(IceFloat ice){}
+    public void moveTo(IceFloat ice){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"moveTo(IceFloat ice)");
+
+        GUI_skeleton.raiseTabCnt();
+        position.removeCharacter(this);
+        GUI_skeleton.decreaseTabCnt();
+
+        position = ice;
+
+    }
 
 }
