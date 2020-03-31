@@ -1,9 +1,6 @@
 package hu.mudm.icefield;
 
-import hu.mudm.icefield.model.action.Action;
-import hu.mudm.icefield.model.action.BuildRocketAction;
-import hu.mudm.icefield.model.action.MoveAction;
-import hu.mudm.icefield.model.action.ShovelAction;
+import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.Hole;
 import hu.mudm.icefield.model.field.InstableIceFloat;
 import hu.mudm.icefield.model.field.StableIceFloat;
@@ -58,7 +55,12 @@ class Main {
 
     static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
         Researcher r = new Researcher(new InstableIceFloat());
-        ShovelAction s = new ShovelAction(r);
+        ShovelAction sa = new ShovelAction(r);
         s.performAction();
+    }
+
+    static void Test_5_3_8() { //Test for 5.3.8 - Player examines icefloat
+        CheckAction ca = new CheckAction(new Researcher(), new Hole()); //We should be able to add Eskimos to a CheckAction as long as they are able to perform one
+        ca.performAction();
     }
 }
