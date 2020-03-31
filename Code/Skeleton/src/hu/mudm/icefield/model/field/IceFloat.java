@@ -46,7 +46,21 @@ public abstract class IceFloat {
 
     public void removeSnow(int layerCount){}
 
-    public void addSnow(){}
+    public void addSnow(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"addsSnow()");
+        snowLevel++;
+        
+        if(iglu) {
+            iglu = false;            
+        }
+        else {
+            for (Character ch: characters) {
+                GUI_skeleton.raiseTabCnt();
+                ch.modifyTemp(-1);
+                GUI_skeleton.decreaseTabCnt();
+            }
+        }
+    }
 
     public int getCapacity(){
         return capacity;

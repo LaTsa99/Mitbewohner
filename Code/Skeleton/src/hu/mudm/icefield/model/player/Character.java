@@ -16,7 +16,10 @@ public abstract class Character {
 
     private int temp;
 
-    public void modifyTemp(int value) {}
+    public void modifyTemp(int value) {
+        GUI_skeleton.printlnWithTabs(this.getClass(), "modifyTemp(int value)");
+        temp+=value;
+    }
 
     public void addAction(Action action){}
 

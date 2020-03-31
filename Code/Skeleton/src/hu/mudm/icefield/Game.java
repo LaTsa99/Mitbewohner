@@ -27,5 +27,7 @@ public class Game {
         GUI_skeleton.printlnWithTabs(Game.class,"lose()");
     }
 
-    public static void win(){}
+    public static void win() {
+        GUI_skeleton.printlnWithTabs(Game.class,"win()");
+    }
 }
