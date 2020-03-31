@@ -11,10 +11,8 @@ public class Controller {
 
     public void gameLoop(){}
 
-    private void snowStorm(){
-        //THERE IT IS!!!! THE MudM ALGORITHM :O
-    }
-
     private void checkWinningStatus(){}
 
+    public void snowstorm() {
+    }
 }
