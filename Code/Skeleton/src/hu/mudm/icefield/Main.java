@@ -39,13 +39,13 @@ class Main {
     }
 
     static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
-        System.out.printf("TEST 5.3.1");
+        System.out.println("TEST 5.3.1");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
     }
 
     static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat - Domi
-        System.out.printf("TEST 5.3.2");
+        System.out.println("TEST 5.3.2");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
         ma.performAction();
     }
