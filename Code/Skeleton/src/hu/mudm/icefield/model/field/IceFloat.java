@@ -19,6 +19,11 @@ public abstract class IceFloat {
         characters = new ArrayList<Character>();
     }
 
+    public IceFloat(Item item){
+        characters = new ArrayList<Character>();
+        this.item = item;
+    }
+
     @Deprecated
     public abstract Boolean stepOn(Character ch, IceFloat prev);
 

@@ -5,6 +5,7 @@ import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.Hole;
 import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.field.UnstableIceFloat;
+import hu.mudm.icefield.model.item.Food;
 import hu.mudm.icefield.model.item.Rope;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
@@ -16,15 +17,23 @@ class Main {
 
         Test_5_3_2();
 
+        Test_5_3_4();
+
         Test_5_3_6();
 
         Test_5_3_7();
 
         Test_5_3_8();
 
+        Test_5_3_12();
+
         Test_5_3_13();
 
+        Test_5_3_14();
+
         Test_5_3_15();
+
+        Test_5_3_16();
     }
 
     static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat
@@ -36,6 +45,13 @@ class Main {
     static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat
         System.out.println("TEST 5.3.2");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
+        ma.performAction();
+    }
+
+    static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food
+        System.out.println("TEST 5.3.4");
+        Eskimo e = new Eskimo(new UnstableIceFloat(new Food()));
+        Action ma = new PickupAction(e);
         ma.performAction();
     }
 
@@ -91,12 +107,6 @@ class Main {
         System.out.println("TEST 5.3.15");
         Game g = new Game();
         g.win();
-    }
-
-    static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food
-        System.out.println("TEST 5.3.4");
-        Action ma = new PickupAction();
-        ma.performAction();
     }
 
     static void Test_5_3_16() {  //Test for 5.3.16 - Snowstorm appears
