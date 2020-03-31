@@ -1,14 +1,10 @@
 package hu.mudm.icefield;
 
-import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.action.*;
-import hu.mudm.icefield.model.field.Hole;
-import hu.mudm.icefield.model.field.StableIceFloat;
-import hu.mudm.icefield.model.field.UnstableIceFloat;
-import hu.mudm.icefield.model.item.Food;
-import hu.mudm.icefield.model.item.Rope;
-import hu.mudm.icefield.model.player.Eskimo;
-import hu.mudm.icefield.model.player.Researcher;
+import hu.mudm.icefield.model.field.*;
+import hu.mudm.icefield.model.item.*;
+import hu.mudm.icefield.model.player.*;
+import hu.mudm.icefield.model.Controller;
 
 class Main {
     public static void main(String[] args){
@@ -16,6 +12,8 @@ class Main {
         Test_5_3_1();
 
         Test_5_3_2();
+
+        Test_5_3_3();
 
         Test_5_3_4();
 
@@ -40,15 +38,24 @@ class Main {
         Test_5_3_16();
     }
 
-    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat
-        System.out.println("TEST 5.3.1");
+    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
+        System.out.printf("TEST 5.3.1");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
     }
 
-    static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat
-        System.out.println("TEST 5.3.2");
+    static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat - Domi
+        System.out.printf("TEST 5.3.2");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
+        ma.performAction();
+    }
+
+    static void Test_5_3_3() {  //Test for 5.3.3 - Player steps on hole - Domi
+        System.out.println("TEST 5.3.3");;
+        IceFloat h = new Hole();
+        IceFloat s = new StableIceFloat();
+        s.setNeighbors(h);
+        Action ma = new MoveAction(new Researcher(new StableIceFloat()),h);
         ma.performAction();
     }
 

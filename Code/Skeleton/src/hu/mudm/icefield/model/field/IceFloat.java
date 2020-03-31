@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class IceFloat {
 
-    protected ArrayList<IceFloat> neighbour;
+    protected ArrayList<IceFloat> neighbors;
     protected ArrayList<Character> characters;
     protected Item item;
     protected Boolean iglu; // a dokumentációban nem szerepel, hogy milyen típus
@@ -17,10 +17,12 @@ public abstract class IceFloat {
 
     public IceFloat(){
         characters = new ArrayList<Character>();
+        neighbors = new ArrayList<IceFloat>();
     }
 
     public IceFloat(Item item){
         characters = new ArrayList<Character>();
+        neighbors = new ArrayList<IceFloat>();
         this.item = item;
     }
 
@@ -33,6 +35,13 @@ public abstract class IceFloat {
         GUI_skeleton.printlnWithTabs(this.getClass(),"removeCharacter(Character ch)");
 
         characters.remove(ch);
+    }
+
+    public void setNeighbors(IceFloat ice){
+        if (!neighbors.contains(ice)){
+            neighbors.add(ice);
+            ice.setNeighbors(this);
+        }
     }
 
     public void removeSnow(int layerCount){}
@@ -50,7 +59,18 @@ public abstract class IceFloat {
     }
 
     public Boolean canRescueFromHere(){
-        throw new UnsupportedOperationException();
+        GUI_skeleton.printlnWithTabs(this.getClass(),"canRescueFromHere()");
+        boolean foundSavior = false;
+        if (characters!=null){
+            for (Character ch:characters){
+                GUI_skeleton.raiseTabCnt();
+                foundSavior = ch.canRescue();
+                GUI_skeleton.decreaseTabCnt();
+
+                if (foundSavior) break;
+            }
+        }
+        return foundSavior;
     }
 
     public int playersHere(){
