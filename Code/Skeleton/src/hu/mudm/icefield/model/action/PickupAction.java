@@ -1,12 +1,9 @@
 package hu.mudm.icefield.model.action;
 
-import hu.mudm.icefield.model.item.Food;
+import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI_skeleton;
-
-import hu.mudm.icefield.model.player.Eskimo;
-
-import hu.mudm.icefield.model.player.Eskimo;
 
 public class PickupAction extends Action {
 
@@ -15,24 +12,31 @@ public class PickupAction extends Action {
         super(character);
     }
 
-    public PickupAction(Eskimo e) {
-        super(e);
-    }
-
     @Override
     public void performAction() {
         GUI_skeleton.printlnWithTabs(this.getClass(),"performAction()");
-        Food food = new Food();
 
         GUI_skeleton.raiseTabCnt();
-        ch.getIceFloat();
+        IceFloat ice = ch.getIceFloat();
+
         GUI_skeleton.raiseTabCnt();
-        target.removeItem();
-        GUI_skeleton.raiseTabCnt();
-        food.onPickup(ch);
-        GUI_skeleton.decreaseTabCnt();
-        GUI_skeleton.decreaseTabCnt();
+        Item item = ice.removeItem();
         GUI_skeleton.decreaseTabCnt();
 
+        if(item!=null) {
+            GUI_skeleton.raiseTabCnt();
+            item.onPickup(ch);
+            GUI_skeleton.decreaseTabCnt();
+
+            GUI_skeleton.raiseTabCnt();
+            boolean b = item.isStoreable();
+            GUI_skeleton.decreaseTabCnt();
+
+            if(b) {
+                GUI_skeleton.raiseTabCnt();
+                item.onPickup(ch);
+                GUI_skeleton.decreaseTabCnt();
+            }
+        }
     }
 }

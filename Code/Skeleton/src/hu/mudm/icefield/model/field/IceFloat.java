@@ -69,7 +69,9 @@ public abstract class IceFloat {
     public void buildIgloo(){}
 
     public Item removeItem(){
-        throw new UnsupportedOperationException();
+        Item item_returning = item;
+        item = null;
+        return item_returning;
     }
 
     public Boolean canRescueFromHere(){

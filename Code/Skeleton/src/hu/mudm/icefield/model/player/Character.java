@@ -2,6 +2,7 @@ package hu.mudm.icefield.model.player;
 
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.view.GUI_skeleton;
 
@@ -25,7 +26,7 @@ public abstract class Character {
 
     public void removeAction(Action action){}
 
-    public Character(IceFloat startPosition){position = startPosition;}
+    public Character(StableIceFloat startPosition){position = startPosition;}
 
     public Boolean canSwim() {
         throw new UnsupportedOperationException();

@@ -6,6 +6,8 @@ import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.*;
 import hu.mudm.icefield.model.Controller;
 
+import java.util.ArrayList;
+
 class Main {
     public static void main(String[] args){
 
@@ -36,6 +38,8 @@ class Main {
         Test_5_3_15();
 
         Test_5_3_16();
+
+        Test_5_3_17();
     }
 
     static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
@@ -61,7 +65,7 @@ class Main {
 
     static void Test_5_3_4() { //Test for 5.3.4 - Player picks up food
         System.out.println("TEST 5.3.4");
-        Eskimo e = new Eskimo(new UnstableIceFloat(new Food()));
+        Eskimo e = new Eskimo(new StableIceFloat(new Food()));
         Action ma = new PickupAction(e);
         ma.performAction();
     }
@@ -74,7 +78,7 @@ class Main {
 
     static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
         System.out.println("TEST 5.3.6");
-        Researcher r = new Researcher(new UnstableIceFloat());
+        Researcher r = new Researcher(new StableIceFloat());
         Action sa = new ShovelAction(r);
         sa.performAction();
     }
@@ -104,7 +108,7 @@ class Main {
 
         //StableIceFloat two = new StableIceFloat();
 
-        Action ma = new MoveAction(new Researcher(new UnstableIceFloat()), one);
+        Action ma = new MoveAction(new Researcher(new StableIceFloat()), one);
         ma.performAction();
     }
 
@@ -144,12 +148,20 @@ class Main {
 
     static void Test_5_3_16() {  //Test for 5.3.16 - Snowstorm appears
         System.out.println("TEST 5.3.16");
-        Controller c = new Controller();
+        ArrayList<IceFloat> icefloats = new ArrayList<IceFloat>();
+        icefloats.add(new StableIceFloat());
+        icefloats.add(new UnstableIceFloat());
+        icefloats.add(new Hole());
+        icefloats.add(new StableIceFloat());
+        icefloats.add(new UnstableIceFloat());
+        icefloats.add(new Hole());
+
+        Controller c = new Controller(icefloats);
         c.snowstorm();
     }
 
 
-    static void Test_5_3_17() { //Test for 5.3.17 - Game generates iceFloat - Kriszti
+    static void Test_5_3_17() { //Test for 5.3.17 - Game generates icefloat
         System.out.println("TEST 5.3.17");
         Game g = new Game();
         g.init();

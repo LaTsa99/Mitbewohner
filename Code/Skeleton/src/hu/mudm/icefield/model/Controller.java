@@ -13,8 +13,10 @@ public class Controller {
     private ArrayList<Character> characters;
     private Random r;
 
-    public Controller() {
+    public Controller(ArrayList<IceFloat> icefloats)
+    {
         r= new Random();
+        this.icefloats = new ArrayList(icefloats);
     }
 
     public void gameLoop(){}
@@ -25,7 +27,7 @@ public class Controller {
         GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
 
         for (IceFloat ice: icefloats) {
-            if(r.nextFloat() < 0.1f) {
+            if(r.nextFloat() < 0.5f) {
                 GUI_skeleton.raiseTabCnt();
                 ice.addSnow();
                 GUI_skeleton.decreaseTabCnt();
