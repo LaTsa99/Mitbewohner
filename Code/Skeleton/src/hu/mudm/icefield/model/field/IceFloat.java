@@ -22,6 +22,7 @@ public abstract class IceFloat {
 
     public IceFloat(Item item){
         characters = new ArrayList<Character>();
+        neighbors = new ArrayList<IceFloat>();
         this.item = item;
     }
 

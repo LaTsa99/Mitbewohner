@@ -4,6 +4,7 @@ import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.*;
 import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.*;
+import hu.mudm.icefield.model.Controller;
 
 class Main {
     public static void main(String[] args){
@@ -35,19 +36,19 @@ class Main {
         Test_5_3_16();
     }
 
-    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat
+    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
         System.out.printf("TEST 5.3.1");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
     }
 
-    static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat
+    static void Test_5_3_2() {  //Test for 5.3.2 - Player steps on unstable icefloat - Domi
         System.out.printf("TEST 5.3.2");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()),new UnstableIceFloat());
         ma.performAction();
     }
 
-    static void Test_5_3_3() {
+    static void Test_5_3_3() {  //Test for 5.3.3 - Player steps on hole - Domi
         System.out.println("TEST 5.3.3");;
         IceFloat h = new Hole();
         IceFloat s = new StableIceFloat();
