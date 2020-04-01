@@ -1,5 +1,6 @@
 package hu.mudm.icefield.model.action;
 
+import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI_skeleton;
 
@@ -14,10 +15,11 @@ public class BuildAction extends Action {
         GUI_skeleton.printlnWithTabs(this.getClass(),"performAction()");
 
         GUI_skeleton.raiseTabCnt();
-        ch.getIceFloat();
-        GUI_skeleton.raiseTabCnt();
-        target.buildIgloo();
+        IceFloat ice = ch.getIceFloat();
         GUI_skeleton.decreaseTabCnt();
+
+        GUI_skeleton.raiseTabCnt();
+        ice.buildIgloo();
         GUI_skeleton.decreaseTabCnt();
     }
 }

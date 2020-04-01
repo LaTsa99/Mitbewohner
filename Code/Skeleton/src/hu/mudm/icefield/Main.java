@@ -12,7 +12,39 @@ import java.util.ArrayList;
 class Main {
     public static void main(String[] args){
 
+        Test_5_3_1();
+
+        Test_5_3_2();
+
+        Test_5_3_3();
+
+        Test_5_3_4();
+
         Test_5_3_5();
+
+        Test_5_3_6();
+
+        Test_5_3_7();
+
+        Test_5_3_8();
+
+        Test_5_3_9();
+
+        Test_5_3_10();
+
+        Test_5_3_11();
+
+        Test_5_3_12();
+
+        Test_5_3_13();
+
+        Test_5_3_14();
+
+        Test_5_3_15();
+
+        Test_5_3_16();
+
+        Test_5_3_17();
 
     }
 
@@ -29,11 +61,11 @@ class Main {
     }
 
     static void Test_5_3_3() {  //Test for 5.3.3 - Player steps on hole - Domi
-        System.out.println("TEST 5.3.3");;
+        System.out.println("TEST 5.3.3");
         IceFloat h = new Hole();
         IceFloat s = new StableIceFloat();
         Researcher r = new Researcher(new StableIceFloat());
-        s.setNeighbors(h);
+        s.setNeighbor(h);
         System.out.println("Can this character swim? (Do they have a diving suit?)");
         try{
             if(GUI_skeleton.chooseYesOrNo()){
@@ -93,6 +125,12 @@ class Main {
         System.out.println("TEST 5.3.9");
         Action ba = new BuildAction(new Eskimo(new StableIceFloat()));
         ba.performAction();
+    }
+
+    static void Test_5_3_10() { //Test for 5.3.10 - IceFloat topples over
+        System.out.println("TEST 5.3.10");
+        Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new UnstableIceFloat());
+        ma.performAction();
     }
 
     static void Test_5_3_11() {  //Test for 5.3.11 - Player drowns
