@@ -72,7 +72,9 @@ public abstract class IceFloat {
         return capacity;
     }
 
-    public void buildIgloo(){}
+    public void buildIgloo(){
+        GUI_skeleton.printlnWithTabs(this.getClass(), "buildIgloo()");
+    }
 
     public Item removeItem(){
         GUI_skeleton.printlnWithTabs(this.getClass(),"removeItem()");

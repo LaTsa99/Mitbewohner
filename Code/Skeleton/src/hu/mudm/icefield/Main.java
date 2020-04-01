@@ -201,6 +201,14 @@ class Main {
         System.out.println("TEST 5.3.11");
         Hole one = new Hole();
         StableIceFloat two = new StableIceFloat();
+        StableIceFloat a = new StableIceFloat();
+        UnstableIceFloat b = new UnstableIceFloat();
+        StableIceFloat c = new StableIceFloat();
+        one.setNeighbor(two);
+        one.setNeighbor(a);
+        one.setNeighbor(b);
+        one.setNeighbor(c);
+
         Action ma = new MoveAction(new Researcher(new StableIceFloat()), one);
         ma.performAction();
     }

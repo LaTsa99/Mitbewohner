@@ -20,6 +20,7 @@ public class Hole extends IceFloat{
         try {
             GUI_skeleton.raiseTabCnt();
             if (!ch.canSwim()){
+                GUI_skeleton.decreaseTabCnt();
                 if (neighbors !=null){
                     boolean willBeSaved = false;
                     for (IceFloat ice: neighbors){
