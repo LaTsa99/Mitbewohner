@@ -74,7 +74,10 @@ public abstract class Character {
 
     public void addItem(Item it){
         GUI_skeleton.printlnWithTabs(this.getClass(), "addItem(Item it)");
+
+        GUI_skeleton.raiseTabCnt();
         items.add(it);
+        GUI_skeleton.decreaseTabCnt();
     }
 
     public void moveTo(IceFloat ice){

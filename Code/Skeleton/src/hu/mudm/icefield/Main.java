@@ -12,7 +12,7 @@ import java.util.ArrayList;
 class Main {
     public static void main(String[] args){
 
-        Test_5_3_4();
+        Test_5_3_5();
 
     }
 
@@ -55,7 +55,7 @@ class Main {
 
     static void Test_5_3_5() { //Test for 5.3.5 - Player picks up rope(/diving suit/shovel) - Kriszti
         System.out.println("TEST 5.3.5");
-        Action ma = new PickupAction(new Eskimo(new StableIceFloat()));
+        Action ma = new PickupAction(new Eskimo(new StableIceFloat(new Rope())));
         ma.performAction();
     }
 
