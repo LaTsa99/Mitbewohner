@@ -41,7 +41,7 @@ public abstract class IceFloat {
         if (!neighbors.contains(ice)){
             neighbors.add(ice);
             GUI_skeleton.raiseTabCnt();
-            ice.setNeighbor(this);
+            ice.setNeighbors(this);
             GUI_skeleton.decreaseTabCnt();
         }
     }
