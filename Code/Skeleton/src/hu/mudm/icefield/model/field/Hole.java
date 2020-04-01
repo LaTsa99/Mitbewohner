@@ -17,9 +17,9 @@ public class Hole extends IceFloat{
     public void stepOn(Character ch) {
         GUI_skeleton.printlnWithTabs(this.getClass(),"stepOn(Character ch)");
 
-        System.out.println("Can this character swim? (Do they have a diving suit?)");
         try {
-            if (!GUI_skeleton.chooseYesOrNo()){
+            GUI_skeleton.raiseTabCnt();
+            if (!ch.canSwim()){
                 if (neighbors !=null){
                     boolean willBeSaved = false;
                     for (IceFloat ice: neighbors){
@@ -40,8 +40,13 @@ public class Hole extends IceFloat{
                         GUI_skeleton.decreaseTabCnt();
                     }
                 }
+            }else{
+                GUI_skeleton.raiseTabCnt();
+                ch.getIceFloat().stepOn(ch);
+                GUI_skeleton.decreaseTabCnt();
             }
-        } catch (GUI_skeleton.GUI_skeletonException | IOException e) {
+            GUI_skeleton.decreaseTabCnt();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

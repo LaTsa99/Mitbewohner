@@ -5,6 +5,7 @@ import hu.mudm.icefield.model.field.*;
 import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.*;
 import hu.mudm.icefield.model.Controller;
+import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 
@@ -58,8 +59,17 @@ class Main {
         System.out.println("TEST 5.3.3");;
         IceFloat h = new Hole();
         IceFloat s = new StableIceFloat();
-        s.setNeighbor(h);
-        Action ma = new MoveAction(new Researcher(new StableIceFloat()),h);
+        Researcher r = new Researcher(new StableIceFloat());
+        s.setNeighbors(h);
+        System.out.println("Can this character swim? (Do they have a diving suit?)");
+        try{
+            if(GUI_skeleton.chooseYesOrNo()){
+                r.addItem(new DiverSuit());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        Action ma = new MoveAction(r,h);
         ma.performAction();
     }
 
@@ -79,6 +89,16 @@ class Main {
     static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
         System.out.println("TEST 5.3.6");
         Researcher r = new Researcher(new StableIceFloat());
+        r.addItem(new Rope());
+        r.addItem(new RocketPart());
+        try{
+            System.out.println("Does the character have a shovel?");
+            if(GUI_skeleton.chooseYesOrNo()){
+                r.addItem(new Shovel());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         Action sa = new ShovelAction(r);
         sa.performAction();
     }
@@ -105,9 +125,7 @@ class Main {
     static void Test_5_3_11() {  //Test for 5.3.11 - Player drowns
         System.out.println("TEST 5.3.11");
         Hole one = new Hole();
-
-        //StableIceFloat two = new StableIceFloat();
-
+        StableIceFloat two = new StableIceFloat();
         Action ma = new MoveAction(new Researcher(new StableIceFloat()), one);
         ma.performAction();
     }
@@ -115,7 +133,16 @@ class Main {
     static void Test_5_3_12() {  //Test for 5.3.12 - Player swims back
         System.out.println("TEST 5.3.12");
         Hole one = new Hole();
-        Action ma = new MoveAction(new Eskimo(new StableIceFloat()), one);
+        Eskimo eski = new Eskimo(new StableIceFloat());
+        System.out.println("Can this character swim? (Do they have a diving suit?)");
+        try{
+            if(GUI_skeleton.chooseYesOrNo()){
+                eski.addItem(new DiverSuit());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Action ma = new MoveAction(eski, one);
         ma.performAction();
     }
 
