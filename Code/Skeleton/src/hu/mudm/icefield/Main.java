@@ -58,7 +58,7 @@ class Main {
         System.out.println("TEST 5.3.3");;
         IceFloat h = new Hole();
         IceFloat s = new StableIceFloat();
-        s.setNeighbors(h);
+        s.setNeighbor(h);
         Action ma = new MoveAction(new Researcher(new StableIceFloat()),h);
         ma.performAction();
     }

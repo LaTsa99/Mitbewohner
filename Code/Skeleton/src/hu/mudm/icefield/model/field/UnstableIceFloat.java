@@ -17,11 +17,6 @@ public class UnstableIceFloat extends IceFloat {
     }
 
     @Override
-    public Boolean stepOn(Character ch, IceFloat prev) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void stepOn(Character ch) {
         GUI_skeleton.printlnWithTabs(this.getClass(),"stepOn(Character ch)");
 

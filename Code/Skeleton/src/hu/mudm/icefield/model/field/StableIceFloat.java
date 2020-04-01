@@ -19,9 +19,4 @@ public class StableIceFloat extends IceFloat {
         ch.moveTo(this);
         GUI_skeleton.decreaseTabCnt();
     }
-
-    @Override
-    public Boolean stepOn(Character ch, IceFloat prev) {
-        throw new UnsupportedOperationException();
-    }
 }

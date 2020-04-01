@@ -18,16 +18,15 @@ public abstract class IceFloat {
     public IceFloat(){
         characters = new ArrayList<Character>();
         neighbors = new ArrayList<IceFloat>();
+        iglu = false;
     }
 
     public IceFloat(Item item){
         characters = new ArrayList<Character>();
         neighbors = new ArrayList<IceFloat>();
+        iglu = false;
         this.item = item;
     }
-
-    @Deprecated
-    public abstract Boolean stepOn(Character ch, IceFloat prev);
 
     public abstract void stepOn(Character ch);
 
@@ -37,10 +36,14 @@ public abstract class IceFloat {
         characters.remove(ch);
     }
 
-    public void setNeighbors(IceFloat ice){
+    public void setNeighbor(IceFloat ice){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"setNeighbor(IceFloat ice)");
+
         if (!neighbors.contains(ice)){
             neighbors.add(ice);
-            ice.setNeighbors(this);
+            GUI_skeleton.raiseTabCnt();
+            ice.setNeighbor(this);
+            GUI_skeleton.decreaseTabCnt();
         }
     }
 

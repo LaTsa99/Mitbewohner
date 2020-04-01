@@ -18,6 +18,7 @@ public class PickupAction extends Action {
 
         GUI_skeleton.raiseTabCnt();
         IceFloat ice = ch.getIceFloat();
+        GUI_skeleton.decreaseTabCnt();
 
         GUI_skeleton.raiseTabCnt();
         Item item = ice.removeItem();

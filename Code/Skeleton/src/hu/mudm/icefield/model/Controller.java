@@ -26,11 +26,13 @@ public class Controller {
     public void snowstorm() {
         GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
 
-        for (IceFloat ice: icefloats) {
-            if(r.nextFloat() < 0.5f) {
-                GUI_skeleton.raiseTabCnt();
-                ice.addSnow();
-                GUI_skeleton.decreaseTabCnt();
+        if(icefloats!=null) {
+            for (IceFloat ice: icefloats) {
+                if(r.nextFloat() < 0.5f) {
+                    GUI_skeleton.raiseTabCnt();
+                    ice.addSnow();
+                    GUI_skeleton.decreaseTabCnt();
+                }
             }
         }
     }

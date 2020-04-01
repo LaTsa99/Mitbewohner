@@ -16,6 +16,7 @@ public class Hole extends IceFloat{
     @Override
     public void stepOn(Character ch) {
         GUI_skeleton.printlnWithTabs(this.getClass(),"stepOn(Character ch)");
+
         System.out.println("Can this character swim? (Do they have a diving suit?)");
         try {
             if (!GUI_skeleton.chooseYesOrNo()){
@@ -43,10 +44,5 @@ public class Hole extends IceFloat{
         } catch (GUI_skeleton.GUI_skeletonException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public Boolean stepOn(Character ch, IceFloat prev) {
-        throw new UnsupportedOperationException();
     }
 }

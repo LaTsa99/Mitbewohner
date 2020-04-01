@@ -1,6 +1,5 @@
 package hu.mudm.icefield.model.action;
 
-import hu.mudm.icefield.model.field.Hole;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI_skeleton;
@@ -16,7 +15,7 @@ public class MoveAction extends Action {
     public void performAction() {
         GUI_skeleton.printlnWithTabs(this.getClass(),"performAction()");
 
-        GUI_skeleton.raiseTabCnt(); //Komolyan minden függvényhívás így fog kinézni?? Nagyon kéne ide egy lambda srácok
+        GUI_skeleton.raiseTabCnt(); //Komolyan minden fuggvenyhivas igy fog kinezni?? Nagyon kene ide egy lambda sracok
         target.stepOn(ch);
         GUI_skeleton.decreaseTabCnt();
     }
