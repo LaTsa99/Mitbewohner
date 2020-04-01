@@ -38,6 +38,7 @@ public abstract class IceFloat {
     }
 
     public void setNeighbors(IceFloat ice){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"setNeighbors(IceFloat ice)");
         if (!neighbors.contains(ice)){
             neighbors.add(ice);
             ice.setNeighbors(this);
@@ -69,6 +70,7 @@ public abstract class IceFloat {
     public void buildIgloo(){}
 
     public Item removeItem(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"removeItem()");
         Item item_returning = item;
         item = null;
         return item_returning;

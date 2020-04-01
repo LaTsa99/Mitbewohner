@@ -18,7 +18,7 @@ public abstract class Item {
         return false;
     }
 
-    public Boolean isStoreable(){
+    public Boolean isStorable(){
         return false;
     }
 

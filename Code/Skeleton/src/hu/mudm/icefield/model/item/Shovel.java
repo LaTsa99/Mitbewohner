@@ -15,7 +15,7 @@ public class Shovel extends Item {
     }
 
     @Override
-    public Boolean isStoreable(){
+    public Boolean isStorable(){
         return true;
     }
 
