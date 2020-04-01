@@ -20,20 +20,20 @@ class Main {
             s.addChoice('A', "Test for 5.3.1 - Player steps on stable icefloat");
             s.addChoice('B', "Test for 5.3.2 - Player steps on unstable icefloat");
             s.addChoice('C', "Test for 5.3.3 - Player steps on hole");
-            s.addChoice('D', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('E', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('F', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('G', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('H', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('I', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('J', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('K', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('L', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('M', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('N', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('O', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('P', "Test for 5.3.1 - Player steps on stable icefloat");
-            s.addChoice('Q', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('D', "Test for 5.3.4 - Player picks up food");
+            s.addChoice('E', "Test for 5.3.5 - Player picks up rope(/diving suit/shovel)");
+            s.addChoice('F', "Test for 5.3.6 - Player shovels snow");
+            s.addChoice('G', "Test for 5.3.7 - Player builds rocket");
+            s.addChoice('H', "Test for 5.3.8 - Player examines icefloat");
+            s.addChoice('I', "Test for 5.3.9 - Player builds igloo");
+            s.addChoice('J', "Test for 5.3.10 - IceFloat topples over");
+            s.addChoice('K', "Test for 5.3.11 - Player drowns");
+            s.addChoice('L', "Test for 5.3.12 - Player swims back");
+            s.addChoice('M', "Test for 5.3.13 - Player gets rescued");
+            s.addChoice('N', "Test for 5.3.14 - Game lost");
+            s.addChoice('O', "Test for 5.3.15 - Game won");
+            s.addChoice('P', "Test for 5.3.16 - Snowstorm appears");
+            s.addChoice('Q', "Test for 5.3.17 - Game generates icefloat");
             s.addChoice('X', "Exit");
 
         } catch (GUI_skeleton.GUI_skeletonException e) {
@@ -41,7 +41,7 @@ class Main {
         }
 
         while(!exit) {
-            char c;
+            char c='X';
             try {
                 c = s.choose();
             } catch (GUI_skeleton.GUI_skeletonException e) {
@@ -51,45 +51,65 @@ class Main {
             }
 
             switch(c) {
-
+                case 'A':
+                    Test_5_3_1();
+                    break;
+                case 'B':
+                    Test_5_3_2();
+                    break;
+                case 'C':
+                    Test_5_3_3();
+                    break;
+                case 'D':
+                    Test_5_3_4();
+                    break;
+                case 'E':
+                    Test_5_3_5();
+                    break;
+                case 'F':
+                    Test_5_3_6();
+                    break;
+                case 'G':
+                    Test_5_3_7();
+                    break;
+                case 'H':
+                    Test_5_3_8();
+                    break;
+                case 'I':
+                    Test_5_3_9();
+                    break;
+                case 'J':
+                    Test_5_3_10();
+                    break;
+                case 'K':
+                    Test_5_3_11();
+                    break;
+                case 'L':
+                    Test_5_3_12();
+                    break;
+                case 'M':
+                    Test_5_3_13();
+                    break;
+                case 'N':
+                    Test_5_3_14();
+                    break;
+                case 'O':
+                    Test_5_3_15();
+                    break;
+                case 'P':
+                    Test_5_3_16();
+                    break;
+                case 'Q':
+                    Test_5_3_17();
+                    break;
+                case 'X':
+                    exit = true;
+                    break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + c);
+                    System.out.println("Unexpected char");
+                    break;
             }
         }
-        Test_5_3_1();
-
-        Test_5_3_2();
-
-        Test_5_3_3();
-
-        Test_5_3_4();
-
-        Test_5_3_5();
-
-        Test_5_3_6();
-
-        Test_5_3_7();
-
-        Test_5_3_8();
-
-        Test_5_3_9();
-
-        Test_5_3_10();
-
-        Test_5_3_11();
-
-        Test_5_3_12();
-
-        Test_5_3_13();
-
-        Test_5_3_14();
-
-        Test_5_3_15();
-
-        Test_5_3_16();
-
-        Test_5_3_17();
-
     }
 
     static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
