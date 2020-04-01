@@ -2,7 +2,6 @@ package hu.mudm.icefield.model.player;
 
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.field.IceFloat;
-import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.view.GUI_skeleton;
 
@@ -26,10 +25,22 @@ public abstract class Character {
 
     public void removeAction(Action action){}
 
-    public Character(StableIceFloat startPosition){position = startPosition;}
+    public Character(IceFloat startPosition){
+        position = startPosition;
+        items = new ArrayList<>();
+    }
 
     public Boolean canSwim() {
-        throw new UnsupportedOperationException();
+        GUI_skeleton.printlnWithTabs(this.getClass(), "canSwim()");
+        for(Item item : items){
+            GUI_skeleton.raiseTabCnt();
+            if(item.canSwim()) {
+                GUI_skeleton.decreaseTabCnt();
+                return true;
+            }
+            GUI_skeleton.raiseTabCnt();
+        }
+        return false;
     }
 
     public Boolean canRescue(){
@@ -48,10 +59,22 @@ public abstract class Character {
     }
 
     public Boolean canFastShovel(){
-        throw new UnsupportedOperationException();
+        GUI_skeleton.printlnWithTabs(this.getClass(), "canFastShovel()");
+        for(Item item : items){
+            GUI_skeleton.raiseTabCnt();
+            if(item.canFastShovel()) {
+                GUI_skeleton.decreaseTabCnt();
+                return true;
+            }
+            GUI_skeleton.decreaseTabCnt();
+        }
+        return false;
     }
 
-    public void addItem(Item it){}
+    public void addItem(Item it){
+        GUI_skeleton.printlnWithTabs(this.getClass(), "addItem(Item it)");
+        items.add(it);
+    }
 
     public void moveTo(IceFloat ice){
         GUI_skeleton.printlnWithTabs(this.getClass(),"moveTo(IceFloat ice)");
