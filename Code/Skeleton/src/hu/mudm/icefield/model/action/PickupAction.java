@@ -28,16 +28,6 @@ public class PickupAction extends Action {
             GUI_skeleton.raiseTabCnt();
             item.onPickup(ch);
             GUI_skeleton.decreaseTabCnt();
-
-            GUI_skeleton.raiseTabCnt();
-            boolean b = item.isStoreable();
-            GUI_skeleton.decreaseTabCnt();
-
-            if(b) {
-                GUI_skeleton.raiseTabCnt();
-                item.onPickup(ch);
-                GUI_skeleton.decreaseTabCnt();
-            }
         }
     }
 }

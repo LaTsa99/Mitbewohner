@@ -12,35 +12,8 @@ import java.util.ArrayList;
 class Main {
     public static void main(String[] args){
 
-        Test_5_3_1();
-
-        Test_5_3_2();
-
-        Test_5_3_3();
-
         Test_5_3_4();
 
-        Test_5_3_5();
-
-        Test_5_3_6();
-
-        Test_5_3_7();
-
-        Test_5_3_8();
-
-        Test_5_3_11();
-
-        Test_5_3_12();
-
-        Test_5_3_13();
-
-        Test_5_3_14();
-
-        Test_5_3_15();
-
-        Test_5_3_16();
-
-        Test_5_3_17();
     }
 
     static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi

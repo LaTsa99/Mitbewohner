@@ -55,6 +55,7 @@ public abstract class Character {
     }
 
     public IceFloat getIceFloat(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"getIceFloat()");
         return position;
     }
 
