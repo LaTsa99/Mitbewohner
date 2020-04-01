@@ -28,7 +28,7 @@ public class Controller {
 
         if(icefloats!=null) {
             for (IceFloat ice: icefloats) {
-                if(r.nextFloat() < 0.5f) {
+                if(r.nextFloat() < 1.0f) {
                     GUI_skeleton.raiseTabCnt();
                     ice.addSnow();
                     GUI_skeleton.decreaseTabCnt();

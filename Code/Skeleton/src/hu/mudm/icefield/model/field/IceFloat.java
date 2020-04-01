@@ -36,12 +36,12 @@ public abstract class IceFloat {
         characters.remove(ch);
     }
 
-    public void setNeighbors(IceFloat ice){
+    public void setNeighbor(IceFloat ice){
         GUI_skeleton.printlnWithTabs(this.getClass(),"setNeighbors(IceFloat ice)");
         if (!neighbors.contains(ice)){
             neighbors.add(ice);
             GUI_skeleton.raiseTabCnt();
-            ice.setNeighbors(this);
+            ice.setNeighbor(this);
             GUI_skeleton.decreaseTabCnt();
         }
     }
