@@ -89,7 +89,6 @@ class Main {
     static void Test_5_3_6() { //Test for 5.3.6 - Player shovels snow
         System.out.println("TEST 5.3.6");
         Researcher r = new Researcher(new StableIceFloat());
-        Researcher r = new Researcher(new UnstableIceFloat());
         r.addItem(new Rope());
         r.addItem(new RocketPart());
         try{
@@ -127,7 +126,7 @@ class Main {
         System.out.println("TEST 5.3.11");
         Hole one = new Hole();
         StableIceFloat two = new StableIceFloat();
-        Action ma = new MoveAction(new Researcher(new UnstableIceFloat()), one);
+        Action ma = new MoveAction(new Researcher(new StableIceFloat()), one);
         ma.performAction();
     }
 
