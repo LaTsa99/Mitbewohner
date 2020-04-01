@@ -13,7 +13,7 @@ import java.util.ArrayList;
 class Main {
     public static void main(String[] args){
 
-        bool exit = false;
+        boolean exit = false;
 
         GUI_skeleton s = new GUI_skeleton();
         try {

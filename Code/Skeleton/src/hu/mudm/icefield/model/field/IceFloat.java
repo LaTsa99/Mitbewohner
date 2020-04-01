@@ -47,7 +47,7 @@ public abstract class IceFloat {
     }
 
     public void removeSnow(int layerCount){
-        GUI_skeleton.printlnWithTabs(this.getClass(), "removeSnow(int layerCount)");
+        GUI_skeleton.printlnWithTabs(this.getClass(), String.format("removeSnow(%d)",layerCount));
         snowLevel = snowLevel - layerCount;
     }
 

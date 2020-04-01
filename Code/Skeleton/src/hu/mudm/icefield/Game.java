@@ -45,11 +45,11 @@ public class Game {
 
         for (int i=1; i<iceFloats.size()-1; i++) {
             GUI_skeleton.raiseTabCnt();
-            iceFloats.get(i).setNeighbors(iceFloats.get(i-1));
+            iceFloats.get(i).setNeighbor(iceFloats.get(i-1));
             GUI_skeleton.decreaseTabCnt();
 
             GUI_skeleton.raiseTabCnt();
-            iceFloats.get(i).setNeighbors(iceFloats.get(i+1));
+            iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
             GUI_skeleton.decreaseTabCnt();
         }
     }
