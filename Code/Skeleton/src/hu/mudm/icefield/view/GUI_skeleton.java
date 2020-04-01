@@ -1,6 +1,5 @@
 package hu.mudm.icefield.view;
 //List of used imports
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -41,7 +40,7 @@ public class GUI_skeleton {
     //It is possible to give a choice without description with an another method.
     //The same choice cannot be added twice, no matter what the description is.
     //There can be two or more choices with the same description
-    public void addChoice(char newChoice, @NotNull String description) throws GUI_skeletonException {
+    public void addChoice(char newChoice, String description) throws GUI_skeletonException {
         if (choices.contains(newChoice)) throw new GUI_skeletonException("The same choice can not be added twice");
         choices.add(newChoice);
         descriptions.add(description);
@@ -83,7 +82,7 @@ public class GUI_skeleton {
     //With this method will a character from console be chosen.
     //This character needs to be the part of the string
     //This method gives back the chosen character
-    static public char chooseCharFromString(@NotNull String choices) throws GUI_skeletonException, IOException {
+    static public char chooseCharFromString(String choices) throws GUI_skeletonException, IOException {
         GUI_skeleton helpVariable = new GUI_skeleton();
         for(int i = 0; i < choices.length(); i++) helpVariable.addChoice(choices.charAt(i), "");
         return helpVariable.choose();
