@@ -7,11 +7,55 @@ import hu.mudm.icefield.model.player.*;
 import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.view.GUI_skeleton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class Main {
     public static void main(String[] args){
 
+        bool exit = false;
+
+        GUI_skeleton s = new GUI_skeleton();
+        try {
+            s.addChoice('A', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('B', "Test for 5.3.2 - Player steps on unstable icefloat");
+            s.addChoice('C', "Test for 5.3.3 - Player steps on hole");
+            s.addChoice('D', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('E', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('F', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('G', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('H', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('I', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('J', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('K', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('L', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('M', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('N', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('O', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('P', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('Q', "Test for 5.3.1 - Player steps on stable icefloat");
+            s.addChoice('X', "Exit");
+
+        } catch (GUI_skeleton.GUI_skeletonException e) {
+            e.printStackTrace();
+        }
+
+        while(!exit) {
+            char c;
+            try {
+                c = s.choose();
+            } catch (GUI_skeleton.GUI_skeletonException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            switch(c) {
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + c);
+            }
+        }
         Test_5_3_1();
 
         Test_5_3_2();
