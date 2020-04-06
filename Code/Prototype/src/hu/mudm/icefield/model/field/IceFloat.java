@@ -12,6 +12,7 @@ public abstract class IceFloat {
     protected ArrayList<Character> characters;
     protected Item item;
     protected Boolean iglu; // a dokumentációban nem szerepel, hogy milyen típus
+    protected Boolean tent;
     protected int snowLevel;
     protected int capacity;
 
@@ -55,8 +56,9 @@ public abstract class IceFloat {
         GUI_skeleton.printlnWithTabs(this.getClass(),"addsSnow()");
         snowLevel++;
         
-        if(iglu) {
-            iglu = false;            
+        if(iglu || tent) {
+            iglu = false;
+            tent = false; //habar a sator mindenkepp eltunik a kor vegen
         }
         else {
             for (Character ch: characters) {
@@ -65,6 +67,12 @@ public abstract class IceFloat {
                 GUI_skeleton.decreaseTabCnt();
             }
         }
+    }
+
+    public void endTurn(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"endOfTurn()");
+
+        tent = false;
     }
 
     public int getCapacity(){
@@ -102,4 +110,11 @@ public abstract class IceFloat {
         return characters.size();
     }
 
+    public ArrayList<IceFloat> getNeighbors() {
+        return new ArrayList<>(neighbors);
+    }
+
+    public void buildTent() {
+        tent = true;
+    }
 }

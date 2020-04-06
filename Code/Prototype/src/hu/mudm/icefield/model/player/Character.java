@@ -91,4 +91,7 @@ public abstract class Character {
 
     }
 
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
 }

@@ -6,6 +6,8 @@ public abstract class Item {
 
     public abstract void onPickup(Character ch);
 
+    public void onUse(Character ch) { }
+
     public Boolean canSwim(){
         return false;
     }
@@ -26,4 +28,7 @@ public abstract class Item {
         return false;
     }
 
+    public Boolean canBuildAsTent(){
+        return false;
+    }
 }

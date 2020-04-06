@@ -10,6 +10,9 @@ public class RocketPart extends Item {
     }
 
     @Override
+    public void onUse(Character ch) { }
+
+    @Override
     public Boolean isRocketPart(){
         return true;
     }
