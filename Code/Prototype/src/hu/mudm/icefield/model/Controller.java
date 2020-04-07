@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Controller {
-
+    private PolarBear p;
     private ArrayList<IceFloat> icefloats;
     private ArrayList<Character> characters;
     private Random r;
@@ -19,7 +19,14 @@ public class Controller {
         this.icefloats = new ArrayList(icefloats);
     }
 
-    public void gameLoop(){}
+    public void gameLoop() {
+        //foreach character -> input, actions
+        p.Wake();
+        snowstorm();
+        for (IceFloat icefloat: icefloats ) {
+            icefloat.endTurn();
+        }
+    }
 
     private void checkWinningStatus(){}
 
