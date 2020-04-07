@@ -16,7 +16,7 @@ public class PolarBear {
     void Wake() {
         int neighborcount = position.getNeighbors().size();
         position = position.getNeighbors().get(r.nextInt(neighborcount));
-        if(position.playersHere()>0)
+        if(position.playersHere()>0 && position.isBearProof()==false)
             Game.lose();
     }
 }

@@ -69,6 +69,11 @@ public abstract class IceFloat {
         }
     }
 
+    public Boolean isBearProof(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"isBearProof()");
+        return iglu;
+    }
+
     public void endTurn(){
         GUI_skeleton.printlnWithTabs(this.getClass(),"endOfTurn()");
 
