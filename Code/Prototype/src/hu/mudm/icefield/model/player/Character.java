@@ -43,6 +43,18 @@ public abstract class Character {
         return false;
     }
 
+    public Boolean canBuildTent(){
+        GUI_skeleton.printlnWithTabs(this.getClass(),"canBuildTent()");
+
+        for (Item item: items) {
+            if(item.canBuildAsTent()) {
+                item.onUse(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Boolean canRescue(){
         GUI_skeleton.printlnWithTabs(this.getClass(),"canRescue()");
         System.out.println("Can this character save someone fallen into a hole? (Do they have a rope?)");
