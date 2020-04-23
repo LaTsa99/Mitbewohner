@@ -15,7 +15,7 @@ class Main {
         System.out.println("PROTOTYPE");
 
         boolean exit = false;
-//próba
+
         GUI_skeleton s = new GUI_skeleton();
         try {
             s.addChoice('A', "Test for 5.3.1 - Player steps on stable icefloat");
