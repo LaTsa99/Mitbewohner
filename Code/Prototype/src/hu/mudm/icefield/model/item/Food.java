@@ -1,22 +1,12 @@
 package hu.mudm.icefield.model.item;
 
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
 
+//Beim Aufnehmen dieses Gegenstandes erhöht sich die Körpertemperatur des Spielers um 1.
 public class Food extends Item {
 
     @Override
     public void onPickup(Character ch) {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"onPickup(Character ch)");
-
-        GUI_skeleton.raiseTabCnt();
         ch.modifyTemp(1);
-        GUI_skeleton.decreaseTabCnt();
-    }
-
-    @Override
-    public Boolean isStorable() {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"isStorable()");
-        return false;
     }
 }

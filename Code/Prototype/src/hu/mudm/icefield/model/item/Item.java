@@ -2,29 +2,26 @@ package hu.mudm.icefield.model.item;
 
 import hu.mudm.icefield.model.player.Character;
 
+//Das soll für einen abstrakten Gegenstand entsprechen, das die verschiedene Eigenschaften der
+//einzelne Gegenstände beschreibt.
 public abstract class Item {
 
-    public abstract void onPickup(Character ch);
+    public void onPickup(Character ch) {
+        ch.addItem(this);
+    }
 
-    public void onUse(Character ch) { }
+    public void onUse(Character ch) {
+    }
 
-    public Boolean canSwim(){
+    public Boolean canSwim() {
         return false;
     }
 
-    public Boolean canFastShovel(){
+    public Boolean canFastShovel() {
         return false;
     }
 
-    public Boolean isRocketPart(){
-        return false;
-    }
-
-    public Boolean isStorable(){
-        return false;
-    }
-
-    public Boolean canRescue(){
+    public Boolean canRescue() {
         return false;
     }
 

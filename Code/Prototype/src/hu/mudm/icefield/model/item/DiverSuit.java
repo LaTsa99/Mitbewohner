@@ -1,22 +1,10 @@
 package hu.mudm.icefield.model.item;
 
-import hu.mudm.icefield.model.player.Character;
-
+//Es soll ermöglichen, dass ein Spieler ein Fall in ein Loch überlebt.
 public class DiverSuit extends Item {
-
-    @Override
-    public void onPickup(Character ch) {
-        ch.addItem(this);
-    }
 
     @Override
     public Boolean canSwim(){
         return true;
     }
-
-    @Override
-    public Boolean isStorable(){
-        return true;
-    }
-
 }

@@ -1,27 +1,10 @@
 package hu.mudm.icefield.model.item;
 
-import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
-
+//Falls ein Charakter diesen Gegenstand enthält, dann kann er einen anderen Character aus
+//einem benachbarten Loch retten.
 public class Rope extends Item {
-
     @Override
-    public void onPickup(Character ch) {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"onPickup(Character ch)");
-
-        GUI_skeleton.raiseTabCnt();
-        ch.addItem(this);
-        GUI_skeleton.decreaseTabCnt();
-    }
-
-    @Override
-    public Boolean canRescue(){
+    public Boolean canRescue() {
         return true;
     }
-
-    @Override
-    public Boolean isStorable(){
-        return true;
-    }
-
 }

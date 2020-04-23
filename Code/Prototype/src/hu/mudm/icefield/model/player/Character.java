@@ -1,53 +1,74 @@
 package hu.mudm.icefield.model.player;
 
 import hu.mudm.icefield.model.action.Action;
+import hu.mudm.icefield.model.action.BuildTentAction;
 import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.item.Item;
-import hu.mudm.icefield.view.GUI_skeleton;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
+//Repräsentiert den Spieler im Spiel. Enthaltet die Arbeiten, die der Charakter leisten kann.
+//Diese Klasse ermöglicht auch die Nachverfolgung und Änderung der Körpertemperatur des
+//Charakters. Diese Klasse enthält auch die Gegenstände, die der Spieler aufgenommen hat, und
+//hat einige Funktionen um zu bestimmen, ob der Charakter dazu fähig ist, bestimmte
+//Tätigkeiten durchzuführen. Die Klasse ist abstrakt, es macht nur Sinn, eine konkrete
+//Charakterentität, z.B. ein Eskimo zu instanzieren.
 public abstract class Character {
 
     protected IceFloat position;
     protected ArrayList<Item> items;
-    protected ArrayList<Action> actions;
+    protected ArrayList<Class<? extends Action>> actions;
 
-    private int temp;
+    protected int temp;
+    private String name;
 
-    public void modifyTemp(int value) {
-        GUI_skeleton.printlnWithTabs(this.getClass(), "modifyTemp(int value)");
-        temp+=value;
+    public Character(String name, StableIceFloat startingosition) {
+        position = startingosition;
+        items = new ArrayList<>();
+        actions = new ArrayList<>();
     }
 
-    public void addAction(Action action){}
+    public void modifyTemp(int value) {
+        temp += value;
+    }
 
-    public void removeAction(Action action){}
+    public void addAction(Class<? extends Action> action) {
+        if (!actions.contains(action)
+                || action.equals(BuildTentAction.class)) {
+            actions.add(action);
+        }
+    }
 
-    public Character(IceFloat startPosition){
-        position = startPosition;
-        items = new ArrayList<>();
+    public void removeAction(Class<? extends Action> action) {
+        actions.remove(action);
     }
 
     public Boolean canSwim() {
-        GUI_skeleton.printlnWithTabs(this.getClass(), "canSwim()");
-        for(Item item : items){
-            GUI_skeleton.raiseTabCnt();
-            if(item.canSwim()) {
-                GUI_skeleton.decreaseTabCnt();
+        for (Item item : items) {
+            if (item.canSwim()) {
                 return true;
             }
-            GUI_skeleton.raiseTabCnt();
         }
         return false;
     }
 
-    public Boolean canBuildTent(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"canBuildTent()");
+    public Boolean canRescue() {
+        for (Item item : items) {
+            if (item.canRescue()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        for (Item item: items) {
-            if(item.canBuildAsTent()) {
+    public IceFloat getIceFloat() {
+        return position;
+    }
+
+    public Boolean canFastShovel(){
+        for(Item item : items){
+            if(item.canFastShovel()) {
                 item.onUse(this);
                 return true;
             }
@@ -55,55 +76,26 @@ public abstract class Character {
         return false;
     }
 
-    public Boolean canRescue(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"canRescue()");
-        System.out.println("Can this character save someone fallen into a hole? (Do they have a rope?)");
-        try {
-            return GUI_skeleton.chooseYesOrNo();
-        } catch (GUI_skeleton.GUI_skeletonException | IOException e) {
-            e.printStackTrace();
-        }
-        return false;   //Exception was thrown
-    }
-
-    public IceFloat getIceFloat(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"getIceFloat()");
-        return position;
-    }
-
-    public Boolean canFastShovel(){
-        GUI_skeleton.printlnWithTabs(this.getClass(), "canFastShovel()");
-        for(Item item : items){
-            GUI_skeleton.raiseTabCnt();
-            if(item.canFastShovel()) {
-                GUI_skeleton.decreaseTabCnt();
-                return true;
-            }
-            GUI_skeleton.decreaseTabCnt();
-        }
-        return false;
-    }
-
-    public void addItem(Item it){
-        GUI_skeleton.printlnWithTabs(this.getClass(), "addItem(Item it)");
-
-        GUI_skeleton.raiseTabCnt();
+    public void addItem(Item it) {
         items.add(it);
-        GUI_skeleton.decreaseTabCnt();
-    }
-
-    public void moveTo(IceFloat ice){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"moveTo(IceFloat ice)");
-
-        GUI_skeleton.raiseTabCnt();
-        position.removeCharacter(this);
-        GUI_skeleton.decreaseTabCnt();
-
-        position = ice;
-
     }
 
     public void removeItem(Item item) {
         items.remove(item);
+    }
+
+    public void setPosition(IceFloat ice) {
+        position.removeCharacter(this);
+        position = ice;
+    }
+
+    public Boolean BuildTent() {
+        for (Item item : items) {
+            if (item.canBuildAsTent()) {
+                item.onUse(this);
+                return true;
+            }
+        }
+        return false;
     }
 }

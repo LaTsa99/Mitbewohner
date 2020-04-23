@@ -1,20 +1,11 @@
 package hu.mudm.icefield;
 
-import hu.mudm.icefield.model.action.*;
-import hu.mudm.icefield.model.field.*;
-import hu.mudm.icefield.model.item.*;
-import hu.mudm.icefield.model.player.*;
-import hu.mudm.icefield.model.Controller;
-import hu.mudm.icefield.view.GUI_skeleton;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 class Main {
     public static void main(String[] args){
         System.out.println("PROTOTYPE");
 
-        boolean exit = false;
+        //Code from Skeleton
+        /*boolean exit = false;
 
         GUI_skeleton s = new GUI_skeleton();
         try {
@@ -110,10 +101,11 @@ class Main {
                     System.out.println("Unexpected char");
                     break;
             }
-        }
+        }*/
     }
 
-    static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
+    //Tests
+    /*static void Test_5_3_1() { //Test for 5.3.1 - Player steps on stable icefloat - Domi
         System.out.println("TEST 5.3.1");
         Action ma = new MoveAction(new Eskimo(new StableIceFloat()), new StableIceFloat());
         ma.performAction();
@@ -276,6 +268,5 @@ class Main {
         System.out.println("TEST 5.3.17");
         Game g = new Game();
         g.init();
-    }
-
+    }*/
 }
