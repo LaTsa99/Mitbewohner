@@ -11,16 +11,12 @@ public class ShovelAction extends Action {
 
     @Override
     public void performAction() {
-        GUI_skeleton.printlnWithTabs(this.getClass(), "performAction()");
-
-        GUI_skeleton.raiseTabCnt();
         IceFloat iceFloat = this.ch.getIceFloat();
         if(this.ch.canFastShovel()){
             iceFloat.removeSnow(2);
         }else{
             iceFloat.removeSnow(1);
         }
-        GUI_skeleton.decreaseTabCnt();
     }
 
 }

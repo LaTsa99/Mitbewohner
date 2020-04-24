@@ -10,14 +10,7 @@ public class BuildTentAction extends Action {
 
     @Override
     public void performAction() {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"performAction()");
-
-        GUI_skeleton.raiseTabCnt();
         IceFloat ice = ch.getIceFloat();
-        GUI_skeleton.decreaseTabCnt();
-
-        GUI_skeleton.raiseTabCnt();
         ice.buildTent();
-        GUI_skeleton.decreaseTabCnt();
     }
 }

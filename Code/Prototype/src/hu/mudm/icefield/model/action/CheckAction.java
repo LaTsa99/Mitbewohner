@@ -12,10 +12,7 @@ public class CheckAction extends Action {
 
     @Override
     public void performAction() {
-        GUI_skeleton.printlnWithTabs(this.getClass(), "performAction()");
-        GUI_skeleton.raiseTabCnt();
         int capacity = this.target.getCapacity();
-        GUI_skeleton.decreaseTabCnt();
     }
 
 }

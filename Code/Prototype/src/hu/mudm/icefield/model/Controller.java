@@ -32,14 +32,10 @@ public class Controller {
     private void checkWinningStatus(){}
 
     public void snowstorm() {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
-
         if(icefloats!=null) {
             for (IceFloat ice: icefloats) {
                 if(r.nextFloat() < 1.0f) {
-                    GUI_skeleton.raiseTabCnt();
                     ice.addSnow();
-                    GUI_skeleton.decreaseTabCnt();
                 }
             }
         }

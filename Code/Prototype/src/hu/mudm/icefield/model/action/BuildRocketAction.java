@@ -18,7 +18,6 @@ public class BuildRocketAction extends Action {
 
     @Override
     public void performAction() {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"performAction()");
         if (pickedUp==3) {
             g.win();
         }
