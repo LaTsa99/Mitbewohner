@@ -1,6 +1,7 @@
 package hu.mudm.icefield.model;
 
 import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.player.Character;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,5 +40,21 @@ public class Controller {
                 }
             }
         }
+    }
+
+    public ArrayList<IceFloat> getIcefloats() { return icefloats;}
+    public ArrayList<Character> getCharacters() { return characters;}
+    public PolarBear getPolarBear(){return p;}
+
+    public void setIcefloats(ArrayList<IceFloat> newFloats){
+        icefloats = newFloats;
+    }
+
+    public void setCharacters(ArrayList<Character> newCharacters){
+        characters = newCharacters;
+    }
+
+    public void setPolarBear(PolarBear bear){
+        p = bear;
     }
 }

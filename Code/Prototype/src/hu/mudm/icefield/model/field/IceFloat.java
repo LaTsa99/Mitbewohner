@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public abstract class IceFloat {
 
+    protected int id;
+    protected String type;
     protected ArrayList<IceFloat> neighbors;
     protected ArrayList<Character> characters;
     protected Item item;
@@ -104,4 +106,12 @@ public abstract class IceFloat {
     public void buildTent() {
         tent = true;
     }
+
+    public int getId() { return id;}
+
+    public String getType() { return type;}
+
+    public Item getItem(){ return item;}
+
+    public int getSnowLevel() { return snowLevel;}
 }

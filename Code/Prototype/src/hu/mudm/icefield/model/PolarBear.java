@@ -19,4 +19,6 @@ public class PolarBear {
         if(position.playersHere()>0 && position.isBearProof()==false)
             Game.lose();
     }
+
+    public IceFloat getPosition(){ return position;}
 }

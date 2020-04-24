@@ -6,6 +6,8 @@ import hu.mudm.icefield.model.player.Character;
 //einzelne Gegenstände beschreibt.
 public abstract class Item {
 
+    protected String name;
+
     public void onPickup(Character ch) {
         ch.addItem(this);
     }
@@ -27,5 +29,9 @@ public abstract class Item {
 
     public Boolean canBuildAsTent(){
         return false;
+    }
+
+    public String getName(){
+        return name;
     }
 }

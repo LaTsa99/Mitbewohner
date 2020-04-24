@@ -98,4 +98,24 @@ public abstract class Character {
         }
         return false;
     }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getTemp(){
+        return temp;
+    }
+
+    public int getPosition(){
+        return position.getId();
+    }
+
+    public ArrayList<Item> getItems(){
+        return items;
+    }
+
+    public void setTemp(int newtemp){
+        if(temp > 0) temp = newtemp;
+    }
 }
