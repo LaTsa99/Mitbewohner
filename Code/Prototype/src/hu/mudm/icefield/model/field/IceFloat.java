@@ -2,7 +2,6 @@ package hu.mudm.icefield.model.field;
 
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character; //ez kb mindenhova kelleni fog, kulonben azt hiszi hogy char-ra gondolunk :(
-import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 

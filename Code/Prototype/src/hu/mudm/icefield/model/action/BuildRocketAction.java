@@ -2,7 +2,6 @@ package hu.mudm.icefield.model.action;
 
 import hu.mudm.icefield.Game;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
 
 public class BuildRocketAction extends Action {
 

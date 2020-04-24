@@ -3,9 +3,6 @@ package hu.mudm.icefield.model.field;
 import hu.mudm.icefield.Game;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
-
-import java.io.IOException;
 
 public class Hole extends IceFloat{
 

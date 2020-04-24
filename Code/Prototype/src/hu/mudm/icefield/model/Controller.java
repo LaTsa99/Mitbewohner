@@ -1,7 +1,6 @@
 package hu.mudm.icefield.model;
 
 import hu.mudm.icefield.model.field.IceFloat;
-import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 import java.util.Random;
