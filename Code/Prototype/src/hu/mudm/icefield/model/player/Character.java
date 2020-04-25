@@ -107,8 +107,8 @@ public abstract class Character {
         return temp;
     }
 
-    public int getPosition(){
-        return position.getId();
+    public IceFloat getPosition(){
+        return position;
     }
 
     public ArrayList<Item> getItems(){
@@ -118,4 +118,6 @@ public abstract class Character {
     public void setTemp(int newtemp){
         if(temp > 0) temp = newtemp;
     }
+
+    public ArrayList<Class<? extends Action>> getActions(){ return actions;}
 }

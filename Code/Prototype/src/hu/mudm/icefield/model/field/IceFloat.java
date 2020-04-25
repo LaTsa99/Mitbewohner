@@ -114,4 +114,8 @@ public abstract class IceFloat {
     public Item getItem(){ return item;}
 
     public int getSnowLevel() { return snowLevel;}
+
+    public void setItem(Item _item){
+        item = _item;
+    }
 }

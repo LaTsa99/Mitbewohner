@@ -9,7 +9,7 @@ public class PolarBear {
     protected IceFloat position;
     private Random r = new Random();
 
-    PolarBear(IceFloat startingposition) {
+    public PolarBear(IceFloat startingposition) {
         position = startingposition;
     }
 

@@ -2,14 +2,16 @@ package hu.mudm.icefield.view;
 
 import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.PolarBear;
+import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.Hole;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.field.UnstableIceFloat;
-import hu.mudm.icefield.model.item.Item;
+import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
+import javafx.scene.control.IndexedCell;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,6 +75,8 @@ final class IceFloatTypes{
 public class GUI_Prototype {
 
     private static Controller c;
+
+    private static boolean snowStormRandom = true;
 
     private static int state = 0; // 0 = creation, 1 = testing
 
@@ -261,15 +265,19 @@ public class GUI_Prototype {
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+                // Iterating through every row
                 for(int i = 0; i < n; i++){
-                    Boolean valid = false;
+                    boolean valid = false;
+                    // While row not valid
                     while(!valid){
                         ArrayList<String> row = new ArrayList<>();
                         System.out.print("\t");
                         String input = br.readLine();
+                        // Row cannot be empty
                         if(!input.equals(" ")){
-                            Boolean rowValid = true;
+                            boolean rowValid = true;
                             String[] parsed = input.split(" ");
+                            // Check if only valid strings
                             for(int j = 0; j < m; j++){
                                 if(parsed[j].equals("s") || parsed[j].equals("h") || parsed[j].matches(unstableRegex)){
                                     row.add(parsed[i]);
@@ -278,6 +286,7 @@ public class GUI_Prototype {
                                     rowValid = false;
                                 }
                             }
+                            // If row is valid, add it to the field
                             if(rowValid){
                                 valid = true;
                                 field.addAll(row);
@@ -290,21 +299,33 @@ public class GUI_Prototype {
                     }
                 }
 
+                // Check, if first icefloat is not stable
                 if(!field.get(0).equals("s")){
                     field.set(0, "s");
                     System.out.println("Warning: First float must be stable, so it has been set.");
                 }
 
                 ArrayList<IceFloat> iceFloats = new ArrayList<>();
-                //PARSOLNI A BETŰKET JÉGTÁBLÁVÁ, FŐGOND A SZOMSZÉD DOLOG
 
+                // Generating icefloats, not implementing neighbourhood yet
+                for(String s : field){
+                    iceFloats.add(createIceFloat(s));
+                }
+
+                // Making neighbours neighbours
+                for(int i = 0; i < iceFloats.size(); i++){
+                    if((i + 1) % m > (i % m)) iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
+                    if((i + m) <= n*m) iceFloats.get(i).setNeighbor(iceFloats.get(i + m));
+                }
+
+                c.setIcefloats(iceFloats);
             }
         }else{
             String usage = "generateField ,\n" +
                     "generateField <m> <n> <random (y or n)>";
             wrongUsage(usage);
         }
-    }
+    } // DONE
 
     private static void setSnow(String[] params){
         if(state == 1){
@@ -322,9 +343,25 @@ public class GUI_Prototype {
                 System.out.println("Error: arguments 1 and 2 must be an integer value.");
                 return;
             }
-            //TODO: set snow on icefloat
+
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            // Set snow on icefloat
+            for(IceFloat iceFloat : iceFloats){
+                if(iceFloat.getId() == floatID){
+                    boolean removing = count < 0;
+                    count = (count < 0) ? -count : count;
+                    for(int i = 0; i < count; i++){
+                        if(removing) iceFloat.removeSnow(1);
+                        else iceFloat.addSnow();
+                    }
+                    printState(iceFloat);
+                }
+            }
+
+            c.setIcefloats(iceFloats);
         }
-    }
+    } // DONE
 
     private static void addItemToFloat(String[] params){
         if(state == 1){
@@ -343,35 +380,25 @@ public class GUI_Prototype {
                 return;
             }
 
-            String item = params[2];
-            switch (item){
-                case ItemTypes.BreakableShovel:
-                    //TODO
-                    break;
-                case ItemTypes.DiverSuit:
-                    //TODO
-                    break;
-                case ItemTypes.Food:
-                    //TODO
-                    break;
-                case ItemTypes.RocketPart:
-                    //TODO
-                    break;
-                case ItemTypes.Rope:
-                    //TODO
-                    break;
-                case  ItemTypes.Shovel:
-                    //TODO
-                    break;
-                case ItemTypes.Tent:
-                    //TODO
-                    break;
-                default:
-                    System.out.println("Error: no such item.");
-                    break;
+            String type = params[2];
+            Item item = createItem(type);
+
+            if(item != null){
+                ArrayList<IceFloat> iceFloats = c.getIcefloats();
+                for(IceFloat iceFloat : iceFloats){
+                    if(iceFloat.getId() == floatID){
+                        if(iceFloat.getType().equals(IceFloatTypes.hole)){
+                            System.out.println("Error: You cannot put an item into a hole.");
+                            return;
+                        }
+                        iceFloat.setItem(item);
+                        printState(iceFloat);
+                    }
+                }
+                c.setIcefloats(iceFloats);
             }
         }
-    }
+    } // DONE
 
     private static void addIgloo(String[] params){
         if(state == 1){
@@ -389,9 +416,20 @@ public class GUI_Prototype {
                 return;
             }
 
-            //TODO: set igloo on float
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+            for(IceFloat iceFloat : iceFloats){
+                if(iceFloat.getId() == floatID){
+                    if(iceFloat.getType().equals(IceFloatTypes.hole)){
+                        System.out.println("Error: You cannot build an igloo on a hole.");
+                        return;
+                    }
+                    iceFloat.buildIgloo();
+                    printState(iceFloat);
+                }
+            }
+            c.setIcefloats(iceFloats);
         }
-    }
+    } // DONE
 
     private static void addTent(String[] params){
         if(state == 1){
@@ -409,19 +447,20 @@ public class GUI_Prototype {
                 return;
             }
 
-            IceFloat iceFloat = null;
-            for(IceFloat i : c.getIcefloats()){
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+            for(IceFloat i : iceFloats){
                 if(i.getId() == floatID){
                     if(i.getType().equals(IceFloatTypes.hole)){
                         System.out.println("Error: You cannot build a tent on a hole.");
                         return;
                     }
                     i.buildTent();
-                    return;
+                    printState(i);
                 }
             }
+            c.setIcefloats(iceFloats);
         }
-    }
+    } // DONE
 
     private static void addCharacter(String[] params){
         if(state == 1){
@@ -453,13 +492,14 @@ public class GUI_Prototype {
             Character character = createCharacter(type, name, (StableIceFloat) c.getIcefloats().get(0));
             if(character != null){
                 character.setTemp(temp);
+                character.setPosition(position);
                 ArrayList<Character> chlist = c.getCharacters();
                 chlist.add(character);
                 c.setCharacters(chlist);
                 printState(character);
             }
         }
-    } // SETPOSITION KÉNE
+    } // DONE
 
     private static void addItemToCharacter(String[] params){
         if(state == 1){
@@ -469,49 +509,399 @@ public class GUI_Prototype {
             String usage = "addItemToCharacter <item> <character>";
             wrongUsage(usage);
         }else{
+            String characterName = params[1];
+            String itemType = params[2];
 
+            ArrayList<Character> characters = c.getCharacters();
+            boolean exists = false;
+            for(Character character : characters){
+                if(character.getName().equals(characterName)){
+                    exists = true;
+                    Item item = createItem(itemType);
+                    if(item != null){
+                        character.addItem(item);
+                    }
+                }
+            }
+            if(exists){
+                c.setCharacters(characters);
+            }else{
+                System.out.println("Error: Character with this name doesn't exist.");
+            }
+        }
+    } // DONE
+
+    private static void setPolarBear(String[] params){
+        if(state == 1){
+            System.out.println("Error: You cannot do this in test state.");
+        }
+        else if(params.length != 3){
+            String usage = "setPolarBear <floatID> <randomize>";
+            wrongUsage(usage);
+        }else{
+            int floatID = 0;
+            try{
+                floatID = Integer.parseInt(params[1]);
+            }catch (NumberFormatException nfe){
+                System.out.println("Error: first argument should be an integer value.");
+                return;
+            }
+
+            IceFloat position = getIceFloat(floatID);
+            if(position == null){
+                System.out.println("Error: Icefloat with this id doesn't exist.");
+                return;
+            }
+            PolarBear bear = new PolarBear(position);
+            c.setPolarBear(bear);
+            // TODO: RANDOMIZE
         }
     }
 
-    private static void setPolarBear(String[] params){
-
-    }
-
     private static void setSnowStorm(String[] params){
-
-    }
+        if(state == 1){
+            System.out.println("Error: You cannot do this in test state.");
+        }
+        else if(params.length != 2){
+            String usage = "setSnowStorm <randomize (y/n)>";
+            wrongUsage(usage);
+        }else{
+            if(params[1].equals("y")){
+                snowStormRandom = true;
+            }else if(params[1].equals("n")){
+                snowStormRandom = false;
+            }else{
+                System.out.println("Error: Argument must be y (yes) or n (no).");
+            }
+        }
+    } // DONE
 
     private static void startTest(String[] params){
-
-    }
+        if(state == 1){
+            System.out.println("Error: You cannot do this in test state.");
+        }else{
+            System.out.println("Starting test...");
+            state = 1;
+        }
+    } // DONE
 
     private static void moveAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "moveAction <character> <icefloat>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            int pos = 0;
+            try{
+                pos = Integer.parseInt(params[2]);
+            }catch (NumberFormatException nfe){
+                System.out.println("Error: Argument 2 must be an integer value.");
+                return;
+            }
+
+            ArrayList<Character> characters = c.getCharacters();
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            Character character = null;
+            IceFloat iceFloat = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            for(IceFloat i : iceFloats){
+                if(i.getId() == pos) iceFloat = i;
+            }
+            if(iceFloat == null){
+                System.out.println("Error: Icefloat with this id doesn't exist!");
+                return;
+            }
+            MoveAction ma = new MoveAction(character, iceFloat);
+            ma.performAction();
+            printState(character);
+            printState(iceFloat);
+
+            c.setCharacters(characters);
+            c.setIcefloats(iceFloats);
+        }
+    } // DONE
 
     private static void shovelAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "shovelAction <character>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            ArrayList<Character> characters = c.getCharacters();
+
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            ShovelAction sa = new ShovelAction(character);
+            sa.performAction();
+            printState(character);
+            printState(character.getPosition());
+
+            c.setCharacters(characters);
+
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            for(int i = 0; i < iceFloats.size(); i++){
+                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                    iceFloats.set(i, character.getPosition());
+                    c.setIcefloats(iceFloats);
+                }
+            }
+        }
+    } // DONE
 
     private static void buildAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "buildAction <character>";
+            wrongUsage(usage);
+        }else{
+            ArrayList<Character> characters = c.getCharacters();
 
-    }
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            boolean hasAction = false;
+            ArrayList<Class<? extends Action>> actions = character.getActions();
+            for(Class<? extends Action> action : actions){
+                if(action.getCanonicalName().equals(BuildAction.class.getCanonicalName()))
+                    hasAction = true;
+            }
+            if(!hasAction){
+                System.out.println("Error: You cannot build igloo as a researcher.");
+                return;
+            }
+
+
+            BuildAction ba = new BuildAction(character);
+            ba.performAction();
+            printState(character);
+            printState(character.getPosition());
+
+            c.setCharacters(characters);
+
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            for(int i = 0; i < iceFloats.size(); i++){
+                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                    iceFloats.set(i, character.getPosition());
+                    c.setIcefloats(iceFloats);
+                }
+            }
+        }
+    } // DONE
 
     private static void buildTentAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "buildTentAction <character>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            ArrayList<Character> characters = c.getCharacters();
+
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            boolean hastent = false;
+            ArrayList<Item> items = character.getItems();
+            for(Item i: items){
+                if(i.getName().equals(ItemTypes.Tent))
+                    hastent = true;
+            }
+
+            if(!hastent){
+                System.out.println("Error: Character doesn't have a tent.");
+            }
+
+            BuildTentAction bta = new BuildTentAction(character);
+            bta.performAction();
+            printState(character);
+            printState(character.getPosition());
+
+            c.setCharacters(characters);
+
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            for(int i = 0; i < iceFloats.size(); i++){
+                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                    iceFloats.set(i, character.getPosition());
+                    c.setIcefloats(iceFloats);
+                }
+            }
+        }
+    } // DONE
 
     private static void checkAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 3){
+            String usage = "checkAction <character> <float>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            int pos = 0;
+            try{
+                pos = Integer.parseInt(params[2]);
+            }catch (NumberFormatException nfe){
+                System.out.println("Error: Second argument must be an integer value.");
+            }
+
+            ArrayList<Character> characters = c.getCharacters();
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            IceFloat iceFloat = null;
+
+            for(IceFloat i : iceFloats){
+                if(i.getId() == pos)
+                    iceFloat = i;
+            }
+
+            if(iceFloat == null){
+                System.out.println("Error: Icefloat with this id doesn't exist!");
+                return;
+            }
+
+            boolean hasAction = false;
+            ArrayList<Class<? extends Action>> actions = character.getActions();
+            for(Class<? extends Action> action : actions){
+                if(action.getCanonicalName().equals(CheckAction.class.getCanonicalName()))
+                    hasAction = true;
+            }
+            if(!hasAction){
+                System.out.println("Error: You cannot check capacity as an eskimo.");
+                return;
+            }
+
+
+            CheckAction ca = new CheckAction(character, iceFloat);
+            ca.performAction();
+            printState(character);
+            printState(iceFloat);
+
+            c.setCharacters(characters);
+            c.setIcefloats(iceFloats);
+        }
+    } // DONE
 
     private static void buildRocketAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "buildRocketAction <character>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            ArrayList<Character> characters = c.getCharacters();
+
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            BuildRocketAction bra = new BuildRocketAction(character);
+            bra.performAction();
+            printState(character);
+
+            c.setCharacters(characters);
+        }
+    } // DONE
 
     private static void pickupAction(String[] params){
+        if(state == 0){
+            System.out.println("Error: You cannot do this in creation state.");
+        }else if(params.length != 2){
+            String usage = "pickupAction <character>";
+            wrongUsage(usage);
+        }else{
 
-    }
+            ArrayList<Character> characters = c.getCharacters();
+
+            Character character = null;
+
+            for(Character c : characters){
+                if(c.getName().equals(params[1])) character = c;
+            }
+
+            if(character == null){
+                System.out.println("Error: Character with this name doesn't exist!");
+                return;
+            }
+
+            PickupAction pa = new PickupAction(character);
+            pa.performAction();
+            printState(character);
+            printState(character.getPosition());
+
+            c.setCharacters(characters);
+
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+
+            for(int i = 0; i < iceFloats.size(); i++){
+                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                    iceFloats.set(i, character.getPosition());
+                    c.setIcefloats(iceFloats);
+                }
+            }
+        }
+    } // DONE
 
     private static void snowstorm(String[] params){
 
@@ -543,7 +933,25 @@ public class GUI_Prototype {
 
 
     private static Item createItem(String type){
-        return null;
+        switch (type){
+            case ItemTypes.BreakableShovel:
+                return new BreakableShovel();
+            case ItemTypes.DiverSuit:
+                return new DiverSuit();
+            case ItemTypes.Food:
+                return new Food();
+            case ItemTypes.RocketPart:
+                return new RocketPart();
+            case ItemTypes.Rope:
+                return new Rope();
+            case  ItemTypes.Shovel:
+                return new Shovel();
+            case ItemTypes.Tent:
+                return new Tent();
+            default:
+                System.out.println("Error: no such item.");
+                return null;
+        }
     }
 
     private static Character createCharacter(String type, String name, StableIceFloat startPosition){
