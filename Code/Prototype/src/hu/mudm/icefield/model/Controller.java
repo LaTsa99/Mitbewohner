@@ -31,7 +31,7 @@ public class Controller {
         }
     }
 
-    private void checkWinningStatus(){}
+    public boolean checkWinningStatus(){return true; /*TODO*/}
 
     public void snowstorm() {
         if(icefloats!=null) {
@@ -58,4 +58,6 @@ public class Controller {
     public void setPolarBear(PolarBear bear){
         p = bear;
     }
+
+    private void validateActions(Character ch) {/*TODO*/}
 }

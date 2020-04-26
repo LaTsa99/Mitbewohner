@@ -3,13 +3,10 @@ package hu.mudm.icefield.model.field;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character; //ez kb mindenhova kelleni fog, kulonben azt hiszi hogy char-ra gondolunk :(
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class IceFloat {
 
-    protected int id;
-    protected String type;
     protected ArrayList<IceFloat> neighbors;
     protected ArrayList<Character> characters;
     protected Item item;
@@ -18,10 +15,15 @@ public abstract class IceFloat {
     protected int snowLevel;
     protected int capacity;
 
+    protected String type;
+    protected static int idCount=0;
+    protected int id;
+
     public IceFloat(){
         characters = new ArrayList<Character>();
         neighbors = new ArrayList<IceFloat>();
         iglu = false;
+        id=idCount++;
     }
 
     public IceFloat(Item item){
@@ -29,6 +31,7 @@ public abstract class IceFloat {
         neighbors = new ArrayList<IceFloat>();
         iglu = false;
         this.item = item;
+        id=idCount++;
     }
 
     public abstract void stepOn(Character ch);
@@ -76,7 +79,7 @@ public abstract class IceFloat {
     }
 
     public void buildIgloo(){
-
+        iglu = true;
     }
 
     public Item removeItem(){
@@ -108,9 +111,6 @@ public abstract class IceFloat {
         tent = true;
     }
 
-    public int getId() { return id;}
-
-    public String getType() { return type;}
 
     public Item getItem(){ return item;}
 
@@ -124,7 +124,12 @@ public abstract class IceFloat {
         return characters;
     }
 
-    public void setId(int _id){
-        id = _id;
+    public String getType(){ return type;  }
+
+    public int getID(){ return id;}
+
+    public Boolean hasItem(){
+        if (item != null) return true;
+        else {return false;}
     }
 }

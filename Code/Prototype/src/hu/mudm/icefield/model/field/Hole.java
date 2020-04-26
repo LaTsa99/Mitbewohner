@@ -13,27 +13,17 @@ public class Hole extends IceFloat{
     @Override
     public void stepOn(Character ch) {
 
-        try {
-            if (!ch.canSwim()){
-                if (neighbors !=null){
-                    boolean willBeSaved = false;
-                    for (IceFloat ice: neighbors){
-                       willBeSaved = ice.canRescueFromHere();
-
-                       if (willBeSaved) {
-                           ice.stepOn(ch);
-                           break;
-                       }
-                    }
-                    if (!willBeSaved){
-                        Game.lose();
-                    }
-                }
-            }else{
-                ch.getIceFloat().stepOn(ch);
+        if (ch.canSwim()) return;
+        for (IceFloat ice: neighbors){
+            if (ice.canRescueFromHere()) {
+                ice.stepOn(ch);
+                return;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        IceFloat prev = ch.getIceFloat();
+        prev.removeCharacter(ch);
+        characters.add(ch);
+        ch.setPosition(this);
+        Game.lose();
     }
 }

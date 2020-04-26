@@ -13,6 +13,7 @@ public class CheckAction extends Action {
     @Override
     public void performAction() {
         int capacity = this.target.getCapacity();
+        System.out.println("Capacity of target ice-float: " + capacity);
     }
 
 }
