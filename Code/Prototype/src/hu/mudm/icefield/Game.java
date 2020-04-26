@@ -30,7 +30,7 @@ public class Game {
 
     public void init()
     {
-
+/*
         ArrayList<IceFloat> iceFloats = new ArrayList<IceFloat>();
         iceFloats.add(new Hole());
         iceFloats.add(new StableIceFloat());
@@ -45,7 +45,7 @@ public class Game {
             iceFloats.get(i).setNeighbor(iceFloats.get(i-1));
 
             iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
-        }
+        }*/
     }
 
     public void start(){}

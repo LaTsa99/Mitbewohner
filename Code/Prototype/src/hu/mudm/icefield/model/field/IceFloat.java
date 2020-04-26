@@ -3,6 +3,7 @@ package hu.mudm.icefield.model.field;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character; //ez kb mindenhova kelleni fog, kulonben azt hiszi hogy char-ra gondolunk :(
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class IceFloat {
@@ -117,5 +118,13 @@ public abstract class IceFloat {
 
     public void setItem(Item _item){
         item = _item;
+    }
+
+    public ArrayList<Character> getCharacters(){
+        return characters;
+    }
+
+    public void setId(int _id){
+        id = _id;
     }
 }

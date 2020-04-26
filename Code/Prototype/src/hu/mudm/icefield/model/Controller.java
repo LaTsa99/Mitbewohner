@@ -14,7 +14,8 @@ public class Controller {
 
     public Controller(ArrayList<IceFloat> icefloats) {
         r = new Random();
-        this.icefloats = new ArrayList(icefloats); //ez warningot dob
+        //this.icefloats = new ArrayList(icefloats); //ez warningot dob
+        this.icefloats = icefloats; //ez warningot dob
     }
 
     public static void rocketPartPickedUp() {
