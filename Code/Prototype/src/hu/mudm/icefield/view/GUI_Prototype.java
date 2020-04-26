@@ -60,16 +60,6 @@ final class Commands{
     public final static String exit                 = "exit";
 }
 
-final class ItemTypes{
-    public final static String Shovel           = "shovel";
-    public final static String DiverSuit        = "diversuit";
-    public final static String Food             = "food";
-    public final static String RocketPart       = "rocketpart";
-    public final static String Rope             = "rope";
-    public final static String Tent             = "tent";
-    public final static String BreakableShovel  = "breakable";
-}
-
 final class CharacterTypes{
     public final static String researcher   = "researcher";
     public final static String eskimo       = "eskimo";
@@ -187,8 +177,17 @@ public class GUI_Prototype implements GUI{
 
     @Override
     public ArrayList<Character> getCharacters(){
-        /*TODO*/
-        return null;
+        ArrayList<Character> characters = new ArrayList<>();
+        Random random = new Random();
+
+
+        while(characters.size() < 3){
+
+            System.out.println("New Character");
+            System.out.print("Your name: ");
+        }
+
+        return characters;
     }
 
     public static void setGame(Game _game){
