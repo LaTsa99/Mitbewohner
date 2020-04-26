@@ -179,12 +179,47 @@ public class GUI_Prototype implements GUI{
     public ArrayList<Character> getCharacters(){
         ArrayList<Character> characters = new ArrayList<>();
         Random random = new Random();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        HashSet<String> names = new HashSet<>();
+
+        try {
+            int count = 0;
+            boolean justright = false;
+            while(!justright){
+                System.out.print("How many characters do you want to add? ");
+                count = Integer.parseInt(br.readLine());
+                if(count >= 3 && count <= 6)
+                    justright = true;
+                else{
+                    System.out.println("Player count must be between 3 and 6.");
+                }
+            }
 
 
-        while(characters.size() < 3){
+            while (characters.size() < count) {
 
-            System.out.println("New Character");
-            System.out.print("Your name: ");
+                int rand = random.nextInt(2);
+                String type = rand==0 ? "Researcher" : "Eskimo";
+                System.out.println("New " + type);
+                System.out.print("Your name: ");
+                String name = br.readLine();
+                if(!names.contains(name)) {
+                    names.add(name);
+                    Character character = null;
+                    if (rand == 0) {
+                        character = new Researcher(name, (StableIceFloat) c.getIcefloats().get(0));
+                    } else {
+                        character = new Eskimo(name, (StableIceFloat) c.getIcefloats().get(0));
+                    }
+                    characters.add(character);
+                }else{
+                    System.out.println("Error: this name is taken.");
+                }
+            }
+        }catch (Exception e){
+            System.out.println("An exception occured");
+            return null;
         }
 
         return characters;
