@@ -1,7 +1,7 @@
 package hu.mudm.icefield.model.field;
 
 import hu.mudm.icefield.model.item.Item;
-import hu.mudm.icefield.model.player.Character; //ez kb mindenhova kelleni fog, kulonben azt hiszi hogy char-ra gondolunk :(
+import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
@@ -28,11 +28,8 @@ public abstract class IceFloat {
     }
 
     public IceFloat(Item item){
-        characters = new ArrayList<Character>();
-        neighbors = new ArrayList<IceFloat>();
-        iglu = false;
+        this();
         this.item = item;
-        id=idCount++;
     }
 
     public abstract void stepOn(Character ch);
@@ -139,7 +136,6 @@ public abstract class IceFloat {
     public int snowLevel(){return snowLevel;}
 
     public Boolean hasItem(){
-        if (item != null) return true;
-        else {return false;}
+        return item != null;
     }
 }
