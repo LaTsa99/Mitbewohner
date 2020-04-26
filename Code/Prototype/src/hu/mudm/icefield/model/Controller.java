@@ -15,6 +15,7 @@ public class Controller {
     private Random r;
     private boolean isWon;
     private boolean isLost;
+    private static int rocketPartsCnt = 0;
 
     public Controller(ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
         r = new Random();
@@ -52,9 +53,12 @@ public class Controller {
 
     //private Action createAction(int index, Object[] parameters) { }
 
-    public boolean checkWinningStatus(){return true; /*TODO*/}
+    public boolean checkWinningStatus(){
+        //the same with the "canWin" method in documentation
+        return true;
+    }
 
     public static void rocketPartPickedUp() {
-        //do
+        Controller.rocketPartsCnt++;
     }
 }
