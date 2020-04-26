@@ -12,7 +12,7 @@ public class PolarBear {
         position = startingposition;
     }
 
-    void Wake() {
+    public void Wake() {
         int neighborcount = position.getNeighbors().size();
         position = position.getNeighbors().get(r.nextInt(neighborcount));
         if(position.playersHere()>0 && position.isBearProof()==false)
@@ -20,4 +20,5 @@ public class PolarBear {
     }
 
     public IceFloat getPosition(){ return position;}
+    public void setPosition(IceFloat _position){ position = _position; }
 }

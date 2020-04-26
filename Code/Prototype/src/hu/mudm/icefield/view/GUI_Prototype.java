@@ -1,5 +1,6 @@
 package hu.mudm.icefield.view;
 
+import hu.mudm.icefield.Game;
 import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.PolarBear;
 import hu.mudm.icefield.model.action.*;
@@ -11,12 +12,17 @@ import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +56,7 @@ final class Commands{
     public final static String snowstorm            = "snowstorm";
     public final static String polarBearMove        = "polarBearMove";
     public final static String saveOutput           = "saveOutput";
+    public final static String startGame            = "startGame";
     public final static String exit                 = "exit";
 }
 
@@ -81,6 +88,7 @@ final class IceFloatTypes{
 public class GUI_Prototype implements GUI{
 
     private static Controller c;
+    private static Game game;
 
     private static boolean snowStormRandom = true;
 
@@ -183,8 +191,9 @@ public class GUI_Prototype implements GUI{
         return null;
     }
 
-    public static void setController(Controller controller){
-        c = controller;
+    public static void setGame(Game _game){
+        game = _game;
+        c = game.GetController();
     }
 
     /**
@@ -265,6 +274,10 @@ public class GUI_Prototype implements GUI{
                 case Commands.saveOutput:
                     saveOutput(parsedInput);
                     break;
+                case Commands.startGame:
+                    game.init();
+                    game.start();
+                    break;
                 case Commands.exit:
                     exit = true;
                     break;
@@ -321,6 +334,7 @@ public class GUI_Prototype implements GUI{
         System.out.println("Usage:");
         System.out.println(usage);
     }
+
 
     private static void loadTest(String[] params){
         if(state == 1){
@@ -405,6 +419,10 @@ public class GUI_Prototype implements GUI{
                     }
 
                     iceFloats.add(iceFloat);
+                }
+
+                for(int i = 0; i < iceFloats.size() - 1; i++){
+                    iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
                 }
 
                 for(IceFloat iceFloat : iceFloats){
@@ -872,9 +890,8 @@ public class GUI_Prototype implements GUI{
             }
             PolarBear bear = new PolarBear(position);
             c.setPolarBear(bear);
-            // TODO: RANDOMIZE
         }
-    }
+    } // DONE
 
     private static void setSnowStorm(String[] params){
         if(state == 1){
@@ -1281,20 +1298,150 @@ public class GUI_Prototype implements GUI{
         if(state == 0){
             System.out.println("Error: You cannot do this in creation state.");
         }else if(params.length == 1){
-            // Polar bear move
+            c.getPolarBear().Wake();
             printState(c.getPolarBear());
         }else if(params.length == 2){
-            // Polar bear move to direction in param 2
+            int nextPosID = Integer.parseInt(params[1]);
+            ArrayList<IceFloat> neighbours = c.getPolarBear().getPosition().getNeighbors();
+            IceFloat target = null;
+            for(IceFloat iceFloat : neighbours){
+                if(iceFloat.getID() == nextPosID)
+                    target = iceFloat;
+            }
+            if(target == null){
+                System.out.println("Error: the bear cannot reach that icefloat.");
+                return;
+            }
+            c.getPolarBear().setPosition(target);
             printState(c.getPolarBear());
         }else{
             String usage = "polarBearMove <direction>";
             wrongUsage(usage);
         }
-    }
+    } // DONE
 
     private static void saveOutput(String[] params){
-        System.out.println("Saving state to xml.");
-    }
+        if(params.length != 2){
+            String usage = "saveOutput <location>";
+            wrongUsage(usage);
+            return;
+        }
+
+        try{
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            // <icefield>
+            Element root = document.createElement("icefield");
+            Attr attr = document.createAttribute("state");
+            String state;
+            if(c.getisWon()) state = "won";
+            else if(c.getisLost()) state = "lost";
+            else state = "ongoing";
+            attr.setValue(state);
+            root.setAttributeNode(attr);
+            document.appendChild(root);
+
+            Element config = document.createElement("config");
+            root.appendChild(config);
+
+            Element floats = document.createElement("icefloats");
+            config.appendChild(floats);
+
+            // serializing icefloats
+            for(IceFloat i : c.getIcefloats()){
+                Element iceFloat = document.createElement("icefloat");
+                //---------
+                Element type = document.createElement("type");
+                String types = i.getType();
+                type.appendChild(document.createTextNode(types));
+                iceFloat.appendChild(type);
+                //---------
+                Element capacity = document.createElement("capacity");
+                String capacitys;
+                if(type.equals(IceFloatTypes.stable) && type.equals(IceFloatTypes.hole)){
+                    capacitys = "";
+                }else{
+                    capacitys = "" + i.getCapacity();
+                }
+                capacity.appendChild(document.createTextNode(capacitys));
+                iceFloat.appendChild(capacity);
+                //---------
+                Element item = document.createElement("item");
+                Item floatsItem = i.getItem();
+                String items;
+                if(floatsItem == null) items = "";
+                else items = floatsItem.getName();
+                item.appendChild(document.createTextNode(items));
+                iceFloat.appendChild(item);
+                //---------
+                Element snowCount = document.createElement("snowcount");
+                snowCount.appendChild(document.createTextNode("" + i.getSnowLevel()));
+                iceFloat.appendChild(snowCount);
+                //---------
+                Element igloo = document.createElement("igloo");
+                String hasIgloo = (i.hasIglu()) ? "true" : "false";
+                igloo.appendChild(document.createTextNode(hasIgloo));
+                iceFloat.appendChild(igloo);
+                //---------
+                Element tent = document.createElement("tent");
+                String hasTent = (i.hasTent()) ? "true" : "false";
+                tent.appendChild(document.createTextNode(hasTent));
+                iceFloat.appendChild(tent);
+                //---------
+                floats.appendChild(iceFloat);
+            }
+
+            Element characters = document.createElement("characters");
+            config.appendChild(characters);
+
+            // serializing characters
+            for(Character character : c.getCharacters()){
+                Element characterNode = document.createElement("character");
+                //----------
+                Element type = document.createElement("type");
+                ArrayList<Class<? extends Action>> actions = character.getActions();
+                boolean researcher = false;
+                for(Class<? extends Action> action : actions){
+                    if(action.getCanonicalName().equals(CheckAction.class.getCanonicalName()))
+                        researcher = true;
+                }
+                String types = researcher ? "Researcher" : "Eskimo";
+                type.appendChild(document.createTextNode(types));
+                characterNode.appendChild(type);
+                //---------
+                Element name = document.createElement("name");
+                name.appendChild(document.createTextNode(character.getName()));
+                characterNode.appendChild(name);
+                //---------
+                Element position = document.createElement("position");
+                position.appendChild(document.createTextNode("" + character.getPosition().getID()));
+                characterNode.appendChild(position);
+                //---------
+                Element temp = document.createElement("bodytemp");
+                temp.appendChild(document.createTextNode("" + character.getTemp()));
+                characterNode.appendChild(temp);
+                //---------
+                characters.appendChild(characterNode);
+            }
+
+            //transform DOM to XML
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(params[1]));
+
+            transformer.transform(domSource, streamResult);
+
+        }catch (Exception e){
+            System.out.println("Exception while parsing output.");
+            e.printStackTrace();
+            return;
+        }
+
+    } // DONE
+
 
     private static ArrayList<IceFloat> randomizedField(int n, int m){
         Random rand = new Random();
@@ -1334,7 +1481,6 @@ public class GUI_Prototype implements GUI{
 
         return field;
     } // DONE
-
 
     private static IceFloat getIceFloat(int id){
         IceFloat iceFloat = null;

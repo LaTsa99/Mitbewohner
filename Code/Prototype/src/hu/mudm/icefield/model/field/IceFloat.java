@@ -133,4 +133,6 @@ public abstract class IceFloat {
     public Boolean hasItem(){
         return item != null;
     }
+    public boolean hasIglu() { return iglu;}
+    public boolean hasTent() { return tent;}
 }
