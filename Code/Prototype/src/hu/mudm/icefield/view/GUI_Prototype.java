@@ -77,19 +77,12 @@ final class IceFloatTypes{
     public final static String unstable = "unstable";
     public final static String hole     = "hole";
 }
-
-final class PolarDirections{
-    public final static String UP = "up";
-    public final static String DOWN = "down";
-    public final static String LEFT = "left";
-    public final static String RIGHt = "right";
-}
 /**
  * Class, that handles the command line input and output of
  * the program. Every field and method is static, so there is
  * no need for instantiating.
  */
-public class GUI_Prototype {
+public class GUI_Prototype implements GUI{
 
     private static Controller c;
 
@@ -108,8 +101,22 @@ public class GUI_Prototype {
     private static Boolean exit = false;
 
     //KELL
-    public static int getAction(Character character){
+    @Override
+    public int getAction(Character character){
         // TODO
+        return 0;
+    }
+
+    @Override
+    public int getStep(IceFloat iceFloat){
+        // TODO
+        return 0;
+    }
+
+    @Override
+    public ArrayList<Character> getCharacters(){
+        // TODO
+        return null;
     }
 
     public static void setController(Controller controller){
@@ -224,7 +231,7 @@ public class GUI_Prototype {
 
     private static void printState(IceFloat iceFloat){
         StringBuilder sb = new StringBuilder();
-        sb.append(iceFloat.getId());
+        sb.append(iceFloat.getID());
         sb.append("\n");
         sb.append("Type: ");
         sb.append(iceFloat.getType());
@@ -242,7 +249,7 @@ public class GUI_Prototype {
     }
 
     private static void printState(PolarBear bear){
-        System.out.println("Polar bear: Position: " + bear.getPosition().getId());
+        System.out.println("Polar bear: Position: " + bear.getPosition().getID());
     }
 
     private static void wrongUsage(String usage){
@@ -307,7 +314,7 @@ public class GUI_Prototype {
                             return;
                     }
 
-                    iceFloat.setId(i);
+                    iceFloat.setID(i);
 
                     for(int j = 0; j < snowCount; j++){
                         iceFloat.addSnow();
@@ -369,7 +376,7 @@ public class GUI_Prototype {
                     newCharacter.setTemp(temp);
 
                     for(IceFloat ice : iceFloats) {
-                        if (ice.getId() == position){
+                        if (ice.getID() == position){
                             if(ice.getType().equals(IceFloatTypes.hole)){
                                 System.out.println("Error: you cannot put character in a hole!");
                                 return;
@@ -390,7 +397,7 @@ public class GUI_Prototype {
                 if(polarBear != null){
                     int position = Integer.parseInt(polarBear.getAttribute("position"));
                     for(IceFloat i: iceFloats){
-                        if(i.getId() == position){
+                        if(i.getID() == position){
                             PolarBear bear = new PolarBear(i);
                             c.setPolarBear(bear);
                             printState(bear);
@@ -527,7 +534,7 @@ public class GUI_Prototype {
                 // Generating icefloats, not implementing neighbourhood yet
                 for(String s : field){
                     IceFloat iceFloat = createIceFloat(s);
-                    iceFloat.setId(id);
+                    iceFloat.setID(id);
                     iceFloats.add(createIceFloat(s));
                     id++;
                 }
@@ -568,7 +575,7 @@ public class GUI_Prototype {
 
             // Set snow on icefloat
             for(IceFloat iceFloat : iceFloats){
-                if(iceFloat.getId() == floatID){
+                if(iceFloat.getID() == floatID){
                     boolean removing = count < 0;
                     count = (count < 0) ? -count : count;
                     for(int i = 0; i < count; i++){
@@ -606,7 +613,7 @@ public class GUI_Prototype {
             if(item != null){
                 ArrayList<IceFloat> iceFloats = c.getIcefloats();
                 for(IceFloat iceFloat : iceFloats){
-                    if(iceFloat.getId() == floatID){
+                    if(iceFloat.getID() == floatID){
                         if(iceFloat.getType().equals(IceFloatTypes.hole)){
                             System.out.println("Error: You cannot put an item into a hole.");
                             return;
@@ -638,7 +645,7 @@ public class GUI_Prototype {
 
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
             for(IceFloat iceFloat : iceFloats){
-                if(iceFloat.getId() == floatID){
+                if(iceFloat.getID() == floatID){
                     if(iceFloat.getType().equals(IceFloatTypes.hole)){
                         System.out.println("Error: You cannot build an igloo on a hole.");
                         return;
@@ -669,7 +676,7 @@ public class GUI_Prototype {
 
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
             for(IceFloat i : iceFloats){
-                if(i.getId() == floatID){
+                if(i.getID() == floatID){
                     if(i.getType().equals(IceFloatTypes.hole)){
                         System.out.println("Error: You cannot build a tent on a hole.");
                         return;
@@ -837,7 +844,7 @@ public class GUI_Prototype {
             }
 
             for(IceFloat i : iceFloats){
-                if(i.getId() == pos) iceFloat = i;
+                if(i.getID() == pos) iceFloat = i;
             }
             if(iceFloat == null){
                 System.out.println("Error: Icefloat with this id doesn't exist!");
@@ -884,7 +891,7 @@ public class GUI_Prototype {
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
 
             for(int i = 0; i < iceFloats.size(); i++){
-                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                if(iceFloats.get(i).getID() == character.getPosition().getID()) {
                     iceFloats.set(i, character.getPosition());
                     c.setIcefloats(iceFloats);
                 }
@@ -934,7 +941,7 @@ public class GUI_Prototype {
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
 
             for(int i = 0; i < iceFloats.size(); i++){
-                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                if(iceFloats.get(i).getID() == character.getPosition().getID()) {
                     iceFloats.set(i, character.getPosition());
                     c.setIcefloats(iceFloats);
                 }
@@ -984,7 +991,7 @@ public class GUI_Prototype {
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
 
             for(int i = 0; i < iceFloats.size(); i++){
-                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                if(iceFloats.get(i).getID() == character.getPosition().getID()) {
                     iceFloats.set(i, character.getPosition());
                     c.setIcefloats(iceFloats);
                 }
@@ -1024,7 +1031,7 @@ public class GUI_Prototype {
             IceFloat iceFloat = null;
 
             for(IceFloat i : iceFloats){
-                if(i.getId() == pos)
+                if(i.getID() == pos)
                     iceFloat = i;
             }
 
@@ -1115,7 +1122,7 @@ public class GUI_Prototype {
             ArrayList<IceFloat> iceFloats = c.getIcefloats();
 
             for(int i = 0; i < iceFloats.size(); i++){
-                if(iceFloats.get(i).getId() == character.getPosition().getId()) {
+                if(iceFloats.get(i).getID() == character.getPosition().getID()) {
                     iceFloats.set(i, character.getPosition());
                     c.setIcefloats(iceFloats);
                 }
@@ -1163,7 +1170,7 @@ public class GUI_Prototype {
             }
 
             for(IceFloat i : iceFloats){
-                if(floats.contains(i.getId())){
+                if(floats.contains(i.getID())){
                     i.addSnow();
                     ArrayList<Character> characters = i.getCharacters();
                     for(Character c : characters){
@@ -1207,24 +1214,24 @@ public class GUI_Prototype {
             switch (random){
                 case 0:
                     iceFloat = new StableIceFloat();
-                    iceFloat.setId(i);
+                    iceFloat.setID(i);
                     field.add(iceFloat);
                     break;
                 case 1:
                     iceFloat = new Hole();
-                    iceFloat.setId(i);
+                    iceFloat.setID(i);
                     field.add(iceFloat);
                     break;
                 case 2:
                     int capacity = rand.nextInt(6) + 1;
                     iceFloat = new UnstableIceFloat(capacity);
-                    iceFloat.setId(i);
+                    iceFloat.setID(i);
                     field.add(iceFloat);
                     break;
             }
             if(!field.get(0).getType().equals(IceFloatTypes.stable)){
                 IceFloat stable = new StableIceFloat();
-                stable.setId(0);
+                stable.setID(0);
                 field.set(0, stable);
             }
         }
@@ -1241,7 +1248,7 @@ public class GUI_Prototype {
     private static IceFloat getIceFloat(int id){
         IceFloat iceFloat = null;
         for(IceFloat fl : c.getIcefloats()){
-            if(fl.getId() == id) iceFloat = fl;
+            if(fl.getID() == id) iceFloat = fl;
         }
         return iceFloat;
     }
