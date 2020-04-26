@@ -3,6 +3,7 @@ package hu.mudm.icefield.model;
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.action.BuildAction;
 import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
@@ -55,6 +56,12 @@ public class Controller {
 
     public boolean checkWinningStatus(){
         //the same with the "canWin" method in documentation
+        if(rocketPartsCnt < 3) return false;
+
+        Character ch = characters.get(0);
+        IceFloat icf = ch.getIceFloat();
+        if(icf.playersHere() != characters.size()) return false;
+
         return true;
     }
 
