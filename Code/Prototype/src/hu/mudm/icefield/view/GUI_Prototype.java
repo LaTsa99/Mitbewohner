@@ -406,6 +406,7 @@ public class GUI_Prototype implements GUI{
                     state = 1;
 
                 String name, pos;
+                // XML commands
                 for(int i = 0; i < test.getLength(); i++){
                     String actionType = test.item(i).getNodeName();
                     switch (actionType){
@@ -447,18 +448,44 @@ public class GUI_Prototype implements GUI{
                             pickupAction(parameters7);
                             break;
                         case "polarmove":
-
-
+                            pos = ((Element)test.item(i)).getAttribute("icefloat");
+                            String parameters8[] = {actionType, pos};
+                            polarBearMove(parameters8);
+                            break;
+                        case "saveoutput":
+                            String location = ((Element)test.item(i)).getAttribute("location");
+                            String parameters9[] = {actionType, location};
+                            saveOutput(parameters9);
+                            break;
+                        case "snowstorm":
+                            NodeList floats = (NodeList) test.item(i);
+                            if(floats.getLength() == 0){
+                                String parameters10[] = {actionType};
+                            }else{
+                                int n = floats.getLength();
+                                String parameters10[] = new String[n + 2];
+                                parameters10[0] = actionType;
+                                parameters10[1] = "" + n;
+                                for(int j = 0; j < floats.getLength(); j++){
+                                    parameters10[j + 2] = ((Element)floats.item(j)).getAttribute("id");
+                                }
+                                snowstorm(parameters10);
+                            }
+                            break;
+                        default:
+                            System.out.println("Error: unknown command!");
+                            return;
                     }
                 }
 
 
 
             }catch (Exception e){
-
+                System.out.println("An exception occured!");
+                return;
             }
         }
-    }
+    } // DONE
 
     private static void generateField(String[] params) throws IOException{
         String unstableRegex = "i[0-9][0-9]*";
