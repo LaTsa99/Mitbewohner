@@ -64,15 +64,16 @@ public class Game {
             if (type >= 90 )                ices.add(new Hole());
         }
 
-        int r1 = rand.nextInt(36);
-        int r2 = -1;
-        int r3 = -1;
-        while (r2<0||r1==r2) r2 = rand.nextInt(36);
-        while (r3<0||r1==r3 || r3==r2) r3 = rand.nextInt(36);
-        int rd[] = {r1, r2, r3};
+        int rd[] = new int[3];
+        rd[0] = rand.nextInt(36);
+        rd[1] = -1;
+        rd[2] = -1;
+        while (rd[1]<0||rd[0]==rd[1]) rd[1] = rand.nextInt(36);
+        while (rd[2]<0||rd[0]==rd[2] || rd[1]==rd[2]) rd[2] = rand.nextInt(36);
+
         for(int j= 0; j<3; j++){
         type = rand.nextInt(90);
-        if (type < 50)                  ices.set(rd[j], new StableIceFloat(new RocketPart()));
+        if (type < 50 || rd[j]==0)                  ices.set(rd[j], new StableIceFloat(new RocketPart()));
         if (type >= 50 && type < 90)    ices.set(rd[j], new UnstableIceFloat(rand.nextInt(5)+1, new RocketPart()));
         }
 
@@ -81,11 +82,10 @@ public class Game {
 
     private void setNeighbors(ArrayList<IceFloat> i){
         ArrayList<IceFloat> neighbors;
+
         for(int j = 0; j < 36; j++){
-            if (j>0)    i.get(j).setNeighbor(i.get(j-1));
-            if (j>6)    i.get(j).setNeighbor(i.get(j-6));
-            if (j<35)   i.get(j).setNeighbor(i.get(j+1));
-            if (j<29)   i.get(j).setNeighbor(i.get(j+6));
+            if((j + 1) % 6 > (j % 6)) i.get(j).setNeighbor(i.get(j+1));
+            if((j + 6) < 36) i.get(j).setNeighbor(i.get(j + 6));
         }
     }
 
@@ -96,13 +96,14 @@ public class Game {
         ArrayList<IceFloat> iceFloats = createIcefloat(items);
         setNeighbors(iceFloats);
         GUI gp = new GUI_Prototype();
-        ArrayList<Character> characters = gp.getCharacters();
-        if (characters == null) System.exit(0);
 
         PolarBear maci = new PolarBear(iceFloats.get(35));
-        controller.setCharacters(characters);
+
         controller.setIcefloats(iceFloats);
         controller.setPolarBear(maci);
+        ArrayList<Character> characters = gp.getCharacters();   //getCharacters() uses iceFloats! (startPosition)
+        if (characters == null) System.exit(0);
+        controller.setCharacters(characters);
     }
 
     public void start(){ this.controller.gameLoop(); }
