@@ -107,6 +107,11 @@ public class GUI_Prototype {
      */
     private static Boolean exit = false;
 
+    //KELL
+    public static int getAction(Character character){
+        // TODO
+    }
+
     public static void setController(Controller controller){
         c = controller;
     }
@@ -404,20 +409,43 @@ public class GUI_Prototype {
                         case "moveaction":
                             name = ((Element)test.item(i)).getAttribute("character");
                             pos = ((Element)test.item(i)).getAttribute("icefloat");
-                            String parameters1[] = {"moveaction", name, pos};
+                            String parameters1[] = {actionType, name, pos};
                             moveAction(parameters1);
                             break;
                         case "shovelaction":
                             name = ((Element)test.item(i)).getAttribute("character");
-                            String parameters2[] = {"shovelaction", name};
+                            String parameters2[] = {actionType, name};
                             shovelAction(parameters2);
                             break;
                         case "buildaction":
                             name = ((Element)test.item(i)).getAttribute("character");
-                            String parameters3[] = {"shovelaction", name};
-                            shovelAction(parameters3);
+                            String parameters3[] = {actionType, name};
+                            buildAction(parameters3);
                             break;
-                            case ""
+                        case "buildtentaction":
+                            name = ((Element)test.item(i)).getAttribute("character");
+                            String parameters4[] = {actionType, name};
+                            buildTentAction(parameters4);
+                            break;
+                        case "checkaction":
+                            name = ((Element)test.item(i)).getAttribute("character");
+                            pos = ((Element)test.item(i)).getAttribute("icefloat");
+                            String parameters5[] = {actionType, name, pos};
+                            checkAction(parameters5);
+                            break;
+                        case "buildrocketaction":
+                            name = ((Element)test.item(i)).getAttribute("character");
+                            String parameters6[] = {actionType, name};
+                            buildRocketAction(parameters6);
+                            break;
+                        case "pickupaction":
+                            name = ((Element)test.item(i)).getAttribute("character");
+                            String parameters7[] = {actionType, name};
+                            pickupAction(parameters7);
+                            break;
+                        case "polarmove":
+
+
                     }
                 }
 
