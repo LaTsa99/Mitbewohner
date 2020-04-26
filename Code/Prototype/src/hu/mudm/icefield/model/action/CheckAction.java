@@ -16,6 +16,7 @@ public class CheckAction extends Action {
         GUI_skeleton.printlnWithTabs(this.getClass(), "performAction()");
         GUI_skeleton.raiseTabCnt();
         int capacity = this.target.getCapacity();
+        System.out.println("Capacity of target ice-float: " + capacity);
         GUI_skeleton.decreaseTabCnt();
     }
 
