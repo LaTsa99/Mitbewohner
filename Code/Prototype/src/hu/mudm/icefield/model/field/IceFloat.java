@@ -125,6 +125,11 @@ public abstract class IceFloat {
 
     public int getID(){ return id;}
 
+    public void setID(int _id){
+        id = _id;
+        idCount--;
+    }
+
     public Boolean hasItem(){
         return item != null;
     }

@@ -73,19 +73,12 @@ final class IceFloatTypes{
     public final static String unstable = "unstable";
     public final static String hole     = "hole";
 }
-
-final class PolarDirections{
-    public final static String UP = "up";
-    public final static String DOWN = "down";
-    public final static String LEFT = "left";
-    public final static String RIGHt = "right";
-}
 /**
  * Class, that handles the command line input and output of
  * the program. Every field and method is static, so there is
  * no need for instantiating.
  */
-public class GUI_Prototype {
+public class GUI_Prototype implements GUI{
 
     private static Controller c;
 
@@ -104,8 +97,22 @@ public class GUI_Prototype {
     private static Boolean exit = false;
 
     //KELL
-    public static int getAction(Character character){
+    @Override
+    public int getAction(Character character){
         // TODO
+        return 0;
+    }
+
+    @Override
+    public int getStep(IceFloat iceFloat){
+        // TODO
+        return 0;
+    }
+
+    @Override
+    public ArrayList<Character> getCharacters(){
+        // TODO
+        return null;
     }
 
     public static void setController(Controller controller){
@@ -523,7 +530,7 @@ public class GUI_Prototype {
                 // Generating icefloats, not implementing neighbourhood yet
                 for(String s : field){
                     IceFloat iceFloat = createIceFloat(s);
-                    iceFloat.setId(id);
+                    iceFloat.setID(id);
                     iceFloats.add(createIceFloat(s));
                     id++;
                 }
