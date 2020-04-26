@@ -28,7 +28,16 @@ public class Controller {
     }
 
     public void gameLoop() {
-        //foreach character -> input, actions
+        while(!isWon && !isLost) {
+            for (Character ch : characters) {
+                for (int i = 0; i < 4; i++) {
+                    validateActions(ch);
+                    //TODO
+                    //action = createAction(ch)
+                    //action.performAction()
+                }
+            }
+        }
         p.Wake();
         snowstorm();
         for (IceFloat icefloat : icefloats) {
@@ -52,7 +61,9 @@ public class Controller {
 
     private void validateActions(Character ch) {/*TODO*/}
 
-    //private Action createAction(int index, Object[] parameters) { }
+    private Action createAction(Character ch) {
+
+    }
 
     public boolean checkWinningStatus(){
         //the same with the "canWin" method in documentation
