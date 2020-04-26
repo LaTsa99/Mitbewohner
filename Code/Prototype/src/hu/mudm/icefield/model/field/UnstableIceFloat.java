@@ -1,6 +1,6 @@
 package hu.mudm.icefield.model.field;
 
-import hu.mudm.icefield.Game;
+import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
 
@@ -25,7 +25,7 @@ public class UnstableIceFloat extends IceFloat {
         ch.setPosition(this);
 
         if (playersHere() > capacity) {
-            Game.lose();
+            Controller.Lose();
         }
     }
 }

@@ -12,8 +12,8 @@ public class Controller {
     private ArrayList<IceFloat> icefloats;
     private ArrayList<Character> characters;
     private Random r;
-    private boolean isWon;
-    private boolean isLost;
+    private static boolean isWon;
+    private static boolean isLost;
     private static int rocketPartsCnt = 0;
 
     public Controller(ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
@@ -109,12 +109,12 @@ public class Controller {
         return isLost;
     }
 
-    public void Win() {
+    public static void Win() {
         isWon = true;
         isLost = false;
     }
 
-    public void Loose() {
+    public static void Lose() {
         isLost = true;
         isWon = false;
     }
