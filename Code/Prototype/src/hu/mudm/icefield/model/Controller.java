@@ -1,5 +1,7 @@
 package hu.mudm.icefield.model;
 
+import hu.mudm.icefield.model.action.Action;
+import hu.mudm.icefield.model.action.BuildAction;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.view.GUI_skeleton;
 
@@ -11,14 +13,16 @@ public class Controller {
     private ArrayList<IceFloat> icefloats;
     private ArrayList<Character> characters;
     private Random r;
+    private boolean isWon;
+    private boolean isLost;
 
-    public Controller(ArrayList<IceFloat> icefloats) {
+    public Controller(ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
         r = new Random();
-        this.icefloats = new ArrayList(icefloats); //ez warningot dob
-    }
-
-    public static void rocketPartPickedUp() {
-        //do
+        isWon = false;
+        isLost = false;
+        this.p = p;
+        this.characters = characters;
+        this.icefloats = icefloats;
     }
 
     public void gameLoop() {
@@ -29,8 +33,6 @@ public class Controller {
             icefloat.endTurn();
         }
     }
-
-    public boolean checkWinningStatus(){return true; /*TODO*/}
 
     public void snowstorm() {
         GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
@@ -47,4 +49,12 @@ public class Controller {
     }
 
     private void validateActions(Character ch) {/*TODO*/}
+
+    //private Action createAction(int index, Object[] parameters) { }
+
+    public boolean checkWinningStatus(){return true; /*TODO*/}
+
+    public static void rocketPartPickedUp() {
+        //do
+    }
 }
