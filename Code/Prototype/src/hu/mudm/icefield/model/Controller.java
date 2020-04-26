@@ -34,16 +34,15 @@ public class Controller {
             for (Character ch : characters) {
                 for (int i = 0; i < 4; i++) {
                     validateActions(ch);
-                    //TODO
-                    //action = createAction(ch)
-                    //action.performAction()
+                    Action action = createAction(ch);
+                    action.performAction();
                 }
             }
-        }
-        p.Wake();
-        snowstorm();
-        for (IceFloat icefloat : icefloats) {
-            icefloat.endTurn();
+            p.Wake();
+            snowstorm();
+            for (IceFloat icefloat : icefloats) {
+                icefloat.endTurn();
+            }
         }
     }
 
@@ -89,6 +88,8 @@ public class Controller {
     }
 
     private Action createAction(Character ch) {
+        int actionIndex = this.gui.getAction(ch);
+
             /*TODO*/
     }
 
