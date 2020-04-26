@@ -9,7 +9,7 @@ public class PolarBear {
     protected IceFloat position;
     private Random r = new Random();
 
-    PolarBear(IceFloat startingposition) {
+    public PolarBear(IceFloat startingposition) {
         position = startingposition;
     }
 
@@ -19,4 +19,6 @@ public class PolarBear {
         if(position.playersHere()>0 && position.isBearProof()==false)
             Game.lose();
     }
+
+    public IceFloat getPosition(){ return position;}
 }

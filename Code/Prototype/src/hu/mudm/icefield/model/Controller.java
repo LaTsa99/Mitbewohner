@@ -4,7 +4,6 @@ import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.action.BuildAction;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -46,17 +45,29 @@ public class Controller {
     }
 
     public void snowstorm() {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
-
         if(icefloats!=null) {
             for (IceFloat ice: icefloats) {
                 if(r.nextFloat() < 0.5f) {
-                    GUI_skeleton.raiseTabCnt();
                     ice.addSnow();
-                    GUI_skeleton.decreaseTabCnt();
                 }
             }
         }
+    }
+
+    public ArrayList<IceFloat> getIcefloats() { return icefloats;}
+    public ArrayList<Character> getCharacters() { return characters;}
+    public PolarBear getPolarBear(){return p;}
+
+    public void setIcefloats(ArrayList<IceFloat> newFloats){
+        icefloats = newFloats;
+    }
+
+    public void setCharacters(ArrayList<Character> newCharacters){
+        characters = newCharacters;
+    }
+
+    public void setPolarBear(PolarBear bear){
+        p = bear;
     }
 
     private void validateActions(Character ch) {/*TODO*/}

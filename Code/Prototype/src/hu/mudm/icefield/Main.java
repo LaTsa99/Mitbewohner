@@ -1,9 +1,17 @@
 package hu.mudm.icefield;
 
+import hu.mudm.icefield.model.Controller;
+import hu.mudm.icefield.view.GUI_Prototype;
+
 class Main {
     public static void main(String[] args){
         System.out.println("PROTOTYPE");
-
+        GUI_Prototype.setController(new Controller(null));
+        try{
+            GUI_Prototype.guiLoop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //Code from Skeleton
         /*boolean exit = false;
 
