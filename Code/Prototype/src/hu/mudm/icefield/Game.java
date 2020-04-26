@@ -1,16 +1,6 @@
 package hu.mudm.icefield;
 
 import hu.mudm.icefield.model.Controller;
-import hu.mudm.icefield.model.field.Hole;
-import hu.mudm.icefield.model.field.IceFloat;
-import hu.mudm.icefield.model.field.StableIceFloat;
-import hu.mudm.icefield.model.field.UnstableIceFloat;
-import hu.mudm.icefield.model.item.DiverSuit;
-import hu.mudm.icefield.model.item.Food;
-import hu.mudm.icefield.model.item.Rope;
-import hu.mudm.icefield.model.item.Shovel;
-
-import java.util.ArrayList;
 
 public class Game {
 
@@ -51,12 +41,4 @@ public class Game {
     }
 
     public void start(){}
-
-    public static void lose(){
-
-    }
-
-    public static void win() {
-
-    }
 }
