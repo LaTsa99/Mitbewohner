@@ -1,7 +1,6 @@
 package hu.mudm.icefield.model;
 
-import hu.mudm.icefield.model.action.Action;
-import hu.mudm.icefield.model.action.BuildAction;
+import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 
@@ -70,10 +69,23 @@ public class Controller {
         p = bear;
     }
 
-    private void validateActions(Character ch) {/*TODO*/}
+    private void validateActions(Character ch) {
+        if (ch.getIceFloat().getSnowLevel() > 0) {
+            ch.addAction(ShovelAction.class);
+        }
+        if (ch.getIceFloat().getNeighbors().size() > 0) {
+            ch.addAction(MoveAction.class);
+        }
+        if (checkWinningStatus()) {
+            ch.addAction(BuildRocketAction.class);
+        }
+        if (ch.getIceFloat().hasItem()){
+            ch.addAction(PickupAction.class);
+        }
+    }
 
     private Action createAction(Character ch) {
-
+            /*TODO*/
     }
 
     public boolean checkWinningStatus(){
@@ -82,12 +94,28 @@ public class Controller {
 
         Character ch = characters.get(0);
         IceFloat icf = ch.getIceFloat();
-        if(icf.playersHere() != characters.size()) return false;
-
-        return true;
+        return icf.playersHere() == characters.size();
     }
 
     public static void rocketPartPickedUp() {
         Controller.rocketPartsCnt++;
+    }
+
+    public boolean getisWon() {
+        return isWon;
+    }
+
+    public boolean getisLost() {
+        return isLost;
+    }
+
+    public void Win() {
+        isWon = true;
+        isLost = false;
+    }
+
+    public void Loose() {
+        isLost = true;
+        isWon = false;
     }
 }
