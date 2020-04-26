@@ -29,6 +29,8 @@ public class Game {
 
     private Controller controller;
 
+    public Controller GetController() {return controller;}
+
     public void init()
     {
         GUI_skeleton.printlnWithTabs(Game.class,"init()");

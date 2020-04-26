@@ -30,7 +30,7 @@ public class Controller {
         }
     }
 
-    private void checkWinningStatus(){}
+    public boolean checkWinningStatus(){return true; /*TODO*/}
 
     public void snowstorm() {
         GUI_skeleton.printlnWithTabs(this.getClass(),"snowstorm()");
@@ -45,4 +45,6 @@ public class Controller {
             }
         }
     }
+
+    private void validateActions(Character ch) {/*TODO*/}
 }
