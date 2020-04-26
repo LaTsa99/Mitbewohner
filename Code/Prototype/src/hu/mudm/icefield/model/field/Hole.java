@@ -9,13 +9,16 @@ import java.io.IOException;
 
 public class Hole extends IceFloat{
 
-    public Hole() {}
+    public Hole() { type = "h";}
 
-    public Hole(Item item){super(item);}
+    public Hole(Item item){
+        type = "h";
+    }
 
     @Override
     public void stepOn(Character ch) {
-        GUI_skeleton.printlnWithTabs(this.getClass(),"stepOn(Character ch)");
+        //Komment, mert ez most nem tűnik hasznosnak ebben a percben...
+        /*GUI_skeleton.printlnWithTabs(this.getClass(),"stepOn(Character ch)");
 
         try {
             GUI_skeleton.raiseTabCnt();
@@ -49,6 +52,19 @@ public class Hole extends IceFloat{
             GUI_skeleton.decreaseTabCnt();
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+
+        if (ch.canSwim()) return;
+        for (IceFloat ice: neighbors){
+            if (ice.canRescueFromHere()) {
+                ice.stepOn(ch);
+                return;
+            }
         }
+        IceFloat prev = ch.getIceFloat();
+        prev.removeCharacter(ch);
+        characters.add(ch);
+        ch.setPosition(this);
+        Game.lose();
     }
 }

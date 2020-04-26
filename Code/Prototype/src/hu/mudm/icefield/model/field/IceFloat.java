@@ -16,10 +16,15 @@ public abstract class IceFloat {
     protected int snowLevel;
     protected int capacity;
 
+    protected String type;
+    protected static int idCount=0;
+    protected int id;
+
     public IceFloat(){
         characters = new ArrayList<Character>();
         neighbors = new ArrayList<IceFloat>();
         iglu = false;
+        id=idCount++;
     }
 
     public IceFloat(Item item){
@@ -27,6 +32,7 @@ public abstract class IceFloat {
         neighbors = new ArrayList<IceFloat>();
         iglu = false;
         this.item = item;
+        id=idCount++;
     }
 
     public abstract void stepOn(Character ch);
@@ -87,10 +93,13 @@ public abstract class IceFloat {
 
     public void buildIgloo(){
         GUI_skeleton.printlnWithTabs(this.getClass(), "buildIgloo()");
+
+        iglu = true;
     }
 
     public Item removeItem(){
         GUI_skeleton.printlnWithTabs(this.getClass(),"removeItem()");
+
         Item item_returning = item;
         item = null;
         return item_returning;
@@ -121,5 +130,16 @@ public abstract class IceFloat {
 
     public void buildTent() {
         tent = true;
+    }
+
+    public String getType(){ return type;  }
+
+    public int getID(){ return id;}
+
+    public int snowLevel(){return snowLevel;}
+
+    public Boolean hasItem(){
+        if (item != null) return true;
+        else {return false;}
     }
 }
