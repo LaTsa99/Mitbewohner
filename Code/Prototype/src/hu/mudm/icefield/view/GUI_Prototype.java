@@ -98,48 +98,88 @@ public class GUI_Prototype implements GUI{
 
     private static void p(String s) { System.out.println(s); }
 
-    //KELL
     @Override
-    public int getAction(Character character){
-        // TODO
-        return 0;
+    public int getAction(Character character) throws NoActionException {
+        //Create List of Actions
+        ArrayList<String> actions = new ArrayList<>();
+        for (Class<? extends Action> a: character.getActions()) {
+            actions.add(a.toString());
+        }
+
+        if(actions.size()<1) throw new NoActionException();
+
+        //List the actions
+        p("Please choose one of the following Actions: (INPUT: name of action)");
+        for (String a:actions) {
+            p("\t"+a);
+        }
+
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(System.in));
+        String input = null;
+        try {
+            while(!actions.contains(input)) {                
+                p(prompt);
+                input = reader.readLine();
+                if(!actions.contains(input)) {
+                    p("Please enter the name of one of the Actions above");
+                }
+            }
+        } catch (IOException e) { //exception while reading input
+            p("IOEXCEPTION WHILE READING INPUT");
+            e.printStackTrace();
+            p("ASSUMING INPUT IS "+actions.get(0));
+            input = actions.get(0); //assume input is a 0
+        }
+        return actions.indexOf(input);
     }
 
     @Override
-    public int getChosenNeighborID(IceFloat icefloat) {
+    public int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException {
+        //Create List of IDs
         ArrayList<Integer> ids = new ArrayList<>();
         for (IceFloat neighbor: icefloat.getNeighbors()) {
             ids.add(neighbor.getID());
         }
-        p("Please choose a neighbor of the IceFloat as a target!");
+
+        if(ids.size()<1) throw new NoNeighborException();
+
+        //List the neighbors
+        p("Please choose a neighbor of the IceFloat as a target! (INPUT: number)");
         p("The neighbors:");
         for (Integer id:ids) {
-
+            p("\t"+id.toString());
         }
-        p(prompt);
 
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
         String input;
+        int i=-1;
         try {
-            input = reader.readLine();
-            int i;
-            try {
-                i = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                p("Please enter a valid number!");
-                i=-1;
+            while(!ids.contains(i)) {
+                if(i!=-1)
+                    p("Please enter a valid number");
+                p(prompt);
+                input = reader.readLine();
+                try {
+                    i = Integer.parseInt(input);
+                } catch (NumberFormatException e) { //input is NaN
+                    p("Please enter a number");
+                    i=-1;
+                }
             }
-            if ()
-        } catch (IOException e) {
+        } catch (IOException e) { //exception while reading input
+            p("IOEXCEPTION WHILE READING INPUT");
             e.printStackTrace();
+            p("ASSUMING INPUT IS "+ids.get(0).toString());
+            i=ids.get(0); //assume input is a 0
         }
-        return 0;
+        return i;
     }
 
     @Override
     public ArrayList<Character> getCharacters(){
-        // TODO
+        /*TODO*/
         return null;
     }
 

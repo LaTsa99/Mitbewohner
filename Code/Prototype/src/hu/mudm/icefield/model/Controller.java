@@ -4,6 +4,7 @@ import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
+import hu.mudm.icefield.view.NoActionException;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -87,7 +88,7 @@ public class Controller {
         }
     }
 
-    private Action createAction(Character ch) {
+    private Action createAction(Character ch) throws NoActionException {
         int actionIndex = this.gui.getAction(ch);
 
             /*TODO*/
