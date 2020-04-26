@@ -20,7 +20,7 @@ public class Tent extends Item {
 
     @Override
     public void onUse(Character ch) {
-        ch.getIceFloat().buildTent();
+        ch.removeAction(BuildTentAction.class);
         ch.removeItem(this);
     }
 }

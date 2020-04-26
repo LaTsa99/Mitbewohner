@@ -1,6 +1,5 @@
 package hu.mudm.icefield.model;
 
-import hu.mudm.icefield.Game;
 import hu.mudm.icefield.model.field.IceFloat;
 
 import java.util.Random;
@@ -17,7 +16,7 @@ public class PolarBear {
         int neighborcount = position.getNeighbors().size();
         position = position.getNeighbors().get(r.nextInt(neighborcount));
         if(position.playersHere()>0 && position.isBearProof()==false)
-            Game.lose();
+            Controller.Lose();
     }
 
     public IceFloat getPosition(){ return position;}
