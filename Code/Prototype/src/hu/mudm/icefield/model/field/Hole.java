@@ -1,6 +1,7 @@
 package hu.mudm.icefield.model.field;
 
 import hu.mudm.icefield.Game;
+import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
 
@@ -24,6 +25,6 @@ public class Hole extends IceFloat{
         prev.removeCharacter(ch);
         characters.add(ch);
         ch.setPosition(this);
-        Game.lose();
+        Controller.Lose();
     }
 }
