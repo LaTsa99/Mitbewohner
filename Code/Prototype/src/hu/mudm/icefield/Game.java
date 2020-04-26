@@ -8,6 +8,9 @@ import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.field.UnstableIceFloat;
 import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
+import hu.mudm.icefield.view.GUI;
+import hu.mudm.icefield.view.GUI_Prototype;
+import hu.mudm.icefield.view.ItemTypes;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,10 +27,11 @@ public class Game {
         return singleInstance;
     }
 
-    // Ez a konstruktor
-    Game(){}
-
     private Controller controller;
+
+    // Ez a konstruktor
+    Game(){ controller = new Controller(new GUI_Prototype(), null, null, null);}
+
 
     public Controller GetController() {return controller;}
 
@@ -44,29 +48,34 @@ public class Game {
             if (type >= 86 && type < 93)    result.add(new Shovel());
             if (type >= 93 )                result.add(new DiverSuit());
         }
-        int r1 = rand.nextInt(36);
-        int r2 = rand.nextInt(36);
-        int r3 = rand.nextInt(36);
-        if (r1==r2) r1 = (r1-1)%36;             //a randomok egyenlősége nincs kizárva, vagyis nem látom teljesen át, amúgy szerintem igen (Kriszti)
-        if (r1==r3) r1 = (r1-1)%36;
-        if (r2==r3) r2 = (r2+1)%36;
-        result.set(r1, new RocketPart());
-        result.set(r2, new RocketPart());
-        result.set(r3, new RocketPart());
 
         return result;
     }
 
     private ArrayList<IceFloat> createIcefloat(ArrayList<Item> i){       //első stable, játszható 50%s, 40%u -> kapacitás random, 10%h
         ArrayList<IceFloat> ices = new ArrayList<IceFloat>();
+        int type;
 
         ices.add(new StableIceFloat(i.get(0)));
         for (int j=1; j<36; j++){
-            int type = rand.nextInt(100);
+            type = rand.nextInt(100);
             if (type < 50)                  ices.add(new StableIceFloat(i.get(j)));
-            if (type >= 50 && type < 90)    ices.add(new UnstableIceFloat(rand.nextInt(4)+1, i.get(j)));
-            if (type >= 90 )                ices.add(new Hole());            // Mi van, ha a RocketPart Holera kerül??
+            if (type >= 50 && type < 90)    ices.add(new UnstableIceFloat(rand.nextInt(5)+1, i.get(j)));
+            if (type >= 90 )                ices.add(new Hole());
         }
+
+        int r1 = rand.nextInt(36);
+        int r2 = -1;
+        int r3 = -1;
+        while (r2<0||r1==r2) r2 = rand.nextInt(36);
+        while (r3<0||r1==r3 || r3==r2) r3 = rand.nextInt(36);
+        int rd[] = {r1, r2, r3};
+        for(int j= 0; j<3; j++){
+        type = rand.nextInt(90);
+        if (type < 50)                  ices.set(rd[j], new StableIceFloat(new RocketPart()));
+        if (type >= 50 && type < 90)    ices.set(rd[j], new UnstableIceFloat(rand.nextInt(5)+1, new RocketPart()));
+        }
+
         return ices;
     }
 
@@ -86,30 +95,14 @@ public class Game {
         ArrayList<Item> items = createItems();
         ArrayList<IceFloat> iceFloats = createIcefloat(items);
         setNeighbors(iceFloats);
-        //TODO: create characters asking GUI for their names
-        ArrayList<Character> characters;
+        GUI gp = new GUI_Prototype();
+        ArrayList<Character> characters = gp.getCharacters();
+        if (characters == null) System.exit(0);
 
-        PolarBear maci = new PolarBear(iceFloats.get(rand.nextInt(36)));
-        Controller controller = new Controller(characters, iceFloats, maci);
-
-
-
-/*
-        ArrayList<IceFloat> iceFloats = new ArrayList<IceFloat>();
-        iceFloats.add(new Hole());
-        iceFloats.add(new StableIceFloat());
-        iceFloats.add(new UnstableIceFloat());
-        iceFloats.add(new Hole());
-        iceFloats.add(new StableIceFloat(new Food()));
-        iceFloats.add(new UnstableIceFloat(new Rope()));
-        iceFloats.add(new StableIceFloat(new Shovel()));
-        iceFloats.add(new UnstableIceFloat(new DiverSuit()));
-
-        for (int i=1; i<iceFloats.size()-1; i++) {
-            iceFloats.get(i).setNeighbor(iceFloats.get(i-1));
-
-            iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
-        }*/
+        PolarBear maci = new PolarBear(iceFloats.get(35));
+        controller.setCharacters(characters);
+        controller.setIcefloats(iceFloats);
+        controller.setPolarBear(maci);
     }
 
     public void start(){ this.controller.gameLoop(); }
