@@ -104,7 +104,7 @@ public class GUI_Prototype implements GUI{
     }
 
     @Override
-    public int getStep(IceFloat iceFloat){
+    public int getChosenNeighborID(IceFloat icefloat) {
         // TODO
         return 0;
     }

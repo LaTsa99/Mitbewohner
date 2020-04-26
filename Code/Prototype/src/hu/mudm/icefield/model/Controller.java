@@ -3,6 +3,7 @@ package hu.mudm.icefield.model;
 import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
+import hu.mudm.icefield.view.GUI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +17,10 @@ public class Controller {
     private static boolean isLost;
     private static int rocketPartsCnt = 0;
 
-    public Controller(ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
+    private GUI gui; //még meg kell kapnia
+
+    public Controller(GUI gui, ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
+        this.gui= gui;
         r = new Random();
         isWon = false;
         isLost = false;

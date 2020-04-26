@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public interface GUI {
 
-    public int getAction(Character character);
+    int getAction(Character character);
 
-    public int getStep(IceFloat iceFloat);
+    int getChosenNeighborID(IceFloat icefloat);
 
-    public ArrayList<Character> getCharacters();
+    ArrayList<Character> getCharacters();
 }
