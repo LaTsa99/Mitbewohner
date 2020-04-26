@@ -96,6 +96,8 @@ public class GUI_Prototype implements GUI{
      */
     private static Boolean exit = false;
 
+    private static void p(String s) { System.out.println(s); }
+
     //KELL
     @Override
     public int getAction(Character character){
@@ -105,7 +107,33 @@ public class GUI_Prototype implements GUI{
 
     @Override
     public int getChosenNeighborID(IceFloat icefloat) {
-        // TODO
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (IceFloat neighbor: icefloat.getNeighbors()) {
+            ids.add(neighbor.getID());
+        }
+        p("Please choose a neighbor of the IceFloat as a target!");
+        p("The neighbors:");
+        for (Integer id:ids) {
+
+        }
+        p(prompt);
+
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(System.in));
+        String input;
+        try {
+            input = reader.readLine();
+            int i;
+            try {
+                i = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                p("Please enter a valid number!");
+                i=-1;
+            }
+            if ()
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -449,21 +477,21 @@ public class GUI_Prototype implements GUI{
                             break;
                         case "polarmove":
                             pos = ((Element)test.item(i)).getAttribute("icefloat");
-                            String parameters8[] = {actionType, pos};
+                            String[] parameters8 = {actionType, pos};
                             polarBearMove(parameters8);
                             break;
                         case "saveoutput":
                             String location = ((Element)test.item(i)).getAttribute("location");
-                            String parameters9[] = {actionType, location};
+                            String[] parameters9 = {actionType, location};
                             saveOutput(parameters9);
                             break;
                         case "snowstorm":
                             NodeList floats = (NodeList) test.item(i);
                             if(floats.getLength() == 0){
-                                String parameters10[] = {actionType};
+                                String[] parameters10 = {actionType};
                             }else{
                                 int n = floats.getLength();
-                                String parameters10[] = new String[n + 2];
+                                String[] parameters10 = new String[n + 2];
                                 parameters10[0] = actionType;
                                 parameters10[1] = "" + n;
                                 for(int j = 0; j < floats.getLength(); j++){
