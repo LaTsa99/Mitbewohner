@@ -365,7 +365,7 @@ public class GUI_Prototype {
                     newCharacter.setTemp(temp);
 
                     for(IceFloat ice : iceFloats) {
-                        if (ice.getID) == position){
+                        if (ice.getID() == position){
                             if(ice.getType().equals(IceFloatTypes.hole)){
                                 System.out.println("Error: you cannot put character in a hole!");
                                 return;
