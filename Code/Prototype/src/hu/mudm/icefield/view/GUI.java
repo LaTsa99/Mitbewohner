@@ -9,7 +9,7 @@ public interface GUI {
 
     int getAction(Character character) throws NoActionException;
 
-    int getChosenNeighborID(IceFloat icefloat) throws Exception;
+    int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException;
 
     ArrayList<Character> getCharacters();
 }

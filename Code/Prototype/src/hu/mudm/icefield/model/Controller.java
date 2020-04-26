@@ -6,6 +6,7 @@ import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
 import hu.mudm.icefield.view.NoActionException;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,7 +36,13 @@ public class Controller {
             for (Character ch : characters) {
                 for (int i = 0; i < 4; i++) {
                     validateActions(ch);
-                    Action action = createAction(ch);
+                    Action action = null;
+                    try {
+                        action = createAction(ch);
+                    } catch (NoActionException e) {
+                        //e.printStackTrace();
+                        i=4; //ending the loop
+                    }
                     action.performAction();
                 }
             }
@@ -89,9 +96,27 @@ public class Controller {
     }
 
     private Action createAction(Character ch) throws NoActionException {
-        int actionIndex = this.gui.getAction(ch);
+        Action action=null;
 
-            /*TODO*/
+        int actionIndex = gui.getAction(ch);
+        Class<? extends Action> classofaction = ch.getActions().get(actionIndex);
+
+        Constructor<? extends Action>[] constructors = (Constructor<? extends Action>[]) classofaction.getConstructors();
+        Constructor<? extends Action> constructor = constructors[0];
+
+        try {
+            if(constructors[0].getParameterCount()>1)
+            {
+                int neighborIndex = gui.getChosenNeighborID(ch.getIceFloat());
+                action = constructor.newInstance(icefloats.get(neighborIndex));
+            }
+            else {
+                action = constructor.newInstance();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return action;
     }
 
     public boolean checkWinningStatus(){
@@ -99,8 +124,8 @@ public class Controller {
         if(rocketPartsCnt < 3) return false;
 
         Character ch = characters.get(0);
-        IceFloat icf = ch.getIceFloat();
-        return icf.playersHere() == characters.size();
+        IceFloat iceFloat = ch.getIceFloat();
+        return iceFloat.playersHere() == characters.size();
     }
 
     public static void rocketPartPickedUp() {
