@@ -1,6 +1,7 @@
 package hu.mudm.icefield.model.action;
 
 import hu.mudm.icefield.Game;
+import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.player.Character;
 
 public class BuildRocketAction extends Action {
@@ -18,9 +19,7 @@ public class BuildRocketAction extends Action {
 
     @Override
     public void performAction() {
-        if (pickedUp==3) {
-            g.win();
-        }
+        Controller.Win();
     }
 
 }
