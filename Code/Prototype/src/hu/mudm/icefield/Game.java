@@ -40,5 +40,5 @@ public class Game {
         }*/
     }
 
-    public void start(){}
+    public void start(){ this.controller.gameLoop(); }
 }
