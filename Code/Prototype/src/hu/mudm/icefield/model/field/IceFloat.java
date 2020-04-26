@@ -2,7 +2,6 @@ package hu.mudm.icefield.model.field;
 
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI_skeleton;
 
 import java.util.ArrayList;
 
@@ -35,28 +34,22 @@ public abstract class IceFloat {
     public abstract void stepOn(Character ch);
 
     public void removeCharacter(Character ch){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"removeCharacter(Character ch)");
 
         characters.remove(ch);
     }
 
     public void setNeighbor(IceFloat ice){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"setNeighbors(IceFloat ice)");
         if (!neighbors.contains(ice)){
             neighbors.add(ice);
-            GUI_skeleton.raiseTabCnt();
             ice.setNeighbor(this);
-            GUI_skeleton.decreaseTabCnt();
         }
     }
 
     public void removeSnow(int layerCount){
-        GUI_skeleton.printlnWithTabs(this.getClass(), String.format("removeSnow(%d)",layerCount));
         snowLevel = snowLevel - layerCount;
     }
 
     public void addSnow(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"addsSnow()");
         snowLevel++;
         
         if(iglu || tent) {
@@ -65,52 +58,38 @@ public abstract class IceFloat {
         }
         else {
             for (Character ch: characters) {
-                GUI_skeleton.raiseTabCnt();
                 ch.modifyTemp(-1);
-                GUI_skeleton.decreaseTabCnt();
             }
         }
     }
 
     public Boolean isBearProof(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"isBearProof()");
         return iglu;
     }
 
     public void endTurn(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"endOfTurn()");
-
         tent = false;
     }
 
     public int getCapacity(){
-        GUI_skeleton.printlnWithTabs(this.getClass(), "getCapacity()");
         return capacity;
     }
 
     public void buildIgloo(){
-        GUI_skeleton.printlnWithTabs(this.getClass(), "buildIgloo()");
-
         iglu = true;
     }
 
     public Item removeItem(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"removeItem()");
-
         Item item_returning = item;
         item = null;
         return item_returning;
     }
 
     public Boolean canRescueFromHere(){
-        GUI_skeleton.printlnWithTabs(this.getClass(),"canRescueFromHere()");
         boolean foundSavior = false;
         if (characters!=null){
             for (Character ch:characters){
-                GUI_skeleton.raiseTabCnt();
                 foundSavior = ch.canRescue();
-                GUI_skeleton.decreaseTabCnt();
-
                 if (foundSavior) break;
             }
         }
@@ -129,11 +108,22 @@ public abstract class IceFloat {
         tent = true;
     }
 
+
+    public Item getItem(){ return item;}
+
+    public int getSnowLevel() { return snowLevel;}
+
+    public void setItem(Item _item){
+        item = _item;
+    }
+
+    public ArrayList<Character> getCharacters(){
+        return characters;
+    }
+
     public String getType(){ return type;  }
 
     public int getID(){ return id;}
-
-    public int snowLevel(){return snowLevel;}
 
     public Boolean hasItem(){
         return item != null;
