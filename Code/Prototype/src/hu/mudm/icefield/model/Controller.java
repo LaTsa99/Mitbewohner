@@ -81,16 +81,16 @@ public class Controller {
     }
 
     private void validateActions(Character ch) {
-        if (ch.getIceFloat().getSnowLevel() > 0) {
+        if (ch.getIceFloat().getSnowLevel() > 0) { //if the current position has snow on it
             ch.addAction(ShovelAction.class);
         }
-        if (ch.getIceFloat().getNeighbors().size() > 0) {
+        if (ch.getIceFloat().getNeighbors().size() > 0) { //if the current position has neighbors
             ch.addAction(MoveAction.class);
         }
-        if (checkWinningStatus()) {
+        if (canRocketBeBuilt()) { //if all parts have been picked up and all players are on the same position
             ch.addAction(BuildRocketAction.class);
         }
-        if (ch.getIceFloat().hasItem()){
+        if (ch.getIceFloat().hasItem()){ //if the current position has an item in it
             ch.addAction(PickupAction.class);
         }
     }
@@ -98,18 +98,22 @@ public class Controller {
     private Action createAction(Character ch) throws NoActionException {
         Action action=null;
 
+        //get index of action class
         int actionIndex = gui.getAction(ch);
         Class<? extends Action> classofaction = ch.getActions().get(actionIndex);
 
+        //get constructor of the chosen action class
         Constructor<? extends Action>[] constructors = (Constructor<? extends Action>[]) classofaction.getConstructors();
         Constructor<? extends Action> constructor = constructors[0];
 
         try {
+            //if the constructor requires a parameter (currently only icefloat)
             if(constructors[0].getParameterCount()>1)
             {
                 int neighborIndex = gui.getChosenNeighborID(ch.getIceFloat());
                 action = constructor.newInstance(icefloats.get(neighborIndex));
             }
+            //if the constructor requires doesn't need a parameter
             else {
                 action = constructor.newInstance();
             }
@@ -119,7 +123,7 @@ public class Controller {
         return action;
     }
 
-    public boolean checkWinningStatus(){
+    public boolean canRocketBeBuilt(){
         //the same with the "canWin" method in documentation
         if(rocketPartsCnt < 3) return false;
 
