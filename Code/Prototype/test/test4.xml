@@ -4,7 +4,7 @@
 		<icefloats>
 			<icefloat>
 				<type>StableIceFloat</type>
-				<capacity></capacity>
+				<capacity>0</capacity>
 				<item>Food</item>
 				<snowcount>0</snowcount>
 				<igloo>no</igloo>
