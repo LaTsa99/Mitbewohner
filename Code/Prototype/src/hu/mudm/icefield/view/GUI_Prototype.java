@@ -1236,7 +1236,7 @@ public class GUI_Prototype implements GUI{
             boolean hastent = false;
             ArrayList<Item> items = character.getItems();
             for(Item i: items){
-                if(i.getName().equals(ItemTypes.Tent))
+                if (i.getClass().equals(Tent.class))
                     hastent = true;
             }
 
