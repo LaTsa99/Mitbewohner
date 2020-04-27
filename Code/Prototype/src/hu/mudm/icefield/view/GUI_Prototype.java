@@ -80,7 +80,6 @@ public class GUI_Prototype implements GUI{
 
     private static boolean snowStormRandom = true;
 
-
     private static int PLAYER_COUNT=0;
     private static int state = 0; // 0 = creation, 1 = testing
 
@@ -210,6 +209,7 @@ public class GUI_Prototype implements GUI{
                     Constructor<? extends IceFloat> constructor = constructors[0];
 
                     try {
+                        //assuming first constructor of all icefloats only require capacity
                         if (constructors[0].getParameterCount() > 0) {
                             iceFloat = constructor.newInstance(capacity);
                         } else {
