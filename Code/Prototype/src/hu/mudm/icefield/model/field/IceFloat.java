@@ -9,20 +9,21 @@ public abstract class IceFloat {
     protected ArrayList<IceFloat> neighbors;
     protected ArrayList<Character> characters;
     protected Item item;
-    protected Boolean iglu; //a dokumentációban nem szerepel, hogy milyen típus
-    protected Boolean tent;
+    protected static int idCount = 0;
+    protected boolean iglu; //a dokumentációban nem szerepel, hogy milyen típus
     protected int snowLevel;
     protected int capacity;
 
     protected String type;
-    protected static int idCount=0;
+    protected boolean tent;
     protected int id;
 
-    public IceFloat(){
+    public IceFloat() {
         characters = new ArrayList<Character>();
         neighbors = new ArrayList<IceFloat>();
         iglu = false;
-        id=idCount++;
+        tent = false;
+        id = idCount++;
     }
 
     public IceFloat(Item item){
@@ -48,16 +49,17 @@ public abstract class IceFloat {
         snowLevel = snowLevel - layerCount;
     }
 
-    public void addSnow(){
+    public void addSnow() {
         snowLevel++;
-        
-        if(iglu || tent) {
+
+        if (iglu || tent) {
             iglu = false;
             tent = false; //habar a sator mindenkepp eltunik a kor vegen
-        }
-        else {
-            for (Character ch: characters) {
-                ch.modifyTemp(-1);
+        } else {
+            if (characters != null) {
+                for (Character ch : characters) {
+                    ch.modifyTemp(-1);
+                }
             }
         }
     }

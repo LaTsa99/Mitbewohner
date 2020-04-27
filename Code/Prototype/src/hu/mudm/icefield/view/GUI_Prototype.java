@@ -433,9 +433,9 @@ public class GUI_Prototype implements GUI{
                         classType = StableIceFloat.class;
                     else if (s.equals("h"))
                         classType = Hole.class;
-                    else if (s.matches(unstableRegex)) {
+                    else if (s.contains("i")) {
                         classType = UnstableIceFloat.class;
-                        capacity =
+                        capacity = java.lang.Character.getNumericValue(s.charAt(1));
                     }
                     IceFloat iceFloat = createIceFloat(classType, capacity);
                     iceFloat.setID(id);
