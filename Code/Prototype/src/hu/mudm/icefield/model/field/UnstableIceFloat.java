@@ -16,7 +16,6 @@ public class UnstableIceFloat extends IceFloat {
     }
 
 
-
     @Override
     public void stepOn(Character ch) {
         IceFloat prev = ch.getIceFloat();
