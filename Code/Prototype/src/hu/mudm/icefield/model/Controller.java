@@ -45,7 +45,11 @@ public class Controller {
     }
 
     public void gameLoop() {
-        while(!isWon && !isLost) {
+        //initial snow level
+        for (int i = 0; i < 5; i++)
+            snowstorm();
+
+        while (!isWon && !isLost) {
             for (Character ch : characters) {
                 gui.showMessage("The turn of " + ch.getName() + " has started");
                 for (int i = 0; i < 4; i++) {
