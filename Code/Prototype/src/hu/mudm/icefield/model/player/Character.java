@@ -24,9 +24,11 @@ public abstract class Character {
     private String name;
 
     public Character(String name, StableIceFloat startingosition) {
+        this.name = name;
         position = startingosition;
         items = new ArrayList<>();
         actions = new ArrayList<>();
+        temp = 4;
     }
 
     public void modifyTemp(int value) {

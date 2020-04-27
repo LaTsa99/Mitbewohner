@@ -44,9 +44,9 @@
 	<polarbear position="2" />
 </config>
 <test>
-	<polarBearMove direction="left"/>
+	<polarBearMove direction="1"/>
 	<saveOutput filename="test11Out1.xml" />
-	<polarBearMove direction="left"/>
+	<polarBearMove direction="0"/>
 	<saveOutput filename="test11Out2.xml" />
 </test>
 </icefield>

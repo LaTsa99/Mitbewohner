@@ -1611,9 +1611,9 @@ public class GUI_Prototype implements GUI{
 
                 String name = null;
                 while (name == null || names.contains(name)) {
-                    System.out.print("Your name: ");
+                    p("Your name: ");
                     name = br.readLine();
-                    if (names.contains(name)) System.out.println("Error: this name is taken.");
+                    if (names.contains(name)) pln("Error: this name is taken.");
                 }
                 names.add(name);
 
