@@ -102,6 +102,35 @@ public class GUI_Prototype implements GUI{
         c = game.GetController();
     }
 
+    @Override
+    public void see(Character ch) {
+        look(ch);
+        pln("Standing on:");
+        look(ch.getPosition());
+        for (IceFloat icefloat : ch.getPosition().getNeighbors()) {
+            look(icefloat);
+        }
+    }
+
+    private void look(Character ch) {
+        pln(ch.getName() + ":");
+        pln("\tBody temperature: " + ch.getTemp());
+
+        if (ch.getItems().size() > 0) pln("\tItems: ");
+        for (Item item : ch.getItems()) {
+            pln("\t\t" + item.getClass().getSimpleName());
+        }
+    }
+
+    private void look(IceFloat f) {
+        pln("\tIceFloat " + f.getID());
+        pln("\t\tSnowlevel: " + f.getSnowLevel());
+        if (f.getCharacters().size() > 0) pln("\tCharacters standing on: ");
+        for (Character ch : f.getCharacters()) {
+            pln("\t\t" + ch.getName());
+        }
+    }
+
     private static void printState(IceFloat iceFloat) {
         StringBuilder sb = new StringBuilder();
         sb.append(iceFloat.getID());
