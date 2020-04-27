@@ -108,14 +108,13 @@ public class Controller {
 
         try {
             //if the constructor requires a parameter (currently only icefloat)
-            if(constructors[0].getParameterCount()>1)
-            {
+            if (constructors[0].getParameterCount() > 2) {
                 int neighborIndex = gui.getChosenNeighborID(ch.getIceFloat());
-                action = constructor.newInstance(icefloats.get(neighborIndex));
+                action = constructor.newInstance(ch, icefloats.get(neighborIndex));
             }
             //if the constructor requires doesn't need a parameter
             else {
-                action = constructor.newInstance();
+                action = constructor.newInstance(ch);
             }
         } catch (Exception e) {
             e.printStackTrace();
