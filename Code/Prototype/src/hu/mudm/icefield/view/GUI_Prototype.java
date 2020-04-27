@@ -86,140 +86,10 @@ public class GUI_Prototype implements GUI{
      */
     private static Boolean exit = false;
 
-    private static void p(String s) { System.out.println(s); }
-
-    @Override
-    public int getAction(Character character) throws NoActionException {
-        //Create List of Actions
-        ArrayList<String> actions = new ArrayList<>();
-        for (Class<? extends Action> a: character.getActions()) {
-            actions.add(a.getSimpleName());
-        }
-
-        if(actions.size()<1) throw new NoActionException();
-
-        //List the actions
-        p("Please choose one of the following Actions: (INPUT: name of action)");
-        for (String a:actions) {
-            p("\t"+a);
-        }
-
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(System.in));
-        String input = null;
-        try {
-            while(!actions.contains(input)) {
-                p(prompt);
-                input = reader.readLine();
-                if(!actions.contains(input)) {
-                    p("Please enter the name of one of the Actions above");
-                }
-            }
-        } catch (IOException e) { //exception while reading input
-            p("IOEXCEPTION WHILE READING INPUT");
-            e.printStackTrace();
-            p("ASSUMING INPUT IS "+actions.get(0));
-            input = actions.get(0); //assume input is a 0
-        }
-        return actions.indexOf(input);
+    private static void p(String s) {
+        System.out.print(s);
     }
 
-    @Override
-    public int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException {
-        //Create List of IDs
-        ArrayList<Integer> ids = new ArrayList<>();
-        for (IceFloat neighbor: icefloat.getNeighbors()) {
-            ids.add(neighbor.getID());
-        }
-
-        if(ids.size()<1) throw new NoNeighborException();
-
-        //List the neighbors
-        p("Please choose a neighbor of the IceFloat as a target! (INPUT: number)");
-        p("The neighbors:");
-        for (Integer id:ids) {
-            p("\t"+id.toString());
-        }
-
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(System.in));
-        String input;
-        int i=-1;
-        try {
-            while(!ids.contains(i)) {
-                if(i!=-1)
-                    p("Please enter a valid number");
-                p(prompt);
-                input = reader.readLine();
-                try {
-                    i = Integer.parseInt(input);
-                } catch (NumberFormatException e) { //input is NaN
-                    p("Please enter a number");
-                    i=-1;
-                }
-            }
-        } catch (IOException e) { //exception while reading input
-            p("IOEXCEPTION WHILE READING INPUT");
-            e.printStackTrace();
-            p("ASSUMING INPUT IS "+ids.get(0).toString());
-            i=ids.get(0); //assume input is a 0
-        }
-        return i;
-    }
-
-    @Override
-    public ArrayList<Character> getCharacters(){
-        ArrayList<Character> characters = new ArrayList<>();
-        Random random = new Random();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        HashSet<String> names = new HashSet<>();
-
-        try {
-            int count = 0;
-            boolean justright = false;
-            while(!justright){
-                System.out.print("How many characters do you want to add? ");
-                count = Integer.parseInt(br.readLine());
-                if(count >= 3 && count <= 6)
-                    justright = true;
-                else{
-                    System.out.println("Player count must be between 3 and 6.");
-                }
-            }
-
-
-            while (characters.size() < count) {
-
-                int rand = random.nextInt(2);
-                String type = rand==0 ? "Researcher" : "Eskimo";
-                System.out.println("New " + type);
-                System.out.print("Your name: ");
-                String name = br.readLine();
-                if(!names.contains(name)) {
-                    names.add(name);
-                    Character character = null;
-                    if (rand == 0) {
-                        character = new Researcher(name, (StableIceFloat) c.getIcefloats().get(0));
-                    } else {
-                        character = new Eskimo(name, (StableIceFloat) c.getIcefloats().get(0));
-                    }
-                    characters.add(character);
-                }else{
-                    System.out.println("Error: this name is taken.");
-                }
-            }
-        }catch (Exception e){
-            System.out.println("An exception occured");
-            return null;
-        }
-
-        return characters;
-    }
-
-    public static void setGame(Game _game){
-        game = _game;
-        c = game.GetController();
     /**
      * Prints a string to out then ends the line
      *
@@ -229,13 +99,9 @@ public class GUI_Prototype implements GUI{
         System.out.println(s);
     }
 
-    /**
-     * Prints a string to out
-     *
-     * @param s
-     */
-    private static void p(String s) {
-        System.out.print(s);
+    public static void setGame(Game _game) {
+        game = _game;
+        c = game.GetController();
     }
 
     private static void printState(IceFloat iceFloat) {
@@ -636,11 +502,6 @@ public class GUI_Prototype implements GUI{
             }
         }
     } // DONE
-
-    public static void setGame(Game _game) {
-        game = _game;
-        c = game.GetController();
-    }
 
     /**
      * The loop of the GUI. Cycles until we exit the program.
