@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+	<config>
+		<icefloats>
+			<icefloat>
+				<type>StableIceFloat</type>
+				<capacity>0</capacity>
+				<item>Food</item>
+				<snowcount>0</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+		</icefloats>
+		<characters>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny</name>
+				<position>0</position>
+				<bodytemp>2</bodytemp>
+			</character>
+		</characters>
+	</config>
+	<test>
+		<pickupAction character="testBunny"/>
+		<saveOutput filename="test4Out.xml" />
+	</test>
+</icefield>
+
