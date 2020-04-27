@@ -56,6 +56,7 @@ public class Controller {
                     validateActions(ch);
                     Action action = null;
                     gui.see(ch);
+                    gui.showMessage((4-i)+" actions left");
                     try {
                         action = createAction(ch);
                     } catch (NoActionException e) {
