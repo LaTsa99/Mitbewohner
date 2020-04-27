@@ -5,8 +5,14 @@ import hu.mudm.icefield.model.player.Character;
 
 public class StableIceFloat extends IceFloat {
 
-    public StableIceFloat() {type = "s";}
-    public StableIceFloat(Item item) {type = "s"; }
+    public StableIceFloat() {
+        capacity = -1;
+    }
+
+    public StableIceFloat(Item item) {
+        this();
+        this.item = item;
+    }
 
     @Override
     public void stepOn(Character ch) {

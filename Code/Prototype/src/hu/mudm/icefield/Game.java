@@ -10,7 +10,6 @@ import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
 import hu.mudm.icefield.view.GUI_Prototype;
-import hu.mudm.icefield.view.ItemTypes;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,7 +30,6 @@ public class Game {
 
     // Ez a konstruktor
     Game(){ controller = new Controller(new GUI_Prototype(), null, null, null);}
-
 
     public Controller GetController() {return controller;}
 
@@ -64,7 +62,7 @@ public class Game {
             if (type >= 90 )                ices.add(new Hole());
         }
 
-        int rd[] = new int[3];
+        int[] rd = new int[3];
         rd[0] = rand.nextInt(36);
         rd[1] = -1;
         rd[2] = -1;
