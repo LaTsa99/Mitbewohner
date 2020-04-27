@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+<config>
+	<icefloats>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>1</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+	</icefloats>
+	<characters>
+		<character>
+			<type>Eskimo</type>
+			<name>testBunny</name>
+			<position>0</position>
+			<bodytemp>2</bodytemp>
+<items>
+				<item  type="Tent"/>
+			</items>
+		</character>
+	</characters>
+</config>
+<test>
+	<buildTentAction character="testBunny"/>
+	<saveOutput filename="test13Out.xml" />
+</test>
+</icefield>

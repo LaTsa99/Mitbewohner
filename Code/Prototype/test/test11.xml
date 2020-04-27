@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+<config>
+	<icefloats>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>2</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>2</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>yes</igloo>
+			<tent>no</tent>
+		</icefloat>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>2</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+	</icefloats>
+	<characters>
+		<character>
+			<type>Eskimo</type>
+			<name>testBunny1</name>
+			<position>0</position>
+			<bodytemp>5</bodytemp>
+		</character>
+<character>
+			<type>Eskimo</type>
+			<name>testBunny2</name>
+			<position>1</position>
+			<bodytemp>5</bodytemp>
+		</character>
+	</characters>
+	<polarbear position="2" />
+</config>
+<test>
+	<polarBearMove direction="left"/>
+	<saveOutput filename="test11Out1.xml" />
+	<polarBearMove direction="left"/>
+	<saveOutput filename="test11Out2.xml" />
+</test>
+</icefield>
