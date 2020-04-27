@@ -17,9 +17,11 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -141,18 +143,21 @@ public class GUI_Prototype implements GUI{
                 doc.getDocumentElement().normalize();
 
                 NodeList list = doc.getElementsByTagName("icefield");
-                NodeList config = (NodeList) list.item(0);
-                NodeList field = (NodeList) config.item(0);
-                NodeList characters = (NodeList) config.item(1);
-                Element polarBear = null;
-                if(config.getLength() >= 3)
+                //NodeList field = (NodeList) config.item(0);
+                //NodeList characters = (NodeList) config.item(1);
+                //Element polarBear = null;
+                NodeList field = doc.getElementsByTagName("icefloat");
+                /*if(config.getLength() >= 3){
+                    System.out.println(config.getLength() + "");
                     polarBear = (Element)config.item(2);
 
+                }*/
+
                 // parse icefloats
-                for(int i = 0; i < field.getLength(); i++){
+                for(int i = 0; i < field.getChildren().size(); i++){
                     Element iceFloatElement = (Element)field.item(i);
                     String type = iceFloatElement.getAttribute("type");
-                    if (i == 0 && !type.equals(StableIceFloat.class)) {
+                    if (i == 0 && !type.equals(StableIceFloat.class.getSimpleName())) {
                         System.out.println("Error: First icefloat must be stable.");
                         return;
                     }
@@ -354,8 +359,17 @@ public class GUI_Prototype implements GUI{
 
 
 
-            }catch (Exception e){
-                System.out.println("An exception occured!");
+            }catch (IOException e){
+                System.out.println("An ioexception occured!");
+                return;
+            }catch (ParserConfigurationException pce){
+                pce.printStackTrace();
+                return;
+            }catch (SAXException se){
+                se.printStackTrace();
+                return;
+            }catch (ClassNotFoundException cnfe){
+                cnfe.printStackTrace();
                 return;
             }
         }
