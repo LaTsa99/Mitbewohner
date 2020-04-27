@@ -6,15 +6,13 @@ import hu.mudm.icefield.model.player.Character;
 
 public class UnstableIceFloat extends IceFloat {
 
-    private int capacity;
-
-    public UnstableIceFloat(int _capacity, Item item) {
-        super(item);
-        capacity = _capacity;
+    public UnstableIceFloat(int capacity, Item item) {
+        this(capacity);
+        this.item = item;
     }
 
-    public UnstableIceFloat(int _capacity) {
-        capacity = _capacity;
+    public UnstableIceFloat(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override
