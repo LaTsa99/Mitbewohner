@@ -4,6 +4,7 @@ import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 
 public class MoveAction extends Action {
+    protected IceFloat target;
 
     public MoveAction(Character character, IceFloat ice){
         super(character);
@@ -14,5 +15,4 @@ public class MoveAction extends Action {
     public void performAction() {
         target.stepOn(ch);
     }
-
 }

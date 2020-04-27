@@ -6,6 +6,7 @@ import hu.mudm.icefield.model.player.Character;
 import java.util.ArrayList;
 
 public interface GUI {
+    void showMessage(String s);
 
     int getAction(Character character) throws NoActionException;
 

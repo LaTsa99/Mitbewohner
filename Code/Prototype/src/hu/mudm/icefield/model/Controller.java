@@ -4,6 +4,7 @@ import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
+import hu.mudm.icefield.view.IDNotFoundException;
 import hu.mudm.icefield.view.NoActionException;
 
 import java.lang.reflect.Constructor;
@@ -19,10 +20,22 @@ public class Controller {
     private static boolean isLost;
     private static int rocketPartsCnt = 0;
 
-    private GUI gui; //még meg kell kapnia
+    private GUI gui;
+
+    public ArrayList<IceFloat> getIcefloats() {
+        return icefloats;
+    }
+
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
+
+    public PolarBear getPolarBear() {
+        return p;
+    }
 
     public Controller(GUI gui, ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
-        this.gui= gui;
+        this.gui = gui;
         r = new Random();
         isWon = false;
         isLost = false;
@@ -34,6 +47,7 @@ public class Controller {
     public void gameLoop() {
         while(!isWon && !isLost) {
             for (Character ch : characters) {
+                gui.showMessage("The turn of " + ch.getName() + " has started");
                 for (int i = 0; i < 4; i++) {
                     validateActions(ch);
                     Action action = null;
@@ -41,42 +55,46 @@ public class Controller {
                         action = createAction(ch);
                     } catch (NoActionException e) {
                         //e.printStackTrace();
-                        i=4; //ending the loop
+                        i = 4; //ending the loop
+                        gui.showMessage("Player " + ch.getName() + " has no possible Actions left, ending turn");
                     }
                     action.performAction();
                 }
             }
+            gui.showMessage("The polar bear is moving");
             p.Wake();
+            gui.showMessage("A snowstorm is happening");
             snowstorm();
             for (IceFloat icefloat : icefloats) {
-                icefloat.endTurn();
+                icefloat.endRound();
             }
+            gui.showMessage("The round has ended");
         }
     }
 
     public void snowstorm() {
-        if(icefloats!=null) {
-            for (IceFloat ice: icefloats) {
-                if(r.nextFloat() < 0.5f) {
+        if (icefloats != null) {
+            for (IceFloat ice : icefloats) {
+                if (r.nextFloat() < 0.5f) {
                     ice.addSnow();
                 }
             }
         }
     }
 
-    public ArrayList<IceFloat> getIcefloats() { return icefloats;}
-    public ArrayList<Character> getCharacters() { return characters;}
-    public PolarBear getPolarBear(){return p;}
+    public void showMessage(String message) {
+        gui.showMessage(message);
+    }
 
-    public void setIcefloats(ArrayList<IceFloat> newFloats){
+    public void setIcefloats(ArrayList<IceFloat> newFloats) {
         icefloats = newFloats;
     }
 
-    public void setCharacters(ArrayList<Character> newCharacters){
+    public void setCharacters(ArrayList<Character> newCharacters) {
         characters = newCharacters;
     }
 
-    public void setPolarBear(PolarBear bear){
+    public void setPolarBear(PolarBear bear) {
         p = bear;
     }
 
@@ -107,15 +125,37 @@ public class Controller {
         Constructor<? extends Action> constructor = constructors[0];
 
         try {
-            //if the constructor requires a parameter (currently only icefloat)
-            if(constructors[0].getParameterCount()>1)
-            {
-                int neighborIndex = gui.getChosenNeighborID(ch.getIceFloat());
-                action = constructor.newInstance(icefloats.get(neighborIndex));
+            //if the constructor requires 3 parameters (character, icefloat and a function)
+            if (constructors[0].getParameterCount() > 2) {
+                int neighborID = gui.getChosenNeighborID(ch.getIceFloat());
+                IceFloat icefloat = null;
+                int i = 0;
+                while (icefloat == null && i < icefloats.size()) {
+                    if (neighborID == icefloats.get(i).getID())
+                        icefloat = icefloats.get(i);
+                    i++;
+                }
+                if (i == icefloats.size()) throw new IDNotFoundException();
+
+                action = constructor.newInstance(ch, icefloat, this);
             }
-            //if the constructor requires doesn't need a parameter
+            //if the constructor requires needs a character and a target
+            else if (constructors[0].getParameterCount() > 1) {
+                int neighborID = gui.getChosenNeighborID(ch.getIceFloat());
+                IceFloat icefloat = null;
+                int i = 0;
+                while (icefloat == null && i < icefloats.size()) {
+                    if (neighborID == icefloats.get(i).getID())
+                        icefloat = icefloats.get(i);
+                    i++;
+                }
+                if (i == icefloats.size()) throw new IDNotFoundException();
+
+                action = constructor.newInstance(ch, icefloat);
+            }
+            //if the constructor requires only needs a character
             else {
-                action = constructor.newInstance();
+                action = constructor.newInstance(ch);
             }
         } catch (Exception e) {
             e.printStackTrace();

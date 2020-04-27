@@ -6,11 +6,10 @@ import hu.mudm.icefield.model.player.Character;
 import java.util.ArrayList;
 
 public abstract class IceFloat {
-
     protected ArrayList<IceFloat> neighbors;
     protected ArrayList<Character> characters;
     protected Item item;
-    protected Boolean iglu; // a dokumentációban nem szerepel, hogy milyen típus
+    protected Boolean iglu; //a dokumentációban nem szerepel, hogy milyen típus
     protected Boolean tent;
     protected int snowLevel;
     protected int capacity;
@@ -67,7 +66,7 @@ public abstract class IceFloat {
         return iglu;
     }
 
-    public void endTurn(){
+    public void endRound() {
         tent = false;
     }
 
@@ -120,8 +119,6 @@ public abstract class IceFloat {
     public ArrayList<Character> getCharacters(){
         return characters;
     }
-
-    public String getType(){ return type;  }
 
     public int getID(){ return id;}
 
