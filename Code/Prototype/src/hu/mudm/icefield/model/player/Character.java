@@ -87,7 +87,7 @@ public abstract class Character {
     }
 
     public void setPosition(IceFloat ice) {
-        position.removeCharacter(this);
+        if(position!=null) position.removeCharacter(this);
         position = ice;
     }
 
