@@ -189,7 +189,6 @@ public class GUI_Prototype implements GUI{
 
                 for(int i = 0; i < field.getLength(); i++){
                     Element iceFloatElement = (Element)field.item(i);
-                    System.out.println(field.getLength());
                     String type = iceFloatElement.getElementsByTagName("type").item(0).getTextContent() ;
                     if (i == 0 && !type.equals(StableIceFloat.class.getSimpleName())) {
                         System.out.println(type);

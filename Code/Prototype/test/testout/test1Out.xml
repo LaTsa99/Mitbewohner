@@ -25,6 +25,7 @@
                 <name>testBunny</name>
                 <position>1</position>
                 <bodytemp>5</bodytemp>
+                <items/>
             </character>
         </characters>
     </config>
