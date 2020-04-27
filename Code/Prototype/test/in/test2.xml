@@ -43,9 +43,9 @@
 	</characters>
 </config>
 <test>
-	<moveaction character=”testBunny1” icefloat=”1” />
-	<saveOutput filename=”test2Out1.xml” />
-	<moveaction character=”testBunny2” icefloat=”1” />
-	<saveOutput filename=”test2Out2.xml” />
+	<action name="moveAction" character="testBunny1" icefloat="1" />
+	<action name="saveOutput" filename="test2Out1.xml" />
+	<action name="moveAction" character="testBunny2" icefloat="1" />
+	<action name="saveOutput" filename="test2Out2.xml" />
 </test>
 </icefield>

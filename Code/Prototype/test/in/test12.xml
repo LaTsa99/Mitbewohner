@@ -21,10 +21,10 @@
 	</characters>
 </config>
 <test>
-	<addItemToCharacter item="BreakableShovel" character="testBunny"/>
-	<shovelAction character="testBunny"/>
-	<shovelAction character="testBunny"/>
-	<shovelAction character="testBunny"/>
-	<saveOutput filename="test12Out.xml" />	
+	<action name="addItemToCharacter" item="BreakableShovel" character="testBunny"/>
+	<action name="shovelAction" character="testBunny"/>
+	<action name="shovelAction" character="testBunny"/>
+	<action name="shovelAction" character="testBunny"/>
+	<action name="saveOutput" filename="test12Out.xml" />
 </test>
 </icefield>

@@ -21,8 +21,8 @@
 		</characters>
 	</config>
 	<test>
-		<pickupAction character="testBunny"/>
-		<saveOutput filename="test5Out.xml" />
+		<action name="pickupAction" character="testBunny"/>
+		<action name="saveOutput" filename="test5Out.xml" />
 	</test>
 </icefield>
 

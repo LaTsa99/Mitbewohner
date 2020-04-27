@@ -35,10 +35,10 @@
         </characters>
     </config>
     <test>
-        <snowstorm>
-            <ifloat id=”0”/>
-            <ifloat id=”1”/>
-        </snowstorm>
-        <saveOutput filename=”test10Out.xml” />
+        <action name="snowstorm">
+            <ifloat id="0"/>
+            <ifloat id="1"/>
+        </action>
+        <action name="saveOutput" filename="test10Out.xml" />
     </test>
 </icefield>

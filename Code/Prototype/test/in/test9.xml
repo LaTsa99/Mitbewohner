@@ -21,7 +21,7 @@
         </characters>
     </config>
     <test>
-        <buildAction character=”testBunny”/>
-        <saveOutput filename=”test9Out.xml” />
+        <action name="buildAction" character="testBunny"/>
+        <action name="saveOutput" filename="test9Out.xml" />
     </test>
 </icefield>

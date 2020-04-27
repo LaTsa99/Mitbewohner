@@ -24,7 +24,7 @@
 	</characters>
 </config>
 <test>
-	<buildTentAction character="testBunny"/>
-	<saveOutput filename="test13Out.xml" />
+	<action name="buildTentAction" character="testBunny"/>
+	<action name="saveOutput" filename="test13Out.xml" />
 </test>
 </icefield>

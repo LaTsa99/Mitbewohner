@@ -29,8 +29,8 @@
 	</characters>
 </config>
 <test>
-	<moveaction character="testBunny" icefloat="1" />
-	<saveOutput filename="test1Out.xml" />
+	<action name="moveAction" character="testBunny" icefloat="1" />
+	<action name="saveOutput" filename="test1Out.xml" />
 </test>
 </icefield>
 
