@@ -13,15 +13,13 @@ import hu.mudm.icefield.model.item.Tent;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -402,17 +400,8 @@ public class GUI_Prototype implements GUI{
 
 
 
-            }catch (IOException e){
-                System.out.println("An ioexception occured!");
-                return;
-            }catch (ParserConfigurationException pce){
-                pce.printStackTrace();
-                return;
-            }catch (SAXException se){
-                se.printStackTrace();
-                return;
-            }catch (ClassNotFoundException cnfe){
-                cnfe.printStackTrace();
+            }catch (Exception e) {
+                e.printStackTrace();
                 return;
             }
         }
@@ -993,14 +982,13 @@ public class GUI_Prototype implements GUI{
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File("Code/Prototype/test/out/" + params[1]));
+            StreamResult streamResult = new StreamResult(new File("Code/Prototype/test/testout/" + params[1]));
 
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
-            System.out.println("Exception while parsing output.");
             e.printStackTrace();
             return;
         }
