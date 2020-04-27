@@ -6,7 +6,7 @@
         <type>StableIceFloat</type>
         <capacity>-1</capacity>
         <item></item>
-        <snowcount>9</snowcount>
+        <snowcount>0</snowcount>
         <igloo>no</igloo>
         <tent>no</tent>
     </icefloat>
@@ -16,7 +16,7 @@
         <type>Eskimo</type>
         <name>testBunny</name>
         <position>0</position>
-        <bodytemp>2</bodytemp>
+        <bodytemp>3</bodytemp>
     </character>
 </characters>
 </config>

@@ -6,7 +6,15 @@
         <type>StableIceFloat</type>
         <capacity>-1</capacity>
         <item></item>
-        <snowcount>9</snowcount>
+        <snowcount>1</snowcount>
+        <igloo>no</igloo>
+        <tent>no</tent>
+    </icefloat>
+    <icefloat>
+        <type>StableIceFloat</type>
+        <capacity>-1</capacity>
+        <item></item>
+        <snowcount>1</snowcount>
         <igloo>no</igloo>
         <tent>no</tent>
     </icefloat>
@@ -14,8 +22,14 @@
 <characters>
     <character>
         <type>Eskimo</type>
-        <name>testBunny</name>
+        <name>testBunny1</name>
         <position>0</position>
+        <bodytemp>1</bodytemp>
+    </character>
+    <character>
+        <type>Eskimo</type>
+        <name>testBunny2</name>
+        <position>1</position>
         <bodytemp>2</bodytemp>
     </character>
 </characters>

@@ -6,8 +6,8 @@
         <type>StableIceFloat</type>
         <capacity>-1</capacity>
         <item></item>
-        <snowcount>9</snowcount>
-        <igloo>no</igloo>
+        <snowcount>0</snowcount>
+        <igloo>yes</igloo>
         <tent>no</tent>
     </icefloat>
 </icefloats>

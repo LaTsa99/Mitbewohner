@@ -72,6 +72,8 @@ public class GUI_Prototype implements GUI{
 
     private static boolean snowStormRandom = true;
 
+
+    private static int PLAYER_COUNT=0;
     private static int state = 0; // 0 = creation, 1 = testing
 
     /**
@@ -1007,7 +1009,7 @@ public class GUI_Prototype implements GUI{
                     field.add(iceFloat);
                     break;
                 case 2:
-                    int capacity = rand.nextInt(6) + 1;
+                    int capacity = rand.nextInt(PLAYER_COUNT) + 1;
                     iceFloat = new UnstableIceFloat(capacity);
                     iceFloat.setID(i);
                     field.add(iceFloat);
@@ -1604,6 +1606,7 @@ public class GUI_Prototype implements GUI{
                     count = 0;
                 }
             }
+            PLAYER_COUNT=count;
 
             while (characters.size() < count) {
 
