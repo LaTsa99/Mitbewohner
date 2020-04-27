@@ -13,12 +13,16 @@ import hu.mudm.icefield.model.item.Tent;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -27,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -69,6 +74,11 @@ public class GUI_Prototype implements GUI{
 
     private static Controller c;
     private static Game game;
+    private static String iceFloatPrefix = "hu.mudm.icefield.model.field.";
+    private static String characterPrefix = "hu.mudm.icefield.model.player.";
+    private static String itemPrefix = "hu.mudm.icefield.model.item.";
+    private static String actionPrefix = "hu.mudm.icefield.model.action.";
+
 
     private static boolean snowStormRandom = true;
 
@@ -137,7 +147,7 @@ public class GUI_Prototype implements GUI{
 
     private static void printState(IceFloat iceFloat) {
         StringBuilder sb = new StringBuilder();
-        sb.append(iceFloat.getID());
+        sb.append("Icefloat " + iceFloat.getID());
         sb.append("\n");
         sb.append("Type: ");
         sb.append(iceFloat.getClass().getSimpleName());
@@ -154,265 +164,269 @@ public class GUI_Prototype implements GUI{
         System.out.println(sb.toString());
     }
 
-    //private static void loadTest(String[] params){
-    //    if(state == 1){
-    //        System.out.println("Error: You cannot do this in test state.");
-    //    }
-    //    else if(params.length != 2){
-    //        String usage = "loadTest <input file>";
-    //        wrongUsage(usage);
-    //    }else{
-    //        ArrayList<IceFloat> iceFloats = new ArrayList<>();
-    //        ArrayList<Character> charactersList = new ArrayList<>();
-    //        try {
-    //            File file = new File(params[1]);
-    //            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-    //            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-    //            Document doc = dBuilder.parse(file);
-    //            doc.getDocumentElement().normalize();
-//
-    //            NodeList list = doc.getElementsByTagName("icefield");
-    //            //NodeList field = (NodeList) config.item(0);
-    //            //NodeList characters = (NodeList) config.item(1);
-    //            //Element polarBear = null;
-    //            NodeList field = doc.getElementsByTagName("icefloat");
-    //            /*if(config.getLength() >= 3){
-    //                System.out.println(config.getLength() + "");
-    //                polarBear = (Element)config.item(2);
-//
-    //            }*/
-//
-    //            // parse icefloats
-    //            for(int i = 0; i < field.getChildren().size(); i++){
-    //                Element iceFloatElement = (Element)field.item(i);
-    //                String type = iceFloatElement.getAttribute("type");
-    //                if (i == 0 && !type.equals(StableIceFloat.class.getSimpleName())) {
-    //                    System.out.println("Error: First icefloat must be stable.");
-    //                    return;
-    //                }
-//
-    //                int capacity = Integer.parseInt(iceFloatElement.getAttribute("capacity"));
-    //                String itemtype_string = iceFloatElement.getAttribute("item");
-    //                int snowCount = Integer.parseInt(iceFloatElement.getAttribute("snowcount"));
-    //                String igloo = iceFloatElement.getAttribute("igloo");
-    //                String tent = iceFloatElement.getAttribute("tent");
-//
-    //                IceFloat iceFloat = null;
-    //                Class<? extends IceFloat> classType = (Class<? extends IceFloat>) Class.forName(type);
-    //                Constructor<? extends IceFloat>[] constructors = (Constructor<? extends IceFloat>[]) classType.getConstructors();
-    //                Constructor<? extends IceFloat> constructor = constructors[0];
-//
-    //                try {
-    //                    if (constructors[0].getParameterCount() > 0) {
-    //                        iceFloat = constructor.newInstance(capacity);
-    //                    } else {
-    //                        iceFloat = constructor.newInstance();
-    //                    }
-    //                } catch (Exception e) {
-    //                    e.printStackTrace();
-    //                }
-//
-    //                iceFloat.setID(i);
-//
-    //                for (int j = 0; j < snowCount; j++) {
-    //                    iceFloat.addSnow();
-    //                }
-//
-    //                if (!classType.equals(Hole.class)) {
-    //                    Class<? extends Item> classType_inside = (Class<? extends Item>) Class.forName(itemtype_string);
-    //                    Item newItem = createItem(classType_inside);
-    //                    if (newItem != null)
-    //                        iceFloat.setItem(newItem);
-//
-    //                    if (tent.equals("yes") && igloo.equals("yes")) {
-    //                        System.out.println("Error: an icefloat cannot have both tent an igloo on it.");
-    //                        return;
-    //                    }
-//
-    //                    if (tent.equals("yes") && igloo.equals("no")) {
-    //                        iceFloat.buildTent();
-    //                    }
-//
-    //                    if(igloo.equals("yes") && tent.equals("no")){
-    //                        iceFloat.buildIgloo();
-    //                    }
-    //                }
-//
-    //                iceFloats.add(iceFloat);
-    //            }
-//
-    //            for(int i = 0; i < iceFloats.size() - 1; i++){
-    //                iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
-    //            }
-//
-    //            for(IceFloat iceFloat : iceFloats){
-    //                printState(iceFloat);
-    //            }
-    //            c.setIcefloats(iceFloats);
-//
-    //            // parse characters
-    //            for(int i = 0; i < characters.getLength(); i++){
-    //                Element characterElement = (Element) characters.item(i);
-    //                String type = characterElement.getAttribute("type");
-    //                Class<? extends Character> classType = (Class<? extends Character>) Class.forName(type);
-    //                String name = characterElement.getAttribute("name");
-    //                int position = Integer.parseInt(characterElement.getAttribute("position"));
-    //                if (position >= iceFloats.size()) {
-    //                    System.out.println("Error: icefloat doesn't exist!");
-    //                    break;
-    //                }
-    //                int temp = Integer.parseInt(characterElement.getAttribute("bodytemp"));
-//
-    //                Character newCharacter = createCharacter(classType, name, (StableIceFloat) iceFloats.get(0));
-//
-    //                NodeList characterItems = (NodeList) ((NodeList) characterElement).item(4);
-    //                for (int j = 0; j < characterItems.getLength(); j++) {
-    //                    Element characterItem = (Element) characterItems.item(j);
-    //                    String itemType_string = characterItem.getAttribute("type");
-    //                    Class<? extends Item> classType_asd = (Class<? extends Item>) Class.forName(itemType_string);
-    //                    Item newItem = createItem(classType_asd);
-    //                    if (newItem == null) {
-    //                        System.out.println("Error: This kind of item doesn't exist.");
-    //                        return;
-    //                    }
-    //                    newCharacter.addItem(newItem);
-    //                }
-    //                newCharacter.setTemp(temp);
-//
-    //                for (IceFloat ice : iceFloats) {
-    //                    if (ice.getID() == position) {
-    //                        if (ice.getClass().equals(Hole.class)) {
-    //                            System.out.println("Error: you cannot put character in a hole!");
-    //                            return;
-    //                        }
-    //                        newCharacter.setPosition(ice);
-    //                        charactersList.add(newCharacter);
-    //                        ice.stepOn(newCharacter);
-    //                    }
-    //                }
-    //            }
-//
-    //            for(Character character : charactersList){
-    //                printState(character);
-    //            }
-    //            c.setCharacters(charactersList);
-//
-    //            // parse polarbear
-    //            if(polarBear != null){
-    //                int position = Integer.parseInt(polarBear.getAttribute("position"));
-    //                for(IceFloat i: iceFloats){
-    //                    if(i.getID() == position){
-    //                        PolarBear bear = new PolarBear(i);
-    //                        c.setPolarBear(bear);
-    //                        printState(bear);
-    //                    }
-    //                }
-    //            }
-//
-    //            NodeList test = (NodeList) list.item(1);
-    //            if(test.getLength() > 0)
-    //                state = 1;
-//
-    //            String name, pos;
-    //            // XML commands
-    //            for(int i = 0; i < test.getLength(); i++){
-    //                String actionType = test.item(i).getNodeName();
-    //                switch (actionType){
-    //                    case "moveaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        pos = ((Element)test.item(i)).getAttribute("icefloat");
-    //                        String[] parameters1 = {actionType, name, pos};
-    //                        moveAction(parameters1);
-    //                        break;
-    //                    case "shovelaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        String[] parameters2 = {actionType, name};
-    //                        shovelAction(parameters2);
-    //                        break;
-    //                    case "buildaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        String[] parameters3 = {actionType, name};
-    //                        buildAction(parameters3);
-    //                        break;
-    //                    case "buildtentaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        String[] parameters4 = {actionType, name};
-    //                        buildTentAction(parameters4);
-    //                        break;
-    //                    case "checkaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        pos = ((Element)test.item(i)).getAttribute("icefloat");
-    //                        String[] parameters5 = {actionType, name, pos};
-    //                        checkAction(parameters5);
-    //                        break;
-    //                    case "buildrocketaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        String[] parameters6 = {actionType, name};
-    //                        buildRocketAction(parameters6);
-    //                        break;
-    //                    case "pickupaction":
-    //                        name = ((Element)test.item(i)).getAttribute("character");
-    //                        String[] parameters7 = {actionType, name};
-    //                        pickupAction(parameters7);
-    //                        break;
-    //                    case "polarmove":
-    //                        pos = ((Element)test.item(i)).getAttribute("icefloat");
-    //                        String[] parameters8 = {actionType, pos};
-    //                        polarBearMove(parameters8);
-    //                        break;
-    //                    case "saveoutput":
-    //                        String location = ((Element)test.item(i)).getAttribute("filename");
-    //                        String[] parameters9 = {actionType, location};
-    //                        saveOutput(parameters9);
-    //                        break;
-    //                    case "snowstorm":
-    //                        NodeList floats = (NodeList) test.item(i);
-    //                        if(floats.getLength() == 0){
-    //                            String[] parameters10 = {actionType};
-    //                        }else{
-    //                            int n = floats.getLength();
-    //                            String[] parameters10 = new String[n + 2];
-    //                            parameters10[0] = actionType;
-    //                            parameters10[1] = "" + n;
-    //                            for(int j = 0; j < floats.getLength(); j++){
-    //                                parameters10[j + 2] = ((Element)floats.item(j)).getAttribute("id");
-    //                            }
-    //                            snowstorm(parameters10);
-    //                        }
-    //                        break;
-    //                    default:
-    //                        System.out.println("Error: unknown command!");
-    //                        return;
-    //                }
-    //            }
-//
-//
-//
-    //        }catch (IOException e){
-    //            System.out.println("An ioexception occured!");
-    //            return;
-    //        }catch (ParserConfigurationException pce){
-    //            pce.printStackTrace();
-    //            return;
-    //        }catch (SAXException se){
-    //            se.printStackTrace();
-    //            return;
-    //        }catch (ClassNotFoundException cnfe){
-    //            cnfe.printStackTrace();
-    //            return;
-    //        }
-    //    }
-    //} // DONE
+    private static void loadTest(String[] params){
+        if(state == 1){
+            System.out.println("Error: You cannot do this in test state.");
+        }
+        else if(params.length != 2){
+            String usage = "loadTest <input file>";
+            wrongUsage(usage);
+        }else{
+            ArrayList<IceFloat> iceFloats = new ArrayList<>();
+            ArrayList<Character> charactersList = new ArrayList<>();
+            try {
+                File file = new File("Code/Prototype/test/in/" + params[1]);
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(file);
+                doc.getDocumentElement().normalize();
 
-    private static void generateField(String[] params) throws IOException {
+                NodeList list = doc.getElementsByTagName("icefield");
+                //NodeList field = (NodeList) config.item(0);
+                //NodeList characters = (NodeList) config.item(1);
+                //Element polarBear = null;
+                NodeList field = doc.getElementsByTagName("icefloat");
+                NodeList characters = doc.getElementsByTagName("character");
+                NodeList polarBear = doc.getElementsByTagName("polarbear");
+
+                for(int i = 0; i < field.getLength(); i++){
+                    Element iceFloatElement = (Element)field.item(i);
+                    System.out.println(field.getLength());
+                    String type = iceFloatElement.getElementsByTagName("type").item(0).getTextContent() ;
+                    if (i == 0 && !type.equals(StableIceFloat.class.getSimpleName())) {
+                        System.out.println(type);
+                        System.out.println(StableIceFloat.class.getSimpleName());
+                        System.out.println("Error: First icefloat must be stable.");
+                        return;
+                    }
+
+                    int capacity = Integer.parseInt(iceFloatElement.getElementsByTagName("capacity").item(0).getTextContent());
+                    String itemtype_string = iceFloatElement.getElementsByTagName("item").item(0).getTextContent();
+                    int snowCount = Integer.parseInt(iceFloatElement.getElementsByTagName("snowcount").item(0).getTextContent());
+                    String igloo = iceFloatElement.getElementsByTagName("igloo").item(0).getTextContent();
+                    String tent = iceFloatElement.getElementsByTagName("tent").item(0).getTextContent();
+
+                    IceFloat iceFloat = null;
+                    Class<? extends IceFloat> classType = (Class<? extends IceFloat>) Class.forName(iceFloatPrefix + type);
+                    Constructor<? extends IceFloat>[] constructors = (Constructor<? extends IceFloat>[]) classType.getConstructors();
+                    Constructor<? extends IceFloat> constructor = constructors[0];
+
+                    try {
+                        if (constructors[0].getParameterCount() > 0) {
+                            iceFloat = constructor.newInstance(capacity);
+                        } else {
+                            iceFloat = constructor.newInstance();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    iceFloat.setID(i);
+
+                    for (int j = 0; j < snowCount; j++) {
+                        iceFloat.addSnow();
+                    }
+
+                    if (!classType.equals(Hole.class) && !itemtype_string.equals("")) {
+                        Class<? extends Item> classType_inside = (Class<? extends Item>) Class.forName(itemPrefix + itemtype_string);
+                        Item newItem = createItem(classType_inside);
+                        if (newItem != null)
+                            iceFloat.setItem(newItem);
+
+                        if (tent.equals("yes") && igloo.equals("yes")) {
+                            System.out.println("Error: an icefloat cannot have both tent an igloo on it.");
+                            return;
+                        }
+
+                        if (tent.equals("yes") && igloo.equals("no")) {
+                            iceFloat.buildTent();
+                        }
+
+                        if(igloo.equals("yes") && tent.equals("no")){
+                            iceFloat.buildIgloo();
+                        }
+                    }
+
+                    iceFloats.add(iceFloat);
+                }
+
+                for(int i = 0; i < iceFloats.size() - 1; i++){
+                    iceFloats.get(i).setNeighbor(iceFloats.get(i+1));
+                }
+
+                for(IceFloat iceFloat : iceFloats){
+                    System.out.println("added");
+                    printState(iceFloat);
+                }
+                c.setIcefloats(iceFloats);
+
+                // parse characters
+                for(int i = 0; i < characters.getLength(); i++){
+                    Element characterElement = (Element) characters.item(i);
+                    String type = characterElement.getElementsByTagName("type").item(0).getTextContent();
+                    Class<? extends Character> classType = (Class<? extends Character>) Class.forName(characterPrefix + type);
+                    String name = characterElement.getElementsByTagName("name").item(0).getTextContent();
+                    int position = Integer.parseInt(characterElement.getElementsByTagName("position").item(0).getTextContent());
+                    if (position >= iceFloats.size()) {
+                        System.out.println("Error: icefloat doesn't exist!");
+                        break;
+                    }
+                    int temp = Integer.parseInt(characterElement.getElementsByTagName("bodytemp").item(0).getTextContent());
+
+                    Character newCharacter = createCharacter(classType, name, (StableIceFloat) iceFloats.get(0));
+
+                    //NodeList characterItems = (NodeList) ((NodeList) characterElement).item(4);
+                    NodeList characterItems = characterElement.getElementsByTagName("item");
+                    for (int j = 0; j < characterItems.getLength(); j++) {
+                        Element characterItem = (Element) characterItems.item(j);
+                        String itemType_string = characterItem.getAttribute("type");
+                        Class<? extends Item> classType_asd = (Class<? extends Item>) Class.forName(itemPrefix + itemType_string);
+                        Item newItem = createItem(classType_asd);
+                        if (newItem == null) {
+                            System.out.println("Error: This kind of item doesn't exist.");
+                            return;
+                        }
+                        newCharacter.addItem(newItem);
+                    }
+                    newCharacter.setTemp(temp);
+
+                    for (IceFloat ice : iceFloats) {
+                        if (ice.getID() == position) {
+                            if (ice.getClass().equals(Hole.class)) {
+                                System.out.println("Error: you cannot put character in a hole!");
+                                return;
+                            }
+                            newCharacter.setPosition(ice);
+                            charactersList.add(newCharacter);
+                            ice.stepOn(newCharacter);
+                        }
+                    }
+                }
+
+                for(Character character : charactersList){
+                    printState(character);
+                }
+
+                c.setCharacters(charactersList);
+
+                if(polarBear.getLength() != 0){
+                    Element bear = (Element)polarBear.item(0);
+                    int position = Integer.parseInt(bear.getAttribute("position"));
+                    for(IceFloat i: iceFloats){
+                        if(i.getID() == position){
+                            PolarBear realbear = new PolarBear(i);
+                            c.setPolarBear(realbear);
+                            printState(realbear);
+                        }
+                    }
+                }
+
+                NodeList test = doc.getElementsByTagName("test");
+                NodeList actions = doc.getElementsByTagName("action");
+                if(test.getLength() > 0)
+                    state = 1;
+
+                String name, pos;
+                // XML commands
+                for(int i = 0; i < actions.getLength(); i++){
+                    String actionType = actions.item(i).getAttributes().getNamedItem("name").getNodeValue();
+                    System.out.println(actionType);
+                    switch (actionType){
+                        case "moveAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            pos = actions.item(i).getAttributes().getNamedItem("icefloat").getNodeValue();
+                            String[] parameters1 = {actionType, name, pos};
+                            moveAction(parameters1);
+                            break;
+                        case "shovelAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            String[] parameters2 = {actionType, name};
+                            shovelAction(parameters2);
+                            break;
+                        case "buildAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            String[] parameters3 = {actionType, name};
+                            buildAction(parameters3);
+                            break;
+                        case "buildTentAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            String[] parameters4 = {actionType, name};
+                            buildTentAction(parameters4);
+                            break;
+                        case "checkAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            pos = actions.item(i).getAttributes().getNamedItem("icefloat").getNodeValue();
+                            String[] parameters5 = {actionType, name, pos};
+                            checkAction(parameters5);
+                            break;
+                        case "buildRocketAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            String[] parameters6 = {actionType, name};
+                            buildRocketAction(parameters6);
+                            break;
+                        case "pickupAction":
+                            name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
+                            String[] parameters7 = {actionType, name};
+                            pickupAction(parameters7);
+                            break;
+                        case "polarmove":
+                            pos = actions.item(i).getAttributes().getNamedItem("icefloat").getNodeValue();
+                            String[] parameters8 = {actionType, pos};
+                            polarBearMove(parameters8);
+                            break;
+                        case "saveOutput":
+                            String location = actions.item(i).getAttributes().getNamedItem("filename").getNodeValue();
+                            String[] parameters9 = {actionType, location};
+                            saveOutput(parameters9);
+                            break;
+                        case "snowstorm":
+                            NodeList floats = (NodeList) test.item(i);
+                            if(floats.getLength() == 0){
+                                String[] parameters10 = {actionType};
+                            }else{
+                                int n = floats.getLength();
+                                String[] parameters10 = new String[n + 2];
+                                parameters10[0] = actionType;
+                                parameters10[1] = "" + n;
+                                for(int j = 0; j < floats.getLength(); j++){
+                                    parameters10[j + 2] = ((Element)floats.item(j)).getAttribute("id");
+                                }
+                                snowstorm(parameters10);
+                            }
+                            break;
+                        default:
+                            System.out.println("Error: unknown command!");
+                            return;
+                    }
+                }
+
+
+
+            }catch (IOException e){
+                System.out.println("An ioexception occured!");
+                return;
+            }catch (ParserConfigurationException pce){
+                pce.printStackTrace();
+                return;
+            }catch (SAXException se){
+                se.printStackTrace();
+                return;
+            }catch (ClassNotFoundException cnfe){
+                cnfe.printStackTrace();
+                return;
+            }
+        }
+    } // DONE
+
+    private static void generateField(String[] params) throws IOException{
         String unstableRegex = "i[0-9][0-9]*";
         ArrayList<String> field = new ArrayList<>();
-        if (state == 1) {
+        if(state == 1){
             System.out.println("Error: You cannot do this in test state.");
-        } else if (params.length == 1) {
-            c.setIcefloats(randomizedField(6, 6));
         }
-        if (params.length == 4) {
+        else if(params.length == 1){
+            c.setIcefloats(randomizedField(6, 6));
+        }if(params.length == 4){
             int n, m;
             try{
                 n = Integer.parseInt(params[1]);
@@ -563,7 +577,7 @@ public class GUI_Prototype implements GUI{
 
             switch (cmd) {
                 case Commands.loadTest:
-                    //loadTest(parsedInput);
+                    loadTest(parsedInput);
                     break;
                 case Commands.generateField:
                     generateField(parsedInput);
@@ -646,7 +660,7 @@ public class GUI_Prototype implements GUI{
         sb.append(character.getTemp());
         sb.append("\n");
         sb.append("Position: ");
-        sb.append(character.getPosition());
+        sb.append(character.getPosition().getID());
         sb.append("\n");
         sb.append("Items: ");
         for (Item item : character.getItems()) {
@@ -908,12 +922,12 @@ public class GUI_Prototype implements GUI{
                 iceFloat.appendChild(type);
                 //---------
                 Element capacity = document.createElement("capacity");
-                String capacitys;
-                if (type.equals(StableIceFloat.class.getSimpleName()) && type.equals(Hole.class.getSimpleName())) {
+                String capacitys = "" + i.getCapacity();
+                /*if (type.equals(StableIceFloat.class.getSimpleName()) || type.equals(Hole.class.getSimpleName())) {
                     capacitys = "";
                 } else {
                     capacitys = "" + i.getCapacity();
-                }
+                }*/
                 capacity.appendChild(document.createTextNode(capacitys));
                 iceFloat.appendChild(capacity);
                 //---------
@@ -930,12 +944,12 @@ public class GUI_Prototype implements GUI{
                 iceFloat.appendChild(snowCount);
                 //---------
                 Element igloo = document.createElement("igloo");
-                String hasIgloo = (i.hasIglu()) ? "true" : "false";
+                String hasIgloo = (i.hasIglu()) ? "yes" : "no";
                 igloo.appendChild(document.createTextNode(hasIgloo));
                 iceFloat.appendChild(igloo);
                 //---------
                 Element tent = document.createElement("tent");
-                String hasTent = (i.hasTent()) ? "true" : "false";
+                String hasTent = (i.hasTent()) ? "yes" : "no";
                 tent.appendChild(document.createTextNode(hasTent));
                 iceFloat.appendChild(tent);
                 //---------
@@ -979,8 +993,10 @@ public class GUI_Prototype implements GUI{
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(params[1]));
+            StreamResult streamResult = new StreamResult(new File("Code/Prototype/test/out/" + params[1]));
 
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
@@ -1131,7 +1147,7 @@ public class GUI_Prototype implements GUI{
     private static void moveAction(String[] params){
         if(state == 0){
             System.out.println("Error: You cannot do this in creation state.");
-        }else if(params.length != 2){
+        }else if(params.length != 3){
             String usage = "moveAction <character> <icefloat>";
             wrongUsage(usage);
         }else{
@@ -1151,6 +1167,7 @@ public class GUI_Prototype implements GUI{
             IceFloat iceFloat = null;
 
             for(Character c : characters){
+                System.out.println(c.getName());
                 if(c.getName().equals(params[1])) character = c;
             }
 
