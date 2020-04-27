@@ -23,9 +23,9 @@ public abstract class Character {
     protected int temp;
     private String name;
 
-    public Character(String name, StableIceFloat startingosition) {
+    public Character(String name, StableIceFloat startingposition) {
         this.name = name;
-        startingosition.stepOn(this);
+        startingposition.stepOn(this);
         items = new ArrayList<>();
         actions = new ArrayList<>();
         temp = 4;
@@ -92,7 +92,7 @@ public abstract class Character {
     }
 
     public Boolean BuildTent() {
-        for (Item item : items) {
+        for (Item item : getItems()) {
             if (item.canBuildAsTent()) {
                 item.onUse(this);
                 return true;

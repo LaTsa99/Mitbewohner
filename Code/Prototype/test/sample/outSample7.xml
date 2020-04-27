@@ -7,8 +7,8 @@
         <capacity>-1</capacity>
         <item></item>
         <snowcount>0</snowcount>
-        <igloo>false</igloo>
-        <tent>false</tent>
+        <igloo>no</igloo>
+        <tent>no</tent>
     </icefloat>
 </icefloats>
 <characters>

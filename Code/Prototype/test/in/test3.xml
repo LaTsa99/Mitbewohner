@@ -59,7 +59,7 @@
 		<action name="saveOutput" filename="test3Out1.xml" />
 		<action name="moveAction" character="testBunny1" icefloat="1" />
 		<action name="saveOutput" filename="test3Out2.xml" />
-		<action name="moveAction" character="testBunny2" icefloat="2" />
+		<action name="moveAction" character="testBunny2" icefloat="3" />
 		<action name="moveAction" character="testBunny1" icefloat="1" />
 		<action name="saveOutput" filename="test3Out3.xml" />
 	</test>

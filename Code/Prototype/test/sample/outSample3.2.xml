@@ -39,14 +39,14 @@
 		<character>
 			<type>Eskimo</type>
 			<name>testBunny1</name>
-			<position>3</position>
+			<position>2</position>
 			<bodytemp>5</bodytemp>
 			<items/>
 		</character>
 <character>
 			<type>Eskimo</type>
 			<name>testBunny2</name>
-			<position>3</position>
+			<position>2</position>
 			<bodytemp>5</bodytemp>
 			<items>
 				<item  type="DiverSuit"/>

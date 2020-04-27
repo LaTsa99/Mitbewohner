@@ -230,18 +230,20 @@ public class GUI_Prototype implements GUI{
                         if (newItem != null)
                             iceFloat.setItem(newItem);
 
-                        if (tent.equals("yes") && igloo.equals("yes")) {
-                            System.out.println("Error: an icefloat cannot have both tent an igloo on it.");
-                            return;
-                        }
 
-                        if (tent.equals("yes") && igloo.equals("no")) {
-                            iceFloat.buildTent();
-                        }
+                    }
 
-                        if(igloo.equals("yes") && tent.equals("no")){
-                            iceFloat.buildIgloo();
-                        }
+                    if (tent.equals("yes") && igloo.equals("yes")) {
+                        System.out.println("Error: an icefloat cannot have both tent an igloo on it.");
+                        return;
+                    }
+
+                    if (tent.equals("yes") && igloo.equals("no")) {
+                        iceFloat.buildTent();
+                    }
+
+                    if(igloo.equals("yes") && tent.equals("no")){
+                        iceFloat.buildIgloo();
                     }
 
                     iceFloats.add(iceFloat);
@@ -270,7 +272,24 @@ public class GUI_Prototype implements GUI{
                     }
                     int temp = Integer.parseInt(characterElement.getElementsByTagName("bodytemp").item(0).getTextContent());
 
-                    Character newCharacter = createCharacter(classType, name, (StableIceFloat) iceFloats.get(0));
+                    IceFloat pos = null;
+
+                    for (IceFloat ice : iceFloats) {
+                        if (ice.getID() == position) {
+                            if (!ice.getClass().equals(StableIceFloat.class)) {
+                                System.out.println("Error: you need to put your character on a stable icefloat!");
+                                return;
+                            }
+                            pos = ice;
+                        }
+                    }
+                    if(pos == null){
+                        System.out.println("Error: icefloat doesnt exist.");
+                        return;
+                    }
+
+
+                    Character newCharacter = createCharacter(classType, name, (StableIceFloat)pos);
 
                     //NodeList characterItems = (NodeList) ((NodeList) characterElement).item(4);
                     NodeList characterItems = characterElement.getElementsByTagName("item");
@@ -286,8 +305,11 @@ public class GUI_Prototype implements GUI{
                         newCharacter.addItem(newItem);
                     }
                     newCharacter.setTemp(temp);
+                    System.out.println(temp);
 
-                    for (IceFloat ice : iceFloats) {
+                    charactersList.add(newCharacter);
+
+                    /*for (IceFloat ice : iceFloats) {
                         if (ice.getID() == position) {
                             if (ice.getClass().equals(Hole.class)) {
                                 System.out.println("Error: you cannot put character in a hole!");
@@ -297,7 +319,7 @@ public class GUI_Prototype implements GUI{
                             charactersList.add(newCharacter);
                             ice.stepOn(newCharacter);
                         }
-                    }
+                    }*/
                 }
 
                 for(Character character : charactersList){
@@ -367,7 +389,7 @@ public class GUI_Prototype implements GUI{
                             pickupAction(parameters7);
                             break;
                         case "polarBearMove":
-                            pos = actions.item(i).getAttributes().getNamedItem("icefloat").getNodeValue();
+                            pos = actions.item(i).getAttributes().getNamedItem("direction").getNodeValue();
                             String[] parameters8 = {actionType, pos};
                             polarBearMove(parameters8);
                             break;
@@ -377,7 +399,7 @@ public class GUI_Prototype implements GUI{
                             saveOutput(parameters9);
                             break;
                         case "snowstorm":
-                            NodeList floats = (NodeList) test.item(i);
+                            NodeList floats = doc.getElementsByTagName("ifloat");
                             if(floats.getLength() == 0){
                                 String[] parameters10 = {actionType};
                             }else{
@@ -386,7 +408,7 @@ public class GUI_Prototype implements GUI{
                                 parameters10[0] = actionType;
                                 parameters10[1] = "" + n;
                                 for(int j = 0; j < floats.getLength(); j++){
-                                    parameters10[j + 2] = ((Element)floats.item(j)).getAttribute("id");
+                                    parameters10[j + 2] = floats.item(j).getAttributes().getNamedItem("id").getNodeValue();
                                 }
                                 snowstorm(parameters10);
                             }
@@ -445,7 +467,7 @@ public class GUI_Prototype implements GUI{
                             // Check if only valid strings
                             for(int j = 0; j < m; j++){
                                 if(parsed[j].equals("s") || parsed[j].equals("h") || parsed[j].matches(unstableRegex)){
-                                    row.add(parsed[i]);
+                                    row.add(parsed[j]);
                                 }
                                 else{
                                     rowValid = false;
@@ -745,29 +767,40 @@ public class GUI_Prototype implements GUI{
                 return;
             }
 
-            IceFloat position = findIceFloat(pos);
+            //IceFloat position = findIceFloat(pos);
+            IceFloat position = null;
+            ArrayList<IceFloat> iceFloats = c.getIcefloats();
+            for(IceFloat i : iceFloats){
+                if(i.getID() == pos) position = i;
+            }
+
             if (position == null) {
                 System.out.println("Error: icefloat doesn't exist.");
                 return;
             }
+
+
             if (!position.getClass().equals(StableIceFloat.class)) {
                 System.out.println("Error: selected icefloat isn't stable.");
             }
             String type = params[1];
             Class<? extends Character> classType = null;
             try {
-                classType = (Class<? extends Character>) Class.forName(type);
+                classType = (Class<? extends Character>) Class.forName(characterPrefix + type);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
             String name = params[2];
-            Character character = createCharacter(classType, name, (StableIceFloat) c.getIcefloats().get(0));
+            Character character = createCharacter(classType, name, (StableIceFloat) position);
             if (character != null) {
                 character.setTemp(temp);
-                character.setPosition(position);
                 ArrayList<Character> chlist = c.getCharacters();
+                if(chlist == null){
+                    chlist = new ArrayList<>();
+                }
                 chlist.add(character);
                 c.setCharacters(chlist);
+                c.setIcefloats(iceFloats);
                 printState(character);
             }
         }
@@ -989,6 +1022,15 @@ public class GUI_Prototype implements GUI{
                 characters.appendChild(characterNode);
             }
 
+            PolarBear maci = c.getPolarBear();
+            if(maci != null){
+                Element maciNode = document.createElement("polarbear");
+                Attr maciPos = document.createAttribute("position");
+                maciPos.setValue(maci.getPosition().getID() + "");
+                maciNode.setAttributeNode(maciPos);
+                config.appendChild(maciNode);
+            }
+
             //transform DOM to XML
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -1059,14 +1101,14 @@ public class GUI_Prototype implements GUI{
         if (state == 1) {
             System.out.println("Error: You cannot do this in test state.");
         } else if (params.length != 3) {
-            String usage = "addItemToCharacter <item> <character>";
+            String usage = "addItemToCharacter <character> <item>";
             wrongUsage(usage);
         } else {
             String characterName = params[1];
             String itemType_string = params[2];
             Class<? extends Item> classType = null;
             try {
-                classType = (Class<? extends Item>) Class.forName(itemType_string);
+                classType = (Class<? extends Item>) Class.forName(itemPrefix + itemType_string);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

@@ -21,6 +21,6 @@
         </characters>
     </config>
     <test>
-        <action name="checkAction" character="testBunny" float="0"/>
+        <action name="checkAction" character="testBunny" icefloat="0"/>
     </test>
 </icefield>

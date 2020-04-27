@@ -46,7 +46,7 @@
 <character>
 			<type>Eskimo</type>
 			<name>testBunny2</name>
-			<position>2</position>
+			<position>3</position>
 			<bodytemp>5</bodytemp>
 			<items>
 				<item  type="DiverSuit"/>

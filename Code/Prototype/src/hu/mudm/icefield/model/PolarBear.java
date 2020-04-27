@@ -20,5 +20,9 @@ public class PolarBear {
     }
 
     public IceFloat getPosition(){ return position;}
-    public void setPosition(IceFloat _position){ position = _position; }
+    public void setPosition(IceFloat _position){
+        position = _position;
+        if(position.playersHere()>0 && position.isBearProof()==false)
+            Controller.Lose();
+    }
 }
