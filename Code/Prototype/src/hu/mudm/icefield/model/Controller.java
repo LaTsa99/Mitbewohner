@@ -104,18 +104,18 @@ public class Controller {
     }
 
     private void validateActions(Character ch) {
-        if (ch.getIceFloat().getSnowLevel() > 0) { //if the current position has snow on it
+        if (ch.getIceFloat().getSnowLevel() > 0) //if the current position has snow on it
             ch.addAction(ShovelAction.class);
-        }
-        if (ch.getIceFloat().getNeighbors().size() > 0) { //if the current position has neighbors
+        else ch.removeAction(ShovelAction.class);
+        if (ch.getIceFloat().getNeighbors().size() > 0)//if the current position has neighbors
             ch.addAction(MoveAction.class);
-        }
-        if (canRocketBeBuilt()) { //if all parts have been picked up and all players are on the same position
+        else ch.removeAction(MoveAction.class);
+        if (canRocketBeBuilt())//if all parts have been picked up and all players are on the same position
             ch.addAction(BuildRocketAction.class);
-        }
-        if (ch.getIceFloat().hasItem()){ //if the current position has an item in it
+        else ch.removeAction(BuildRocketAction.class);
+        if (ch.getIceFloat().getSnowLevel() <= 0 && ch.getIceFloat().hasItem()) //if the current position has an item in it and there is no snow
             ch.addAction(PickupAction.class);
-        }
+        else ch.removeAction(PickupAction.class);
     }
 
     private Action createAction(Character ch) throws NoActionException {

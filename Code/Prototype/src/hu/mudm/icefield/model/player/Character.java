@@ -25,7 +25,7 @@ public abstract class Character {
 
     public Character(String name, StableIceFloat startingosition) {
         this.name = name;
-        position = startingosition;
+        startingosition.stepOn(this);
         items = new ArrayList<>();
         actions = new ArrayList<>();
         temp = 4;
@@ -87,7 +87,7 @@ public abstract class Character {
     }
 
     public void setPosition(IceFloat ice) {
-        position.removeCharacter(this);
+        if(position!=null) position.removeCharacter(this);
         position = ice;
     }
 

@@ -113,7 +113,7 @@ public class GUI_Prototype implements GUI{
     }
 
     private void look(Character ch) {
-        pln(ch.getName() + ":");
+        pln(ch.getName() + ": ("+ch.getClass().getSimpleName()+")");
         pln("\tBody temperature: " + ch.getTemp());
 
         if (ch.getItems().size() > 0) pln("\tItems: ");
@@ -125,10 +125,12 @@ public class GUI_Prototype implements GUI{
     private void look(IceFloat f) {
         pln("\tIceFloat " + f.getID());
         pln("\t\tSnowlevel: " + f.getSnowLevel());
-        if (f.getCharacters().size() > 0) pln("\tCharacters standing on: ");
+        if (f.getCharacters().size() > 0) pln("\t\tCharacters standing on: ");
         for (Character ch : f.getCharacters()) {
-            pln("\t\t" + ch.getName());
+            pln("\t\t\t" + ch.getName());
         }
+
+        if(f.equals(c.getPolarBear().getPosition())) pln("\t\tThere is a Polar Bear standing here");
     }
 
     private static void printState(IceFloat iceFloat) {
@@ -1489,7 +1491,7 @@ public class GUI_Prototype implements GUI{
 
         if (actions.size() < 1) throw new NoActionException();
 
-        p(character.getName());
+        p(character.getName()+":");
         //List the actions
         pln("\tPlease choose one of the following Actions: (INPUT: name of action)");
         for (String a : actions) {

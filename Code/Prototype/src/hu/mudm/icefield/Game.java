@@ -50,7 +50,7 @@ public class Game {
         return result;
     }
 
-    private ArrayList<IceFloat> createIcefloat(ArrayList<Item> i){       //első stable, játszható 50%s, 40%u -> kapacitás random, 10%h
+    private ArrayList<IceFloat> createIcefloats(ArrayList<Item> i){       //első stable, játszható 50%s, 40%u -> kapacitás random, 10%h
         ArrayList<IceFloat> ices = new ArrayList<IceFloat>();
         int type;
 
@@ -91,7 +91,7 @@ public class Game {
     {
         rand = new Random();
         ArrayList<Item> items = createItems();
-        ArrayList<IceFloat> iceFloats = createIcefloat(items);
+        ArrayList<IceFloat> iceFloats = createIcefloats(items);
         setNeighbors(iceFloats);
         GUI gp = new GUI_Prototype();
 
