@@ -982,7 +982,7 @@ public class GUI_Prototype implements GUI{
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File("Code/Prototype/test/out/" + params[1]));
+            StreamResult streamResult = new StreamResult(new File("Code/Prototype/test/testout/" + params[1]));
 
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
