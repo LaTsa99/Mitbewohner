@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield state="ongoing">
+<config>
+	<icefloats>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>-1</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+		<icefloat>
+			<type>Hole</type>
+			<capacity>0</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>-1</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>no</igloo>
+			<tent>no</tent>
+		</icefloat>
+		<icefloat>
+			<type>StableIceFloat</type>
+			<capacity>-1</capacity>
+			<item></item>
+			<snowcount>0</snowcount>
+			<igloo>false</igloo>
+			<tent>false</tent>
+		</icefloat>
+	</icefloats>
+	<characters>
+		<character>
+			<type>Eskimo</type>
+			<name>testBunny1</name>
+			<position>3</position>
+			<bodytemp>5</bodytemp>
+		</character>
+<character>
+			<type>Eskimo</type>
+			<name>testBunny2</name>
+			<position>3</position>
+			<bodytemp>5</bodytemp>
+<items>
+				<item  type="DiverSuit"/>
+<item  type="Rope"/>
+			</items>
+		</character>
+	</characters>
+</config>
+</icefield>
