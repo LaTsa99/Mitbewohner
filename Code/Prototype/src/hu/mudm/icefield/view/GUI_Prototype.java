@@ -8,7 +8,8 @@ import hu.mudm.icefield.model.field.Hole;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.field.UnstableIceFloat;
-import hu.mudm.icefield.model.item.*;
+import hu.mudm.icefield.model.item.Item;
+import hu.mudm.icefield.model.item.Tent;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.model.player.Eskimo;
 import hu.mudm.icefield.model.player.Researcher;
@@ -114,7 +115,7 @@ public class GUI_Prototype implements GUI{
         sb.append(iceFloat.getCapacity());
         sb.append("\n");
         sb.append("Item: ");
-        sb.append(iceFloat.getItem() == null ? " - " : iceFloat.getItem().getName());
+        sb.append(iceFloat.getItem() == null ? " - " : iceFloat.getItem().getClass().getSimpleName());
         sb.append("\n");
         sb.append("Snow: ");
         sb.append(iceFloat.getSnowLevel());
@@ -157,7 +158,7 @@ public class GUI_Prototype implements GUI{
                     }
 
                     int capacity = Integer.parseInt(iceFloatElement.getAttribute("capacity"));
-                    String item = iceFloatElement.getAttribute("item");
+                    String itemtype_string = iceFloatElement.getAttribute("item");
                     int snowCount = Integer.parseInt(iceFloatElement.getAttribute("snowcount"));
                     String igloo = iceFloatElement.getAttribute("igloo");
                     String tent = iceFloatElement.getAttribute("tent");
@@ -184,7 +185,8 @@ public class GUI_Prototype implements GUI{
                     }
 
                     if (!classType.equals(Hole.class)) {
-                        Item newItem = createItem(item);
+                        Class<? extends Item> classType_inside = (Class<? extends Item>) Class.forName(itemtype_string);
+                        Item newItem = createItem(classType_inside);
                         if (newItem != null)
                             iceFloat.setItem(newItem);
 
@@ -193,7 +195,7 @@ public class GUI_Prototype implements GUI{
                             return;
                         }
 
-                        if(tent.equals("yes") && igloo.equals("no")){
+                        if (tent.equals("yes") && igloo.equals("no")) {
                             iceFloat.buildTent();
                         }
 
@@ -221,7 +223,7 @@ public class GUI_Prototype implements GUI{
                     Class<? extends Character> classType = (Class<? extends Character>) Class.forName(type);
                     String name = characterElement.getAttribute("name");
                     int position = Integer.parseInt(characterElement.getAttribute("position"));
-                    if(position >= iceFloats.size()){
+                    if (position >= iceFloats.size()) {
                         System.out.println("Error: icefloat doesn't exist!");
                         break;
                     }
@@ -229,12 +231,13 @@ public class GUI_Prototype implements GUI{
 
                     Character newCharacter = createCharacter(classType, name, (StableIceFloat) iceFloats.get(0));
 
-                    NodeList characterItems = (NodeList)((NodeList)characterElement).item(4);
-                    for(int j = 0; j < characterItems.getLength(); j++){
-                        Element characterItem = (Element)characterItems.item(j);
-                        String itemType = characterItem.getAttribute("type");
-                        Item newItem = createItem(itemType);
-                        if(newItem == null){
+                    NodeList characterItems = (NodeList) ((NodeList) characterElement).item(4);
+                    for (int j = 0; j < characterItems.getLength(); j++) {
+                        Element characterItem = (Element) characterItems.item(j);
+                        String itemType_string = characterItem.getAttribute("type");
+                        Class<? extends Item> classType_asd = (Class<? extends Item>) Class.forName(itemType_string);
+                        Item newItem = createItem(classType_asd);
+                        if (newItem == null) {
                             System.out.println("Error: This kind of item doesn't exist.");
                             return;
                         }
@@ -242,8 +245,8 @@ public class GUI_Prototype implements GUI{
                     }
                     newCharacter.setTemp(temp);
 
-                    for(IceFloat ice : iceFloats) {
-                        if (ice.getID() == position){
+                    for (IceFloat ice : iceFloats) {
+                        if (ice.getID() == position) {
                             if (ice.getClass().equals(Hole.class)) {
                                 System.out.println("Error: you cannot put character in a hole!");
                                 return;
@@ -461,26 +464,32 @@ public class GUI_Prototype implements GUI{
     private static void addItemToFloat(String[] params){
         if(state == 1){
             System.out.println("Error: You cannot do this in test state.");
-        } else if(params.length != 3){
+        } else if (params.length != 3) {
             String usage = "addItemToFloat <floatID> <item>";
             wrongUsage(usage);
-        }else{
+        } else {
             int floatID;
 
-            try{
+            try {
                 floatID = Integer.parseInt(params[1]);
-            }catch (NumberFormatException nfe){
+            } catch (NumberFormatException nfe) {
                 System.out.println("Error: first argument should be an integer value.");
                 return;
             }
 
-            String type = params[2];
-            Item item = createItem(type);
+            String type_string = params[2];
+            Class<? extends Item> classType = null;
+            try {
+                classType = (Class<? extends Item>) Class.forName(type_string);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Item item = createItem(classType);
 
-            if(item != null){
+            if (item != null) {
                 ArrayList<IceFloat> iceFloats = c.getIcefloats();
-                for(IceFloat iceFloat : iceFloats){
-                    if(iceFloat.getID() == floatID){
+                for (IceFloat iceFloat : iceFloats) {
+                    if (iceFloat.getID() == floatID) {
                         if (iceFloat.getClass().equals(Hole.class)) {
                             System.out.println("Error: You cannot put an item into a hole.");
                             return;
@@ -603,7 +612,7 @@ public class GUI_Prototype implements GUI{
         sb.append("\n");
         sb.append("Items: ");
         for (Item item : character.getItems()) {
-            sb.append(item.getName());
+            sb.append(item.getClass().getSimpleName());
             sb.append(" ");
         }
         sb.append("\n");
@@ -696,7 +705,7 @@ public class GUI_Prototype implements GUI{
                 return;
             }
 
-            IceFloat position = getIceFloat(pos);
+            IceFloat position = findIceFloat(pos);
             if (position == null) {
                 System.out.println("Error: icefloat doesn't exist.");
                 return;
@@ -874,7 +883,7 @@ public class GUI_Prototype implements GUI{
                 Item floatsItem = i.getItem();
                 String items;
                 if (floatsItem == null) items = "";
-                else items = floatsItem.getName();
+                else items = floatsItem.getClass().getSimpleName();
                 item.appendChild(document.createTextNode(items));
                 iceFloat.appendChild(item);
                 //---------
@@ -1001,22 +1010,28 @@ public class GUI_Prototype implements GUI{
             wrongUsage(usage);
         } else {
             String characterName = params[1];
-            String itemType = params[2];
+            String itemType_string = params[2];
+            Class<? extends Item> classType = null;
+            try {
+                classType = (Class<? extends Item>) Class.forName(itemType_string);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
             ArrayList<Character> characters = c.getCharacters();
             boolean exists = false;
-            for(Character character : characters){
-                if(character.getName().equals(characterName)){
+            for (Character character : characters) {
+                if (character.getName().equals(characterName)) {
                     exists = true;
-                    Item item = createItem(itemType);
-                    if(item != null){
+                    Item item = createItem(classType);
+                    if (item != null) {
                         character.addItem(item);
                     }
                 }
             }
-            if(exists){
+            if (exists) {
                 c.setCharacters(characters);
-            }else{
+            } else {
                 System.out.println("Error: Character with this name doesn't exist.");
             }
         }
@@ -1038,7 +1053,7 @@ public class GUI_Prototype implements GUI{
                 return;
             }
 
-            IceFloat position = getIceFloat(floatID);
+            IceFloat position = findIceFloat(floatID);
             if(position == null){
                 System.out.println("Error: Icefloat with this id doesn't exist.");
                 return;
@@ -1467,34 +1482,21 @@ public class GUI_Prototype implements GUI{
         return actions.indexOf(input);
     }
 
-    private static IceFloat getIceFloat(int id){
+    private static IceFloat findIceFloat(int id) {
         IceFloat iceFloat = null;
-        for(IceFloat fl : c.getIcefloats()){
-            if(fl.getID() == id) iceFloat = fl;
+        for (IceFloat fl : c.getIcefloats()) {
+            if (fl.getID() == id) iceFloat = fl;
         }
         return iceFloat;
     }
 
-    private static Item createItem(String type){
-        switch (type){
-            case ItemTypes.BreakableShovel:
-                return new BreakableShovel();
-            case ItemTypes.DiverSuit:
-                return new DiverSuit();
-            case ItemTypes.Food:
-                return new Food();
-            case ItemTypes.RocketPart:
-                return new RocketPart();
-            case ItemTypes.Rope:
-                return new Rope();
-            case ItemTypes.Shovel:
-                return new Shovel();
-            case ItemTypes.Tent:
-                return new Tent();
-            default:
-                System.out.println("Error: no such item.");
-                return null;
+    private static Item createItem(Class<? extends Item> classType) {
+        try {
+            return (Item) classType.getConstructors()[0].newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override
