@@ -17,11 +17,13 @@
 			<name>testBunny</name>
 			<position>0</position>
 			<bodytemp>2</bodytemp>
+			<items>
+				<item type="BreakableShovel"/>
+			</items>
 		</character>
 	</characters>
 </config>
 <test>
-	<action name="addItemToCharacter" item="BreakableShovel" character="testBunny"/>
 	<action name="shovelAction" character="testBunny"/>
 	<action name="shovelAction" character="testBunny"/>
 	<action name="shovelAction" character="testBunny"/>
