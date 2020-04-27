@@ -367,7 +367,7 @@ public class GUI_Prototype implements GUI{
                             String[] parameters7 = {actionType, name};
                             pickupAction(parameters7);
                             break;
-                        case "polarmove":
+                        case "polarBearMove":
                             pos = actions.item(i).getAttributes().getNamedItem("icefloat").getNodeValue();
                             String[] parameters8 = {actionType, pos};
                             polarBearMove(parameters8);
@@ -974,6 +974,18 @@ public class GUI_Prototype implements GUI{
                 Element temp = document.createElement("bodytemp");
                 temp.appendChild(document.createTextNode("" + character.getTemp()));
                 characterNode.appendChild(temp);
+                //---------
+                Element items = document.createElement("items");
+                if(!character.getItems().isEmpty()){
+                    for(Item item : character.getItems()){
+                        Element itemNode = document.createElement("item");
+                        Attr itemType = document.createAttribute("type");
+                        itemType.setValue(item.getClass().getSimpleName());
+                        itemNode.setAttributeNode(itemType);
+                        items.appendChild(itemNode);
+                    }
+                }
+                characterNode.appendChild(items);
                 //---------
                 characters.appendChild(characterNode);
             }

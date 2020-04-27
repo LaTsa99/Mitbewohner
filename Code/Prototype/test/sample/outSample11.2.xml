@@ -33,12 +33,14 @@
 			<name>testBunny1</name>
 			<position>0</position>
 			<bodytemp>5</bodytemp>
+			<items/>
 		</character>
 <character>
 			<type>Eskimo</type>
 			<name>testBunny2</name>
 			<position>1</position>
 			<bodytemp>5</bodytemp>
+			<items/>
 		</character>
 	</characters>
 	<polarbear position="0" />
