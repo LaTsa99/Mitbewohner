@@ -18,13 +18,21 @@
 				<position>0</position>
 				<bodytemp>2</bodytemp>
 			</character>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny2</name>
+				<position>0</position>
+				<bodytemp>2</bodytemp>
+				<items>
+					<item type="Shovel"/>
+				</items>
+			</character>
 		</characters>
 	</config>
 	<test>
 		<action name="shovelAction" character="testBunny"/>
 		<action name="saveOutput" filename="test6Out1.xml" />
-		<action name="addItemToCharacter" item="Shovel" character="testBunny"/>
-		<action name="shovelAction" character="testBunny"/>
+		<action name="shovelAction" character="testBunny2"/>
 		<action name="saveOutput" filename="test6Out2.xml" />
 	</test>
 </icefield>

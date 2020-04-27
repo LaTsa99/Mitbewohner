@@ -18,6 +18,15 @@
         <position>0</position>
         <bodytemp>2</bodytemp>
     </character>
+    <character>
+        <type>Eskimo</type>
+        <name>testBunny2</name>
+        <position>0</position>
+        <bodytemp>2</bodytemp>
+        <items>
+            <item type="Shovel"/>
+        </items>
+    </character>
 </characters>
 </config>
 </icefield>
