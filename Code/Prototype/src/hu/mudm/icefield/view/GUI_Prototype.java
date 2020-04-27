@@ -101,7 +101,7 @@ public class GUI_Prototype implements GUI{
         //Create List of Actions
         ArrayList<String> actions = new ArrayList<>();
         for (Class<? extends Action> a: character.getActions()) {
-            actions.add(a.toString());
+            actions.add(a.getSimpleName());
         }
 
         if(actions.size()<1) throw new NoActionException();
@@ -573,7 +573,7 @@ public class GUI_Prototype implements GUI{
                             polarBearMove(parameters8);
                             break;
                         case "saveoutput":
-                            String location = ((Element)test.item(i)).getAttribute("location");
+                            String location = ((Element)test.item(i)).getAttribute("filename");
                             String[] parameters9 = {actionType, location};
                             saveOutput(parameters9);
                             break;
