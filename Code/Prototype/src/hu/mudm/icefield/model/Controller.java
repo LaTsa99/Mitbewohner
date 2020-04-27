@@ -51,6 +51,7 @@ public class Controller {
                 for (int i = 0; i < 4; i++) {
                     validateActions(ch);
                     Action action = null;
+                    gui.see(ch);
                     try {
                         action = createAction(ch);
                     } catch (NoActionException e) {

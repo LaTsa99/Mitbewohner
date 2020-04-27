@@ -13,4 +13,6 @@ public interface GUI {
     int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException;
 
     ArrayList<Character> getCharacters();
+
+    void see(Character ch);
 }
