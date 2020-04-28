@@ -78,7 +78,7 @@ public class Game {
         }
         if (type >= 50 && type < 90)    {
             int id = ices.get(rd[j]).getID();
-            ices.set(rd[j], new UnstableIceFloat(rand.nextInt(5)+1, new RocketPart()));
+            ices.set(rd[j], new UnstableIceFloat(rand.nextInt(1)+1, new RocketPart()));
             ices.get(rd[j]).setID(id);
         }
         }
