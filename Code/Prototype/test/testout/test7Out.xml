@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<icefield state="won">
+    <config>
+        <icefloats>
+            <icefloat>
+                <type>StableIceFloat</type>
+                <capacity>-1</capacity>
+                <item/>
+                <snowcount>0</snowcount>
+                <igloo>no</igloo>
+                <tent>no</tent>
+            </icefloat>
+        </icefloats>
+        <characters>
+            <character>
+                <type>Eskimo</type>
+                <name>testBunny</name>
+                <position>0</position>
+                <bodytemp>2</bodytemp>
+                <items>
+                    <item type="RocketPart"/>
+                    <item type="RocketPart"/>
+                    <item type="RocketPart"/>
+                </items>
+            </character>
+        </characters>
+    </config>
+</icefield>
