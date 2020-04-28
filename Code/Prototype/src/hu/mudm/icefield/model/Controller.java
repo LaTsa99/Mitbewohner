@@ -45,9 +45,7 @@ public class Controller {
     }
 
     public void gameLoop() {
-        //initial snow level
-        for (int i = 0; i < 5; i++)
-            snowstorm();
+
 
         while (!isWon && !isLost) {
             for (Character ch : characters) {

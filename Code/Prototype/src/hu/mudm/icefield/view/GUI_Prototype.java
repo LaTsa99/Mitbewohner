@@ -134,6 +134,15 @@ public class GUI_Prototype implements GUI{
     private void look(IceFloat f) {
         pln("\tIceFloat " + f.getID());
         pln("\t\tSnowlevel: " + f.getSnowLevel());
+        if(f.hasIglu()){
+            pln("\t\tIgloo");
+        }
+        if(f.hasTent()){
+            pln("\t\tTent");
+        }
+        if(f.getSnowLevel() == 0 && f.getItem() != null){
+            pln("\t\tItem: " + f.getItem().getClass().getSimpleName());
+        }
         if (f.getCharacters().size() > 0) pln("\t\tCharacters standing on: ");
         for (Character ch : f.getCharacters()) {
             pln("\t\t\t" + ch.getName());

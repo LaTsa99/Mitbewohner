@@ -58,7 +58,7 @@ public class Game {
         for (int j=1; j<36; j++){
             type = rand.nextInt(100);
             if (type < 50)                  ices.add(new StableIceFloat(i.get(j)));
-            if (type >= 50 && type < 90)    ices.add(new UnstableIceFloat(rand.nextInt(5)+1, i.get(j)));
+            if (type >= 50 && type < 90)    ices.add(new UnstableIceFloat(rand.nextInt(1)+1, i.get(j)));
             if (type >= 90 )                ices.add(new Hole());
         }
 
@@ -98,6 +98,9 @@ public class Game {
         PolarBear maci = new PolarBear(iceFloats.get(35));
 
         controller.setIcefloats(iceFloats);
+        //initial snow level
+        for (int i = 0; i < 5; i++)
+            controller.snowstorm();
         controller.setPolarBear(maci);
         ArrayList<Character> characters = gp.getCharacters();   //getCharacters() uses iceFloats! (startPosition)
         if (characters == null) System.exit(0);
