@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+	<config>
+		<icefloats>
+			<icefloat>
+				<type>StableIceFloat</type>
+				<capacity>0</capacity>
+				<item></item>
+				<snowcount>10</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+		</icefloats>
+		<characters>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny</name>
+				<position>0</position>
+				<bodytemp>2</bodytemp>
+			</character>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny2</name>
+				<position>0</position>
+				<bodytemp>2</bodytemp>
+				<items>
+					<item type="Shovel"/>
+				</items>
+			</character>
+		</characters>
+	</config>
+	<test>
+		<action name="shovelAction" character="testBunny"/>
+		<action name="saveOutput" filename="test6Out1.xml" />
+		<action name="shovelAction" character="testBunny2"/>
+		<action name="saveOutput" filename="test6Out2.xml" />
+	</test>
+</icefield>
+

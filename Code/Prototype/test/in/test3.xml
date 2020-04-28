@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+	<config>
+		<icefloats>
+			<icefloat>
+				<type>StableIceFloat</type>
+				<capacity>0</capacity>
+				<item></item>
+				<snowcount>0</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+			<icefloat>
+				<type>Hole</type>
+				<capacity>0</capacity>
+				<item></item>
+				<snowcount>0</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+			<icefloat>
+				<type>StableIceFloat</type>
+				<capacity>0</capacity>
+				<item></item>
+				<snowcount>0</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+			<icefloat>
+				<type>StableIceFloat</type>
+				<capacity>0</capacity>
+				<item></item>
+				<snowcount>0</snowcount>
+				<igloo>no</igloo>
+				<tent>no</tent>
+			</icefloat>
+		</icefloats>
+		<characters>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny1</name>
+				<position>0</position>
+				<bodytemp>5</bodytemp>
+			</character>
+			<character>
+				<type>Eskimo</type>
+				<name>testBunny2</name>
+				<position>2</position>
+				<bodytemp>5</bodytemp>
+				<items>
+					<item  type="DiverSuit"/>
+					<item  type="Rope"/>
+				</items>
+			</character>
+		</characters>
+	</config>
+	<test>
+		<action name="moveAction" character="testBunny2" icefloat="1" />
+		<action name="saveOutput" filename="test3Out1.xml" />
+		<action name="moveAction" character="testBunny1" icefloat="1" />
+		<action name="saveOutput" filename="test3Out2.xml" />
+		<action name="moveAction" character="testBunny2" icefloat="3" />
+		<action name="moveAction" character="testBunny1" icefloat="1" />
+		<action name="saveOutput" filename="test3Out3.xml" />
+	</test>
+</icefield>

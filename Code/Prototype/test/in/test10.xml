@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<icefield>
+    <config>
+        <icefloats>
+            <icefloat>
+                <type>StableIceFloat</type>
+                <capacity>2</capacity>
+                <item></item>
+                <snowcount>0</snowcount>
+                <igloo>no</igloo>
+                <tent>no</tent>
+            </icefloat>
+            <icefloat>
+                <type>StableIceFloat</type>
+                <capacity>2</capacity>
+                <item></item>
+                <snowcount>0</snowcount>
+                <igloo>yes</igloo>
+                <tent>no</tent>
+            </icefloat>
+        </icefloats>
+        <characters>
+            <character>
+                <type>Eskimo</type>
+                <name>testBunny1</name>
+                <position>0</position>
+                <bodytemp>2</bodytemp>
+            </character>
+            <character>
+                <type>Eskimo</type>
+                <name>testBunny2</name>
+                <position>1</position>
+                <bodytemp>2</bodytemp>
+            </character>
+        </characters>
+    </config>
+    <test>
+        <action name="snowstorm">
+            <ifloat id="0"/>
+            <ifloat id="1"/>
+        </action>
+        <action name="saveOutput" filename="test10Out.xml" />
+    </test>
+</icefield>
