@@ -45,12 +45,13 @@ public class Controller {
     }
 
     public void gameLoop() {
-
-
         while (!isWon && !isLost) {
             for (Character ch : characters) {
+
+                gui.startTurn();
                 gui.showMessage("The turn of " + ch.getName() + " has started");
                 for (int i = 0; i < 4; i++) {
+                    gui.startTurn();
                     validateActions(ch);
                     Action action = null;
                     gui.see(ch);
@@ -72,7 +73,7 @@ public class Controller {
             for (IceFloat icefloat : icefloats) {
                 icefloat.endRound();
             }
-            gui.showMessage("The round has ended");
+            gui.endRound();
         }
     }
 

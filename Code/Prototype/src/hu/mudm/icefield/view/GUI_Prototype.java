@@ -121,6 +121,21 @@ public class GUI_Prototype implements GUI{
         }
     }
 
+    @Override
+    public void endRound() {
+        pln("-----------------------------------------------------");
+        pln("");
+        pln("");
+        pln("");
+    }
+
+    @Override
+    public void startTurn() {
+        pln("-----------------------------------------------------");
+        pln("");
+        pln("");
+    }
+
     private void look(Character ch) {
         pln(ch.getName() + ": ("+ch.getClass().getSimpleName()+")");
         pln("\tBody temperature: " + ch.getTemp());
