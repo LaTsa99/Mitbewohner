@@ -27,6 +27,6 @@ public class Hole extends IceFloat {
         prev.removeCharacter(ch);
         characters.add(ch);
         ch.setPosition(this);
-        Controller.Lose();
+        Controller.Lose(ch.getName() + " got wet at " + this.getID());
     }
 }

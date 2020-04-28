@@ -24,7 +24,7 @@ public class UnstableIceFloat extends IceFloat {
         ch.setPosition(this);
 
         if (playersHere() > capacity) {
-            Controller.Lose();
+            Controller.Lose("Someone got wet.");
         }
     }
 }

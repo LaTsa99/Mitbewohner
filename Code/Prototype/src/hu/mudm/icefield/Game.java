@@ -63,16 +63,24 @@ public class Game {
         }
 
         int[] rd = new int[3];
-        rd[0] = rand.nextInt(36);
+        rd[0] = rand.nextInt(35) + 1;
         rd[1] = -1;
         rd[2] = -1;
-        while (rd[1]<0||rd[0]==rd[1]) rd[1] = rand.nextInt(36);
-        while (rd[2]<0||rd[0]==rd[2] || rd[1]==rd[2]) rd[2] = rand.nextInt(36);
+        while (rd[1]<0||rd[0]==rd[1]) rd[1] = rand.nextInt(35) + 1;
+        while (rd[2]<0||rd[0]==rd[2] || rd[1]==rd[2]) rd[2] = rand.nextInt(35) + 1;
 
         for(int j= 0; j<3; j++){
         type = rand.nextInt(90);
-        if (type < 50 || rd[j]==0)                  ices.set(rd[j], new StableIceFloat(new RocketPart()));
-        if (type >= 50 && type < 90)    ices.set(rd[j], new UnstableIceFloat(rand.nextInt(5)+1, new RocketPart()));
+        if (type < 50 || rd[j]==0)            {
+            int id = ices.get(rd[j]).getID();
+            ices.set(rd[j], new StableIceFloat(new RocketPart()));
+            ices.get(rd[j]).setID(id);
+        }
+        if (type >= 50 && type < 90)    {
+            int id = ices.get(rd[j]).getID();
+            ices.set(rd[j], new UnstableIceFloat(rand.nextInt(5)+1, new RocketPart()));
+            ices.get(rd[j]).setID(id);
+        }
         }
 
         return ices;

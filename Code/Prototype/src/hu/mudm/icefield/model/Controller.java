@@ -4,6 +4,7 @@ import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
+import hu.mudm.icefield.view.GUI_Prototype;
 import hu.mudm.icefield.view.IDNotFoundException;
 import hu.mudm.icefield.view.NoActionException;
 
@@ -64,6 +65,7 @@ public class Controller {
                         gui.showMessage("Player " + ch.getName() + " has no possible Actions left, ending turn");
                     }
                     action.performAction();
+                    if(isLost || isWon) return;
                 }
             }
             gui.showMessage("The polar bear is moving");
@@ -190,11 +192,13 @@ public class Controller {
     }
 
     public static void Win() {
+        GUI_Prototype.printMessage("You won! :D");
         isWon = true;
         isLost = false;
     }
 
-    public static void Lose() {
+    public static void Lose(String cause) {
+        GUI_Prototype.printMessage("You lost :(\n" + cause);
         isLost = true;
         isWon = false;
     }

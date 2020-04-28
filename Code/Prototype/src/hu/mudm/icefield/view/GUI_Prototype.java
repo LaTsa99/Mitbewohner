@@ -1111,6 +1111,10 @@ public class GUI_Prototype implements GUI{
         return field;
     } // DONE
 
+    public static void printMessage(String message){
+        pln(message);
+    }
+
     private static Character createCharacter(Class<? extends Character> classType, String name, StableIceFloat startPosition) {
         try {
             Character ch = (Character) classType.getConstructors()[0].newInstance(name, startPosition);
