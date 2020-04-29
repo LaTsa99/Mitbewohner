@@ -203,9 +203,6 @@ public class GUI_Prototype implements GUI{
                 doc.getDocumentElement().normalize();
 
                 NodeList list = doc.getElementsByTagName("icefield");
-                //NodeList field = (NodeList) config.item(0);
-                //NodeList characters = (NodeList) config.item(1);
-                //Element polarBear = null;
                 NodeList field = doc.getElementsByTagName("icefloat");
                 NodeList characters = doc.getElementsByTagName("character");
                 NodeList polarBear = doc.getElementsByTagName("polarbear");
@@ -214,7 +211,6 @@ public class GUI_Prototype implements GUI{
                     Element iceFloatElement = (Element)field.item(i);
                     String type = iceFloatElement.getElementsByTagName("type").item(0).getTextContent() ;
                     if (i == 0 && !type.equals(StableIceFloat.class.getSimpleName())) {
-                        System.out.println(type);
                         System.out.println(StableIceFloat.class.getSimpleName());
                         System.out.println("Error: First icefloat must be stable.");
                         return;
@@ -278,7 +274,6 @@ public class GUI_Prototype implements GUI{
                 }
 
                 for(IceFloat iceFloat : iceFloats){
-                    System.out.println("added");
                     printState(iceFloat);
                 }
                 c.setIcefloats(iceFloats);
@@ -329,21 +324,9 @@ public class GUI_Prototype implements GUI{
                         newCharacter.addItem(newItem);
                     }
                     newCharacter.setTemp(temp);
-                    System.out.println(temp);
 
                     charactersList.add(newCharacter);
 
-                    /*for (IceFloat ice : iceFloats) {
-                        if (ice.getID() == position) {
-                            if (ice.getClass().equals(Hole.class)) {
-                                System.out.println("Error: you cannot put character in a hole!");
-                                return;
-                            }
-                            newCharacter.setPosition(ice);
-                            charactersList.add(newCharacter);
-                            ice.stepOn(newCharacter);
-                        }
-                    }*/
                 }
 
                 for(Character character : charactersList){
@@ -373,7 +356,6 @@ public class GUI_Prototype implements GUI{
                 // XML commands
                 for(int i = 0; i < actions.getLength(); i++){
                     String actionType = actions.item(i).getAttributes().getNamedItem("name").getNodeValue();
-                    System.out.println(actionType);
                     switch (actionType){
                         case "moveAction":
                             name = actions.item(i).getAttributes().getNamedItem("character").getNodeValue();
@@ -571,7 +553,7 @@ public class GUI_Prototype implements GUI{
             String type_string = params[2];
             Class<? extends Item> classType = null;
             try {
-                classType = (Class<? extends Item>) Class.forName(type_string);
+                classType = (Class<? extends Item>) Class.forName(itemPrefix + type_string);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -968,11 +950,6 @@ public class GUI_Prototype implements GUI{
                 //---------
                 Element capacity = document.createElement("capacity");
                 String capacitys = "" + i.getCapacity();
-                /*if (type.equals(StableIceFloat.class.getSimpleName()) || type.equals(Hole.class.getSimpleName())) {
-                    capacitys = "";
-                } else {
-                    capacitys = "" + i.getCapacity();
-                }*/
                 capacity.appendChild(document.createTextNode(capacitys));
                 iceFloat.appendChild(capacity);
                 //---------
@@ -1236,7 +1213,6 @@ public class GUI_Prototype implements GUI{
             IceFloat iceFloat = null;
 
             for(Character c : characters){
-                System.out.println(c.getName());
                 if(c.getName().equals(params[1])) character = c;
             }
 
