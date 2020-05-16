@@ -12,6 +12,8 @@ public class MVCController implements GUI {
     private FieldView fieldView;
     private MessageView messageView;
 
+    private WelcomeFrame welcomeFrame;
+
     public MVCController(){
     }
 
@@ -33,6 +35,7 @@ public class MVCController implements GUI {
     @Override
     public ArrayList<Character> getCharacters(StableIceFloat startingIceFloat) {
         return null;
+        //TODO welcomeFrame pops up
     }
 
     @Override
