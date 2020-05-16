@@ -3,16 +3,13 @@ package hu.mudm.icefield.model;
 import hu.mudm.icefield.model.action.*;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI;
-import hu.mudm.icefield.view.GUI_Prototype;
-import hu.mudm.icefield.view.IDNotFoundException;
-import hu.mudm.icefield.view.NoActionException;
+import hu.mudm.icefield.view.*;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Controller {
+public class Controller extends MVCModell {
     private PolarBear p;
     private ArrayList<IceFloat> icefloats;
     private ArrayList<Character> characters;
@@ -201,5 +198,10 @@ public class Controller {
         GUI_Prototype.printMessage("You lost :(\n" + cause);
         isLost = true;
         isWon = false;
+    }
+
+    @Override
+    public void createViews() {
+
     }
 }
