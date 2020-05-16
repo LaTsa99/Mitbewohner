@@ -8,6 +8,9 @@ public abstract class MVCModell {
 
     private MVCController mvcController;
 
+    public MVCModell(){
+    }
+
     public void updateViews(){
         for(MVCView view : views){
             view.update();

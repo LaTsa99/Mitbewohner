@@ -10,6 +10,7 @@ import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
 import hu.mudm.icefield.view.GUI_Prototype;
+import hu.mudm.icefield.view.MVCController;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,7 +30,7 @@ public class Game {
     private Controller controller;
 
     // Ez a konstruktor
-    Game(){ controller = new Controller(new GUI_Prototype(), null, null, null);}
+    private Game(){}
 
     public Controller GetController() {return controller;}
 
@@ -97,11 +98,13 @@ public class Game {
 
     public void init()
     {
+
         rand = new Random();
         ArrayList<Item> items = createItems();
         ArrayList<IceFloat> iceFloats = createIcefloats(items);
         setNeighbors(iceFloats);
-        GUI gp = new GUI_Prototype();
+        GUI gp = new MVCController();
+        controller = new Controller(gp);
 
         PolarBear maci = new PolarBear(iceFloats.get(35));
 

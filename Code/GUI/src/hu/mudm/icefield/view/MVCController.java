@@ -1,6 +1,7 @@
 package hu.mudm.icefield.view;
 
 import hu.mudm.icefield.model.field.IceFloat;
+import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.player.Character;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class MVCController implements GUI {
     private FieldView fieldView;
     private MessageView messageView;
 
+    public MVCController(){
+    }
 
     @Override
     public void showMessage(String s) {
@@ -28,7 +31,7 @@ public class MVCController implements GUI {
     }
 
     @Override
-    public ArrayList<Character> getCharacters() {
+    public ArrayList<Character> getCharacters(StableIceFloat startingIceFloat) {
         return null;
     }
 

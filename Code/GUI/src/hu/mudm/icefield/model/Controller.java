@@ -32,14 +32,11 @@ public class Controller extends MVCModell {
         return p;
     }
 
-    public Controller(GUI gui, ArrayList<Character> characters, ArrayList<IceFloat> icefloats, PolarBear p) {
+    public Controller(GUI gui) {
         this.gui = gui;
         r = new Random();
         isWon = false;
         isLost = false;
-        this.p = p;
-        this.characters = characters;
-        this.icefloats = icefloats;
     }
 
     public void gameLoop() {

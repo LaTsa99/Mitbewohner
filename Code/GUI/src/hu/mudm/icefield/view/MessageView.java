@@ -6,6 +6,10 @@ public class MessageView extends MVCView {
 
     private JLabel label;
 
+    public MessageView(MVCModell modell) {
+        super(modell);
+    }
+
     @Override
     public void update() {
 
