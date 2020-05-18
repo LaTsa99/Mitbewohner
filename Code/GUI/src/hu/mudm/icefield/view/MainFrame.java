@@ -57,7 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         pField.setMinimumSize(new java.awt.Dimension(810, 805)); // :(
 
 
-        lDemoField.setIcon(new javax.swing.ImageIcon("D:\\BME\\Semester 4\\Projlab\\Icons\\field_sample.png")); // NOI18N
+        lDemoField.setIcon(new javax.swing.ImageIcon(".\\GUI\\icons\\forIceFloat\\field_final.png")); // NOI18N
         lDemoField.setToolTipText("");
 
         //Ez a sok sor csak az lDemoFieldet helyezi el, ki lehet szedni később
@@ -88,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
         pDataView.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lCharIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lCharIcon.setIcon(new javax.swing.ImageIcon("D:\\BME\\Semester 4\\Projlab\\Icons\\researcher_mini.png")); // NOI18N
+        lCharIcon.setIcon(new javax.swing.ImageIcon(".\\GUI\\icons\\forIceFloat\\researcher_mini.png")); // NOI18N
         lCharIcon.setToolTipText("");
         lCharIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -112,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lTempIcon.setBackground(java.awt.SystemColor.window);
         lTempIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTempIcon.setIcon(new javax.swing.ImageIcon("D:\\BME\\Semester 4\\Projlab\\Icons\\homero_tr.png")); // NOI18N
+        lTempIcon.setIcon(new javax.swing.ImageIcon(".\\GUI\\icons\\forIceFloat\\thermometer.png")); // NOI18N
         lTempIcon.setToolTipText("");
 
         javax.swing.GroupLayout pTempLayout = new javax.swing.GroupLayout(pTemp);
@@ -167,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
         spItems.setViewportView(itemList);
 
         lActionsLeft.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lActionsLeft.setIcon(new javax.swing.ImageIcon("D:\\BME\\Semester 4\\Projlab\\Icons\\akciok\\1.png")); // NOI18N
+        lActionsLeft.setIcon(new javax.swing.ImageIcon(".\\GUI\\icons\\forIceFloat\\1.png")); // NOI18N
         lActionsLeft.setToolTipText("");
 
         javax.swing.GroupLayout pDataViewLayout = new javax.swing.GroupLayout(pDataView);
@@ -226,7 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
         lSnowInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lSnowInfo.setText("<html>The icefloat you are standing on <br>\nhas 2 layers of snow.</html>");
 
-        lSnowIcon.setIcon(new javax.swing.ImageIcon("D:\\BME\\Semester 4\\Projlab\\Icons\\layer2.png")); // NOI18N
+        lSnowIcon.setIcon(new javax.swing.ImageIcon(".\\GUI\\icons\\forIceFloat\\layer2.png")); // NOI18N
         lSnowIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout pIceFloatLayout = new javax.swing.GroupLayout(pIceFloat);
