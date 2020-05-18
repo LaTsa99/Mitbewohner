@@ -1,10 +1,11 @@
 package hu.mudm.icefield.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MVCModell {
 
-    protected List<MVCView> views;
+    protected List<MVCView> views = new ArrayList<>();
     protected GUI gui;
 
     private MVCController mvcController;

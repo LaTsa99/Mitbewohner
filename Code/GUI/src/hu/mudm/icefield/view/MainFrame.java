@@ -13,6 +13,7 @@ package hu.mudm.icefield.view;
 
 
 import javax.swing.*;
+import java.lang.reflect.InvocationTargetException;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -20,7 +21,18 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        initComponents();
+        try {
+            java.awt.EventQueue.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    initComponents();
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -77,60 +89,6 @@ public class MainFrame extends javax.swing.JFrame {
         lMessage.setFont(new java.awt.Font("Century Schoolbook", 0, 14)); // NOI18N
         lMessage.setText("<html><b>TestBunny</b>'s turn has started.</html>");
         lMessage.setToolTipText("");
-
-        pDataView.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-
-
-        javax.swing.GroupLayout pDataViewLayout = new javax.swing.GroupLayout(pDataView);
-        pDataView.setLayout(pDataViewLayout);
-        pDataViewLayout.setHorizontalGroup(
-                pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                .addGroup(pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                                .addGap(67, 67, 67)
-                                                .addComponent(bFireAction, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                                .addGap(26, 26, 26)
-                                                .addGroup(pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(lCharIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lCharTurn))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lActionsLeft)
-                                                        .addComponent(pTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(spItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDataViewLayout.createSequentialGroup()
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cbActions, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
-        );
-        pDataViewLayout.setVerticalGroup(
-                pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                .addGroup(pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pDataViewLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(lActionsLeft)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDataViewLayout.createSequentialGroup()
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lCharTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)))
-                                .addGroup(pDataViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lCharIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pTemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbActions, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bFireAction, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spItems, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-        );
 
         pIceFloat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

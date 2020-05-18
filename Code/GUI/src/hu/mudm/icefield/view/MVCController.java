@@ -8,6 +8,7 @@ import hu.mudm.icefield.model.player.Researcher;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MVCController implements GUI {
 
@@ -16,7 +17,7 @@ public class MVCController implements GUI {
     private MessageView messageView;
 
     private WelcomeFrame welcomeFrame;
-
+    private Random rand = new Random();
     public MVCController(){
     }
 
@@ -33,7 +34,12 @@ public class MVCController implements GUI {
 
     @Override
     public int getAction(Character character) throws NoActionException {
-        return 0;
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return rand.nextInt(3);
     }
 
     @Override

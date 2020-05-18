@@ -8,6 +8,8 @@ public class MenuView extends MVCView {
 
     public MenuView(MVCModell modell) {
         super(modell);
+        mainFrame = new MainFrame();
+        mainFrame.setVisible(true);
     }
 
     @Override
