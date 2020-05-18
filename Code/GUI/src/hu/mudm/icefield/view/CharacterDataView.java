@@ -3,6 +3,7 @@ package hu.mudm.icefield.view;
 import hu.mudm.icefield.model.player.Character;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class CharacterDataView extends MVCView {
 
@@ -94,9 +95,22 @@ public class CharacterDataView extends MVCView {
         spItems.setBorder(null);
 
         itemList.setBackground(new java.awt.Color(240, 240, 240));
-        //TODO: Feltölteni üres ikonokkal (/items/icon_frame.png)
+        //TODO: ...
         itemList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            ArrayList<Item> items = character.getItems();
+
+            String[] strings;
+            if(items.size()<5) strings = new String[5]
+            else strings = new String[item.size()]
+            for(int i=0; i<items.size()i++)
+            {
+                strings[i]=new String(items[i].getClass().getSimpleName());
+            }
+            if(items.size()<5) {
+                for(int i=items.size(); i<5; i++) {
+                    strings[i]= "Empty";
+                }
+            }
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -139,8 +153,41 @@ public class CharacterDataView extends MVCView {
         }
         tfTempNum.setText(((Integer)(character.getTemp())).toString());
 
-        //TODO: A character.Actions-ből a stringeket kinyerni vhogy..
-        cbActions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<html><i>-Choose your next move-</i></html>", "Shovel", "Move", "Check icefloat capacity", "Build tent" }));
+        ArrayList<String> actionnames = new ArrayList<String>();
+        for (Action a: character.getActions()) {
+            actionnames.add(a.getClass().getSimpleName());
+        }
+        String[] actionstrings = new String[1+actionnames.size()];
+
+        int i = 0;
+        actionstrings[i++] = "<html><i>-Choose your next move-</i></html>";
+        for (String s: actionnames) {
+            switch(s) {
+                case "BuildAction":
+                    actionstrings[i++] = "Build an Igloo";
+                    break;
+                case "BuildRocketAction":
+                    actionstrings[i++] = "Assemble the Rocket";
+                    break;
+                case "BuildTentAction":
+                    actionstrings[i++] = "Build a Tent";
+                    break;
+                case "CheckAction":
+                    actionstrings[i++] = "Check the capacity of a neighbouring Icefloat";
+                    break;
+                case "MoveAction":
+                    actionstrings[i++] = "Move to a neighbouring IceFloat";
+                    break;
+                case "PickupAction":
+                    actionstrings[i++] = "Pick up the Item in the IceFloat";
+                    break;
+                case "ShovelAction":
+                    actionstrings[i++] = "Shovel snow from the current IceFloat";
+                    break;
+
+            }
+        }
+        cbActions.setModel(new javax.swing.DefaultComboBoxModel<>(actionstrings));
 
         itemList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
