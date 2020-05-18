@@ -10,7 +10,6 @@ import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.*;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -115,6 +114,8 @@ public class Game {
         ArrayList<Character> characters = gui.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)
         if (characters == null) System.exit(0);
         controller.setCharacters(characters);
+
+        //TODO: Létrehozni az összes MVCViewt, a modellhez, kontrollerhez (menüfieldes message).. + set
         MenuView menuView = new MenuView(controller);
         MessageView messageView = new MessageView(controller, menuView);
         FieldView fieldView = new FieldView(controller, menuView);
@@ -126,5 +127,4 @@ public class Game {
     }
 
     public void start(){ this.controller.gameLoop(); }
-
 }
