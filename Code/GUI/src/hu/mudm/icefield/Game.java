@@ -115,6 +115,8 @@ public class Game {
         ArrayList<Character> characters = gp.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)
         if (characters == null) System.exit(0);
         controller.setCharacters(characters);
+
+        //TODO: Létrehozni az összes MVCViewt, a modellhez, kontrollerhez (menüfieldes message).. + set
     }
 
     public void start(){ this.controller.gameLoop(); }

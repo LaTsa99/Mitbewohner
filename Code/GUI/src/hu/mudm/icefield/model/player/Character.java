@@ -22,6 +22,7 @@ public abstract class Character {
 
     protected int temp;
     private String name;
+    protected int actionsLeft;
 
     public Character(String name, StableIceFloat startingposition) {
         this.name = name;
@@ -122,4 +123,8 @@ public abstract class Character {
     }
 
     public ArrayList<Class<? extends Action>> getActions(){ return actions;}
+
+    public void setActionsLeft (int i){actionsLeft = i;}
+
+    public int getActionsLeft(){return actionsLeft;}
 }
