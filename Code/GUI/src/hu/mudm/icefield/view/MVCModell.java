@@ -5,10 +5,12 @@ import java.util.List;
 public abstract class MVCModell {
 
     private List<MVCView> views;
+    protected GUI gui;
 
     private MVCController mvcController;
 
-    public MVCModell(){
+    public MVCModell(GUI gui){
+        this.gui = gui;
     }
 
     public void updateViews(){
