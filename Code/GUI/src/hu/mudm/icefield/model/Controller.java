@@ -186,13 +186,13 @@ public class Controller extends MVCModell {
     }
 
     public static void Win() {
-        GUI_Prototype.printMessage("You won! :D");
+        //gui.showMessage("You won! :D");
         isWon = true;
         isLost = false;
     }
 
     public static void Lose(String cause) {
-        GUI_Prototype.printMessage("You lost :(\n" + cause);
+        //GUI_Prototype.printMessage("You lost :(\n" + cause);
         isLost = true;
         isWon = false;
     }

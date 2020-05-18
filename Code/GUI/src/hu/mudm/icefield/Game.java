@@ -9,7 +9,6 @@ import hu.mudm.icefield.model.field.UnstableIceFloat;
 import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.GUI;
-import hu.mudm.icefield.view.GUI_Prototype;
 import hu.mudm.icefield.view.MVCController;
 
 import java.util.ArrayList;
@@ -72,12 +71,12 @@ public class Game {
 
         for(int j= 0; j<3; j++){
         type = rand.nextInt(90);
-        if (type < 50 || rd[j]==0)            {
+        if (type < 50 )            {        // or rd[j]==0
             int id = ices.get(rd[j]).getID();
             ices.set(rd[j], new StableIceFloat(new RocketPart()));
             ices.get(rd[j]).setID(id);
         }
-        if (type >= 50 && type < 90)    {
+        else if (type >= 50 && type < 90)    {
             int id = ices.get(rd[j]).getID();
             ices.set(rd[j], new UnstableIceFloat(rand.nextInt(1)+1, new RocketPart()));
             ices.get(rd[j]).setID(id);
@@ -113,7 +112,7 @@ public class Game {
         for (int i = 0; i < 5; i++)
             controller.snowstorm();
         controller.setPolarBear(maci);
-        ArrayList<Character> characters = gp.getCharacters();   //getCharacters() uses iceFloats! (startPosition)
+        ArrayList<Character> characters = gp.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)
         if (characters == null) System.exit(0);
         controller.setCharacters(characters);
     }
