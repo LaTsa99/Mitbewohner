@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class MVCModell {
 
-    private List<MVCView> views;
+    protected List<MVCView> views;
     protected GUI gui;
 
     private MVCController mvcController;
@@ -19,5 +19,9 @@ public abstract class MVCModell {
         }
     }
 
-    public abstract void createViews();
+    public void addView(MVCView view){
+        views.add(view);
+    }
+
+    public abstract void createViews(MenuView mv);
 }

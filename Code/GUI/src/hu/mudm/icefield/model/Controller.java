@@ -196,7 +196,8 @@ public class Controller extends MVCModell {
     }
 
     @Override
-    public void createViews() {
-
+    public void createViews(MenuView mv) {
+        views.add(new CharacterDataView(this, mv));
+        views.add(new IceFloatView(this, mv));
     }
 }

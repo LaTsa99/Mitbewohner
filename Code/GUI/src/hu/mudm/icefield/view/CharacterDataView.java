@@ -1,9 +1,15 @@
 package hu.mudm.icefield.view;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class CharacterDataView extends MVCView {
 
-    public CharacterDataView(MVCModell modell) {
+    private JPanel panel;
+
+    public CharacterDataView(MVCModell modell, MenuView mv) {
         super(modell);
+        panel = mv.getDataView();
     }
 
     @Override

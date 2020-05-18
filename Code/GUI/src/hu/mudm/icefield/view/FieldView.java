@@ -1,9 +1,16 @@
 package hu.mudm.icefield.view;
 
+import hu.mudm.icefield.model.Controller;
+
+import javax.swing.*;
+
 public class FieldView extends MVCView {
 
-    public FieldView(MVCModell modell) {
-        super(modell);
+    private JPanel panel;
+
+    public FieldView(Controller controller, MenuView menuView) {
+        super(controller);
+        panel = menuView.getField();
     }
 
     @Override

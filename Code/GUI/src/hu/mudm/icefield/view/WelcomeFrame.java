@@ -1,9 +1,12 @@
 package hu.mudm.icefield.view;
 
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WelcomeFrame extends javax.swing.JFrame {
 
@@ -14,6 +17,11 @@ public class WelcomeFrame extends javax.swing.JFrame {
         /* Create and display the form */
         initComponents();
     }
+
+    Random rand = new Random();
+
+    DefaultListModel<String> nicknameModel = new DefaultListModel<>();
+    DefaultListModel<String> typeModel = new DefaultListModel<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +46,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
         lNewPlayer = new javax.swing.JLabel();
         bAdd = new javax.swing.JButton();
         bStartGame = new javax.swing.JButton();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Icefield");
@@ -84,22 +93,14 @@ public class WelcomeFrame extends javax.swing.JFrame {
 
         listNickname.setBackground(new java.awt.Color(240, 240, 240));
         listNickname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        listNickname.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Ali", "Bambi", "Cili", "Dumbó" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listNickname.setModel(nicknameModel);
         spNickname.setViewportView(listNickname);
 
         spType.setBorder(null);
 
         listType.setBackground(new java.awt.Color(240, 240, 240));
         listType.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        listType.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Eskimo", "Eskimo", "Researcher", "Eskimo" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listType.setModel(typeModel);
         listType.setToolTipText("");
         spType.setViewportView(listType);
 
@@ -141,6 +142,14 @@ public class WelcomeFrame extends javax.swing.JFrame {
                 startGame();
             }
         });
+        bStartGame.setEnabled(false);
+
+        tfPlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addNewCharacter();
+            }
+        });
 
         javax.swing.GroupLayout pCenterLayout = new javax.swing.GroupLayout(pCenter);
         pCenter.setLayout(pCenterLayout);
@@ -180,7 +189,27 @@ public class WelcomeFrame extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void addNewCharacter(){
-        //TODO generate random char type, add type and nickname to list, ? disable button
+        String name = tfPlayer.getText();
+        name = name.trim();
+        if(name.equals(""))
+            return;
+        int p = rand.nextInt(500);
+        String type;
+        if(p < 250){
+            type = "Eskimo";
+        }else{
+            type = "Researcher";
+        }
+        nicknameModel.addElement(name);
+        typeModel.addElement(type);
+        if(nicknameModel.size() >= 3 && !bStartGame.isEnabled()){
+            bStartGame.setEnabled(true);
+        }
+        if(nicknameModel.size() == 6){
+            bAdd.setEnabled(false);
+            tfPlayer.setEditable(false);
+        }
+        tfPlayer.setText("");
     }
 
     private void startGame(){
@@ -190,13 +219,21 @@ public class WelcomeFrame extends javax.swing.JFrame {
         }
     }
 
-//    public List<String> getNickNames(){
-//
-//    }
-//
-//    public List<String> getCharacterTypes(){
-//
-//    }
+    public List<String> getNickNames(){
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 0; i < nicknameModel.size(); i++){
+            list.add(nicknameModel.get(i));
+        }
+        return list;
+    }
+
+    public List<String> getCharacterTypes(){
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 0; i < typeModel.size(); i++){
+            list.add(typeModel.get(i));
+        }
+        return list;
+    }
 
     public Object lock = new Object();
     // Variables declaration - do not modify
