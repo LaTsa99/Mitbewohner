@@ -18,8 +18,6 @@ public class Controller extends MVCModell {
     private static boolean isLost;
     private static int rocketPartsCnt = 0;
 
-    private GUI gui;
-
     public ArrayList<IceFloat> getIcefloats() {
         return icefloats;
     }
@@ -33,7 +31,7 @@ public class Controller extends MVCModell {
     }
 
     public Controller(GUI gui) {
-        this.gui = gui;
+        super(gui);
         r = new Random();
         isWon = false;
         isLost = false;
