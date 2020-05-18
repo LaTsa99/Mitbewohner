@@ -14,6 +14,22 @@ public class MenuView extends MVCView {
     public void update() {
 
     }
+
+    public JPanel getDataView(){
+        return mainFrame.getDataView();
+    }
+
+    public JPanel getField(){
+        return mainFrame.getField();
+    }
+
+    public JPanel getIceFloat(){
+        return mainFrame.getIceFloat();
+    }
+
+    public JLabel getMessage(){
+        return mainFrame.getMessage();
+    }
 }
 
 

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class CharacterDataView extends MVCView {
 
+    private JPanel panel;
+
+
     JLabel lMessage, lCharIcon, lCharTurn, lTempText, lTempIcon, lActionsLeft;
     JPanel pTemp;
     JTextField tfTempNum;
@@ -17,8 +20,9 @@ public class CharacterDataView extends MVCView {
 
     Character character;
 
-    public CharacterDataView(MVCModell modell) {
+    public CharacterDataView(MVCModell modell, MenuView mv) {
         super(modell);
+        panel = mv.getDataView();
         lCharIcon = new javax.swing.JLabel();
         lCharTurn = new javax.swing.JLabel();
         tfTempNum = new javax.swing.JTextField();
@@ -47,11 +51,6 @@ public class CharacterDataView extends MVCView {
         tfTempNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         //tfTempNum.setText("5");
         tfTempNum.setBorder(null);
-        tfTempNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTempNumActionPerformed(evt);
-            }
-        });
         lTempText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lTempText.setText("Temperature");
 
@@ -86,11 +85,6 @@ public class CharacterDataView extends MVCView {
         );
 
         bFireAction.setText("OK");
-        bFireAction.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bFireActionActionPerformed(evt);
-            }
-        });
 
         spItems.setBorder(null);
 
@@ -129,7 +123,7 @@ public class CharacterDataView extends MVCView {
     }
 
     @Override
-    public void update(JPanel panel) {
+    public void update() {
         lCharTurn.setText(character.getName()+ "'s turn.");
 
         if (character.getClass().getSimpleName().equals("Eskimo"))

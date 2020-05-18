@@ -267,6 +267,22 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane spItems;
     private javax.swing.JTextField tfTempNum;
     // End of variables declaration
+
+    public JPanel getDataView(){
+        return pDataView;
+    }
+
+    public JPanel getField(){
+        return pField;
+    }
+
+    public JPanel getIceFloat(){
+        return pIceFloat;
+    }
+
+    public JLabel getMessage(){
+        return lMessage;
+    }
 }
 
 

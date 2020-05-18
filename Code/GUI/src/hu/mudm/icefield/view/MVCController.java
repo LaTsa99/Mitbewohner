@@ -3,6 +3,8 @@ package hu.mudm.icefield.view;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.player.Character;
+import hu.mudm.icefield.model.player.Eskimo;
+import hu.mudm.icefield.model.player.Researcher;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -16,6 +18,12 @@ public class MVCController implements GUI {
     private WelcomeFrame welcomeFrame;
 
     public MVCController(){
+    }
+
+    public void setViews(MenuView menuView, FieldView fieldView, MessageView messageView){
+        this.menuView = menuView;
+        this.fieldView = fieldView;
+        this.messageView = messageView;
     }
 
     @Override
@@ -73,8 +81,18 @@ public class MVCController implements GUI {
             }
         }
 
-        //TODO list data
-        return null;
+        ArrayList<String> nameList = (ArrayList<String>) welcomeFrame.getNickNames();
+        ArrayList<String> typeList = (ArrayList<String>) welcomeFrame.getCharacterTypes();
+
+        ArrayList<Character> characters = new ArrayList<>();
+
+        for(int i = 0; i < nameList.size(); i++){
+            if(typeList.get(i).equals("Researcher"))
+                characters.add(new Researcher(nameList.get(i), startingIceFloat));
+            else if(typeList.get(i).equals("Eskimo"))
+                characters.add(new Eskimo(nameList.get(i), startingIceFloat));
+        }
+        return characters;
     }
 
     @Override

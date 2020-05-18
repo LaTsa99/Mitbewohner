@@ -19,5 +19,9 @@ public abstract class MVCModell {
         }
     }
 
-    public abstract void createViews();
+    public void addView(MVCView view){
+        views.add(view);
+    }
+
+    public abstract void createViews(MenuView mv);
 }

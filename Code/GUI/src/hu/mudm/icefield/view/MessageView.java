@@ -6,8 +6,9 @@ public class MessageView extends MVCView {
 
     private JLabel label;
 
-    public MessageView(MVCModell modell) {
+    public MessageView(MVCModell modell, MenuView mv) {
         super(modell);
+        label = mv.getMessage();
     }
 
     @Override

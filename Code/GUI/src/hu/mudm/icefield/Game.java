@@ -8,8 +8,7 @@ import hu.mudm.icefield.model.field.StableIceFloat;
 import hu.mudm.icefield.model.field.UnstableIceFloat;
 import hu.mudm.icefield.model.item.*;
 import hu.mudm.icefield.model.player.Character;
-import hu.mudm.icefield.view.GUI;
-import hu.mudm.icefield.view.MVCController;
+import hu.mudm.icefield.view.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -102,8 +101,8 @@ public class Game {
         ArrayList<Item> items = createItems();
         ArrayList<IceFloat> iceFloats = createIcefloats(items);
         setNeighbors(iceFloats);
-        GUI gp = new MVCController();
-        controller = new Controller(gp);
+        GUI gui = new MVCController();
+        controller = new Controller(gui);
 
         PolarBear maci = new PolarBear(iceFloats.get(35));
 
@@ -112,11 +111,19 @@ public class Game {
         for (int i = 0; i < 5; i++)
             controller.snowstorm();
         controller.setPolarBear(maci);
-        ArrayList<Character> characters = gp.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)
+        ArrayList<Character> characters = gui.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)
         if (characters == null) System.exit(0);
         controller.setCharacters(characters);
 
         //TODO: Létrehozni az összes MVCViewt, a modellhez, kontrollerhez (menüfieldes message).. + set
+        MenuView menuView = new MenuView(controller);
+        MessageView messageView = new MessageView(controller, menuView);
+        FieldView fieldView = new FieldView(controller, menuView);
+        ((MVCController)gui).setViews(menuView, fieldView, messageView);
+        controller.addView(messageView);
+        controller.addView(fieldView);
+        controller.addView(menuView);
+        controller.createViews(menuView);
     }
 
     public void start(){ this.controller.gameLoop(); }
