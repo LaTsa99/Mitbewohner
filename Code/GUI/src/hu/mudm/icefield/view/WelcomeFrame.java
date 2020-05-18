@@ -1,12 +1,17 @@
 package hu.mudm.icefield.view;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 public class WelcomeFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form WelcomeFrame
      */
     public WelcomeFrame() {
+        /* Create and display the form */
         initComponents();
     }
 
@@ -19,210 +24,195 @@ public class WelcomeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pNorth = new javax.swing.JPanel();
+        lTitle = new javax.swing.JLabel();
+        lDescr = new javax.swing.JLabel();
+        pCenter = new javax.swing.JPanel();
+        pPlayers = new javax.swing.JPanel();
+        lNickname = new javax.swing.JLabel();
+        spNickname = new javax.swing.JScrollPane();
+        listNickname = new javax.swing.JList<>();
+        spType = new javax.swing.JScrollPane();
+        listType = new javax.swing.JList<>();
+        tfPlayer = new javax.swing.JTextField();
+        lNewPlayer = new javax.swing.JLabel();
+        bAdd = new javax.swing.JButton();
+        bStartGame = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Icefield");
 
-        jLabel3.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
-        jLabel3.setText("IceField Game");
+        lTitle.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
+        lTitle.setText("IceField Game");
 
-        jLabel4.setFont(new java.awt.Font("Century Schoolbook", 0, 14)); // NOI18N
-        jLabel4.setText("   Enter 3-6 players and start the game when you are ready.");
+        lDescr.setFont(new java.awt.Font("Century Schoolbook", 0, 14)); // NOI18N
+        lDescr.setText("   Enter 3-6 players and start the game when you are ready.");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pNorthLayout = new javax.swing.GroupLayout(pNorth);
+        pNorth.setLayout(pNorthLayout);
+        pNorthLayout.setHorizontalGroup(
+                pNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pNorthLayout.createSequentialGroup()
+                                .addGroup(pNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pNorthLayout.createSequentialGroup()
                                                 .addGap(40, 40, 40)
-                                                .addComponent(jLabel3))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lTitle))
+                                        .addGroup(pNorthLayout.createSequentialGroup()
                                                 .addGap(30, 30, 30)
-                                                .addComponent(jLabel4)))
+                                                .addComponent(lDescr)))
                                 .addContainerGap(115, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        pNorthLayout.setVerticalGroup(
+                pNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pNorthLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(jLabel3)
+                                .addComponent(lTitle)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
+                                .addComponent(lDescr)
                                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+        getContentPane().add(pNorth, java.awt.BorderLayout.NORTH);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pPlayers.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Players");
+        lNickname.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lNickname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lNickname.setText("Players");
 
-        jScrollPane2.setBorder(null);
+        spNickname.setBorder(null);
 
-        jList1.setBackground(new java.awt.Color(240, 240, 240));
-        jList1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        listNickname.setBackground(new java.awt.Color(240, 240, 240));
+        listNickname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        listNickname.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Ali", "Bambi", "Cili", "Dumbó" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        spNickname.setViewportView(listNickname);
 
-        jScrollPane3.setBorder(null);
+        spType.setBorder(null);
 
-        jList2.setBackground(new java.awt.Color(240, 240, 240));
-        jList2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        listType.setBackground(new java.awt.Color(240, 240, 240));
+        listType.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        listType.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Eskimo", "Eskimo", "Researcher", "Eskimo" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList2.setToolTipText("");
-        jScrollPane3.setViewportView(jList2);
+        listType.setToolTipText("");
+        spType.setViewportView(listType);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout pPlayersLayout = new javax.swing.GroupLayout(pPlayers);
+        pPlayers.setLayout(pPlayersLayout);
+        pPlayersLayout.setHorizontalGroup(
+                pPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pPlayersLayout.createSequentialGroup()
+                                .addComponent(spType, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lNickname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+        pPlayersLayout.setVerticalGroup(
+                pPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pPlayersLayout.createSequentialGroup()
+                                .addComponent(lNickname)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane3)))
+                                .addGroup(pPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(spNickname, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                        .addComponent(spType)))
         );
 
-        jLabel2.setText("New Player:");
+        lNewPlayer.setText("New Player:");
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        bAdd.setText("Add");
+        bAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addNewCharacter();
             }
         });
 
-        jButton2.setText("Start Game");
+        bStartGame.setText("Start Game");
+        bStartGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                startGame();
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pCenterLayout = new javax.swing.GroupLayout(pCenter);
+        pCenter.setLayout(pCenterLayout);
+        pCenterLayout.setHorizontalGroup(
+                pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pCenterLayout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(80, 80, 80)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel2))
+                                .addGroup(pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(bAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tfPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(bStartGame, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lNewPlayer))
                                 .addContainerGap(44, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
+        pCenterLayout.setVerticalGroup(
+                pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pCenterLayout.createSequentialGroup()
+                                .addGroup(pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(pCenterLayout.createSequentialGroup()
+                                                .addComponent(lNewPlayer)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tfPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(bAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(29, 29, 29)
-                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(bStartGame, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(pPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(pCenter, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void addNewCharacter(){
+        //TODO generate random char type, add type and nickname to list, ? disable button
     }
 
-
-    /**
-     * @param args the command line arguments
-     */
-
-
-    public static void main(String args[]) {;
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void startGame(){
+        synchronized (lock){
+            setVisible(false);
+            lock.notify();
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WelcomeFrame().setVisible(true);
-            }
-        });
     }
 
+//    public List<String> getNickNames(){
+//
+//    }
+//
+//    public List<String> getCharacterTypes(){
+//
+//    }
+
+    public Object lock = new Object();
     // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton bAdd;
+    private javax.swing.JButton bStartGame;
+    private javax.swing.JList<String> listNickname;
+    private javax.swing.JLabel lDescr;
+    private javax.swing.JLabel lNewPlayer;
+    private javax.swing.JLabel lNickname;
+    private javax.swing.JLabel lTitle;
+    private javax.swing.JList<String> listType;
+    private javax.swing.JPanel pCenter;
+    private javax.swing.JPanel pNorth;
+    private javax.swing.JPanel pPlayers;
+    private javax.swing.JScrollPane spNickname;
+    private javax.swing.JScrollPane spType;
+    private javax.swing.JTextField tfPlayer;
     // End of variables declaration
 }
