@@ -175,7 +175,6 @@ public class FieldView extends MVCView {
         return background;
     }
 
-
     private void drawPolarBear(Graphics g_background, int alreadyDrawn, int offset_y) {
         BufferedImage imageToBeDrawn = null;
         try {
@@ -214,35 +213,35 @@ public class FieldView extends MVCView {
         try {
             switch (item.getClass().getSimpleName()) {
                 case "BreakableShovel":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/breakableShovel.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/breakableShovel.png"));
                     break;
                 case "DiverSuit":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/diverSuit.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/diverSuit.png"));
                     break;
                 case "Food":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/food.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/food.png"));
                     break;
                 case "RocketPart":
                     switch(((RocketPart)item).getID()+1) {
                         case 1:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rocketPart_1.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_1.png"));
                             break;
                         case 2:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rocketPart_2.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_2.png"));
                             break;
                         case 3:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rocketPart_3.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_3.png"));
                             break;
                     }
                     break;
                 case "Rope":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rope.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rope.png"));
                     break;
                 case "Shovel":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/shovel.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/shovel.png"));
                     break;
                 case "Tent":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tent.png"));
+                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/tent.png"));
                     break;
                 default:
                     return;
