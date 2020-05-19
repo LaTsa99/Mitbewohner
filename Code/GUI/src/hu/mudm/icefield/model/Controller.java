@@ -43,10 +43,11 @@ public class Controller extends MVCModell {
             for (Character ch : characters) {
                 activeCharacter = ch;
                 gui.startTurn();
-                gui.showMessage("The turn of " + ch.getName() + " has started");
+                gui.showMessage("<html>The turn of <b>" + ch.getName() + "</b> has started.</html>");
                 for (int i = 0; i < 4; i++) {
                     //gui.startTurn(); ??
                     validateActions(ch);
+                    ch.setActionsLeft(4-i);
                     updateViews();
                     Action action = null;
                     //gui.see(ch);

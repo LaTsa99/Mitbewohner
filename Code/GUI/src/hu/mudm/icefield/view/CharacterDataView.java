@@ -274,6 +274,7 @@ public class CharacterDataView extends MVCView {
 
     private void updateCharacterInventory(){
         listModel.clear();
+        int rp = 1;
         ArrayList<Item> items = character.getItems();
         String[] strings;
         if(items.size()<5) strings = new String[5];
@@ -283,6 +284,8 @@ public class CharacterDataView extends MVCView {
         for(int i=0; i<items.size();i++)
         {
             strings[i]=new String(items.get(i).getClass().getSimpleName());
+            if(strings[i].equals("RocketPart"))
+                strings[i] = "rp" + rp++;
         }
         if(items.size()<5) {
           for(int i=items.size(); i<5; i++) {
@@ -300,14 +303,14 @@ public class CharacterDataView extends MVCView {
 
         public ItemCellRenderer(){
             icons.put("empty", new ImageIcon(this.getClass().getResource("/icons/items/icon_frame.png")));
-            icons.put("breakableShovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_breakableShovel.png")));
-            icons.put("diverSuit",new ImageIcon(this.getClass().getResource("/icons/items/framed_diverSuit.png")));
-            icons.put("rope",new ImageIcon(this.getClass().getResource("/icons/items/framed_rope.png")));
+            icons.put("BreakableShovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_breakableShovel.png")));
+            icons.put("DiverSuit",new ImageIcon(this.getClass().getResource("/icons/items/framed_diverSuit.png")));
+            icons.put("Rope",new ImageIcon(this.getClass().getResource("/icons/items/framed_rope.png")));
             icons.put("rp1",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp1.png")));
             icons.put("rp2",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp2.png")));
             icons.put("rp3",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp3.png")));
-            icons.put("shovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_shovel.png")));
-            icons.put("tent",new ImageIcon(this.getClass().getResource("/icons/items/framed_tent.png")));
+            icons.put("Shovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_shovel.png")));
+            icons.put("Tent",new ImageIcon(this.getClass().getResource("/icons/items/framed_tent.png")));
         }
 
         @Override
