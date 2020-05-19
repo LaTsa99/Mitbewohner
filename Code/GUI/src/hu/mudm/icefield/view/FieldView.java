@@ -103,8 +103,8 @@ public class FieldView extends MVCView {
 
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
         boolean showhole = false;
-        if(true || ((Controller)model).getIsLost()) {
-            if(icefloat.getClass().getSimpleName().equals("Hole") /*&& icefloat.getCharacters().size()>0*/)
+        if(((Controller)model).getIsLost()) {
+            if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
                 showhole = true;
             if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
                 showhole = true;
@@ -122,7 +122,7 @@ public class FieldView extends MVCView {
         BufferedImage background = null;
         try {
             if(showhole)
-                background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/hole.png"));
+                background = images.get("hole");
             else {
                 int r =0;
                 if(((Controller) model).getDuringStorm())
@@ -134,16 +134,16 @@ public class FieldView extends MVCView {
                 }
                 switch (r + 1) {
                     case 1:
-                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_1.png"));
+                        background = images.get("iceFloat_1");
                         break;
                     case 2:
-                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_2.png"));
+                        background = images.get("iceFloat_2");
                         break;
                     case 3:
-                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_3.png"));
+                        background = images.get("iceFloat_3");
                         break;
                     case 4:
-                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_4.png"));
+                        background = images.get("iceFloat_4");
                         break;
                 }
             }

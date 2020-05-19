@@ -31,12 +31,17 @@ public abstract class MVCView {
                 images.put("eskimo_yellow", ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_yellow.png")));
 
                 images.put("igloo",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/igloo.png")));
-                images.put("tent",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tent.png"));
+                images.put("tent",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tentOnIce.png")));
                 images.put("polarBear", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/polarBear.png")));
 
                 images.put("rectangle", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rectangle.png")));
                 images.put("x", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/x.png")));
 
+                images.put("hole", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/hole.png")));
+                images.put("iceFloat_1", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_1.png")));
+                images.put("iceFloat_2", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_2.png")));
+                images.put("iceFloat_3", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_3.png")));
+                images.put("iceFloat_4", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_4.png")));
 
 
                 images.put("action1", ImageIO.read(this.getClass().getResource("/icons/actionNumbers/1.png")));
