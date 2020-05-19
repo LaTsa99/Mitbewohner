@@ -125,7 +125,7 @@ public class FieldView extends MVCView {
         int countOfDrawables = countOfDrawables(icefloat);
         if(pb.getPosition().equals(icefloat)) countOfDrawables++;
 
-        if(countOfDrawables==0) return null;
+        //if(countOfDrawables==0) return null;
 
         BufferedImage background = null;
         try {
