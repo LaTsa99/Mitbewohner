@@ -3,9 +3,13 @@ package hu.mudm.icefield.view;
 import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.field.IceFloat;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 
 public class FieldView extends MVCView {
 
@@ -15,38 +19,65 @@ public class FieldView extends MVCView {
     private JPanel panel;
     private JLabel icon;
     BufferedImage img;
+    Graphics2D backGround;
 
     public FieldView(Controller controller, MenuView menuView) {
         super(controller);
         panel = menuView.getField();
+        icon = new JLabel();
 
         panel.setBackground(SystemColor.window);
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setMinimumSize(new Dimension(810, 805)); // :(
 
+        try {
+            img = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/field_final.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         icon.setIcon(new ImageIcon(img));
-        icon.setToolTipText("");
 
-        GroupLayout pFieldLayout = new GroupLayout(panel);
-        panel.setLayout(pFieldLayout);
-        pFieldLayout.setHorizontalGroup(
-                pFieldLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(pFieldLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(icon)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pFieldLayout.setVerticalGroup(
-                pFieldLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(pFieldLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(icon)
-                                .addContainerGap(22, Short.MAX_VALUE))
-        );
+       //GroupLayout pFieldLayout = new GroupLayout(panel);
+       //panel.setLayout(pFieldLayout);
+       //pFieldLayout.setHorizontalGroup(
+       //        pFieldLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+       //                .addGroup(pFieldLayout.createSequentialGroup()
+       //                        .addGap(22, 22, 22)
+       //                        .addComponent(icon)
+       //                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+       //);
+       //pFieldLayout.setVerticalGroup(
+       //        pFieldLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+       //                .addGroup(pFieldLayout.createSequentialGroup()
+       //                        .addContainerGap()
+       //                        .addComponent(icon)
+       //                        .addContainerGap(22, Short.MAX_VALUE))
+       //);
+        //try {
+        //    img = ImageIO.read(new File("/icons/forIceFloat/field_final.png"));
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
+        panel.add(icon);
+        menuView.packMainFrame();
     }
 
     @Override
     public void update() {
+        BufferedImage character = null;
+        try {
+            character = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_blue.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(character == null) return;
+        //BufferedImage combined = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics g = img.getGraphics();
+        //g.drawImage(img, 0, 0, null);
+        g.drawImage(character, 3, 3, null);
+        g.dispose();
+        ImageIcon image = new ImageIcon(img);
+        icon.setIcon(image);
         panel.invalidate();
     }
 

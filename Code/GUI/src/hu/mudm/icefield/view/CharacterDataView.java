@@ -44,6 +44,7 @@ public class CharacterDataView extends MVCView {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+        mv.packMainFrame();
     }
 
     private void initializePanel(){
@@ -261,6 +262,7 @@ public class CharacterDataView extends MVCView {
         for(i=0;i<actionStrings.length;i++) actionsModel.addElement(actionStrings[i]);
 
         updateCharacterInventory();
+
     }
 
     public void setCharacter(Character ch){character = ch;}
