@@ -63,6 +63,11 @@ public class Controller extends MVCModell {
                     updateViews();
                     if(isLost || isWon) return;
                 }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             gui.showMessage("The polar bear is moving");
             p.Wake();
