@@ -1,5 +1,5 @@
 package hu.mudm.icefield.view;
-
+import hu.mudm.icefield.model.Controller;
 import javax.swing.*;
 
 public class MessageView extends MVCView {
@@ -15,12 +15,12 @@ public class MessageView extends MVCView {
     @Override
     public void update() {
 
-        if((Controller)modell.getIsWon())
+        if(((Controller)model).getisWon())
         {
             label.setText("You won!");
             locktext = true;
         }
-        if((Controller)modell.getIsLost())
+        if(((Controller)model).getisLost())
         {
             label.setText("You lost!");
             locktext = true;
