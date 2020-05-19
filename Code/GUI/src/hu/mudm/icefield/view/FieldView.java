@@ -90,10 +90,7 @@ public class FieldView extends MVCView {
         panel.invalidate();
     }
 
-
-
-
-    private Dimension iceFloatOffset(IceFloat ice){
+    private Dimension getIceFloatOffset(IceFloat ice){
         boolean doesNeedOffset = false;
         int x, y;
         int index = ice.getID();
@@ -111,5 +108,14 @@ public class FieldView extends MVCView {
         public MyLabel(){
             super();
         }
+    }
+
+    private IceFloat getIceFloat(Dimension dimension){
+        return getIceFloat(dimension.width,dimension.height);
+    }
+
+    private IceFloat getIceFloat(int width, int height){
+        int row = height/128;
+        return null;
     }
 }
