@@ -299,15 +299,15 @@ public class CharacterDataView extends MVCView {
         private Map<String, Icon> icons = new HashMap<String,Icon>();
 
         public ItemCellRenderer(){
-            icons.put("empty", new ImageIcon("icons/items/icon_frame.png"));
-            icons.put("breakableShovel",new ImageIcon("icons/items/framed_breakableShovel.png"));
-            icons.put("diverSuit",new ImageIcon("icons/items/framed_diverSuit.png"));
-            icons.put("rope",new ImageIcon("icons/items/framed_rope.png"));
-            icons.put("rp1",new ImageIcon("icons/items/framed_rp1.png"));
-            icons.put("rp2",new ImageIcon("icons/items/framed_rp2.png"));
-            icons.put("rp3",new ImageIcon("icons/items/framed_rp3.png"));
-            icons.put("shovel",new ImageIcon("icons/items/framed_shovel.png"));
-            icons.put("tent",new ImageIcon("icons/items/framed_tent.png"));
+            icons.put("empty", new ImageIcon(this.getClass().getResource("/icons/items/icon_frame.png")));
+            icons.put("breakableShovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_breakableShovel.png")));
+            icons.put("diverSuit",new ImageIcon(this.getClass().getResource("/icons/items/framed_diverSuit.png")));
+            icons.put("rope",new ImageIcon(this.getClass().getResource("/icons/items/framed_rope.png")));
+            icons.put("rp1",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp1.png")));
+            icons.put("rp2",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp2.png")));
+            icons.put("rp3",new ImageIcon(this.getClass().getResource("/icons/items/framed_rp3.png")));
+            icons.put("shovel",new ImageIcon(this.getClass().getResource("/icons/items/framed_shovel.png")));
+            icons.put("tent",new ImageIcon(this.getClass().getResource("/icons/items/framed_tent.png")));
         }
 
         @Override
@@ -316,6 +316,8 @@ public class CharacterDataView extends MVCView {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             label.setIcon(icons.get((String)value));
+            label.setText("");
+
             return label;
         }
     }
