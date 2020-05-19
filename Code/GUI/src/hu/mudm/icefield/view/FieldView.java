@@ -125,7 +125,7 @@ public class FieldView extends MVCView {
         int countOfDrawables = countOfDrawables(icefloat);
         if(pb.getPosition().equals(icefloat)) countOfDrawables++;
 
-        if(countOfDrawables==0) return null;
+        //if(countOfDrawables==0) return null;
 
         BufferedImage background = null;
         try {
@@ -257,10 +257,10 @@ public class FieldView extends MVCView {
     private void drawCharacters(ArrayList<Character> characterList, Graphics g_background, Integer alreadyDrawn, int offset_y) {
         BufferedImage imageToBeDrawn = null;
         for (Character ch : characterList) {
-            int r = rnd.nextInt(6); //0-5
+            int id = ch.getId();
 
             try {
-                switch (r) {
+                switch (id) {
                     case 0:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
                             imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_blue.png"));
