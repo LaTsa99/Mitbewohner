@@ -302,7 +302,7 @@ public class CharacterDataView extends MVCView {
         {
             strings[i]= items.get(i).getClass().getSimpleName();
             if(strings[i].equals("RocketPart"))
-                strings[i] = "rp" + ((RocketPart)items.get(i)).getID();
+                strings[i] = "rp" + (((RocketPart)items.get(i)).getID()+1);
         }
         if(items.size()<5) {
           for(int i=items.size(); i<5; i++) {
