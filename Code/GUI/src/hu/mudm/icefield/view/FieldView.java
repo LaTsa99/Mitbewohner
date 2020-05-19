@@ -103,7 +103,7 @@ public class FieldView extends MVCView {
 
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
         boolean showhole = false;
-        if(((Controller)model).getIsLost()) {
+        if(true || ((Controller)model).getIsLost()) {
             if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
                 showhole = true;
             if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
@@ -225,7 +225,7 @@ public class FieldView extends MVCView {
         }
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
+            g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
@@ -240,7 +240,7 @@ public class FieldView extends MVCView {
         }
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
+            g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
@@ -256,7 +256,7 @@ public class FieldView extends MVCView {
 
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
+            g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
@@ -306,7 +306,7 @@ public class FieldView extends MVCView {
 
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
+            g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
@@ -365,7 +365,7 @@ public class FieldView extends MVCView {
 
             if (imageToBeDrawn != null)
             {
-                g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn+count), offsets_y.get(alreadyDrawn/4), null);
+                g_background.drawImage(imageToBeDrawn, 32 * ((alreadyDrawn+count)%4), offsets_y.get((alreadyDrawn+count)/4), null);
                 count++;
             }
         }
