@@ -87,7 +87,7 @@ public class IceFloatView extends MVCView {
             lSnowIcon.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/icons/layers/layer3.png"))); // NOI18N
         }
         else {
-            lSnowInfo.setText("<html>The icefloat you are standing on <br>\nhas "+ snowLevel +"layers of snow.</html>");
+            lSnowInfo.setText("<html>The icefloat you are standing on <br>\nhas "+ snowLevel +" layers of snow.</html>");
             lSnowIcon.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/icons/layers/layer4.png"))); // NOI18N
         }
     }
