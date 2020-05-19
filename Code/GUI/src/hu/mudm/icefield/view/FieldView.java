@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FieldView extends MVCView {
 
@@ -67,6 +68,23 @@ public class FieldView extends MVCView {
             public void mouseClicked(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
+                IceFloat i = getIceFloat(x, y);
+                if(i == null) return;
+
+                ArrayList<IceFloat> neighbours = ((Controller)model).getActiveCharacter().getPosition().getNeighbors();
+                boolean isNeighbour = false;
+                for(IceFloat iceFloat : neighbours){
+                    if(iceFloat.getID() == i.getID()) isNeighbour = true;
+                }
+
+                if(isNeighbour){
+                    Object lock = model.getMvcController().fieldLock;
+                    synchronized (lock){
+                        model.getMvcController().setSelectedNeighbour(i.getID());
+                        lock.notify();
+                    }
+                }
+
             }
         });
     }
