@@ -16,6 +16,8 @@ import java.util.ArrayList;
 //Charakterentität, z.B. ein Eskimo zu instanzieren.
 public abstract class Character {
 
+    static int id = 0;
+
     protected IceFloat position;
     protected ArrayList<Item> items;
     protected ArrayList<Class<? extends Action>> actions;
@@ -24,6 +26,7 @@ public abstract class Character {
     private String name;
     protected int actionsLeft;
 
+    private int charId;
 
     public Character(String name, StableIceFloat startingposition) {
         this.name = name;
@@ -31,6 +34,11 @@ public abstract class Character {
         items = new ArrayList<>();
         actions = new ArrayList<>();
         temp = 4;
+        charId = id++;
+    }
+
+    public int getId(){
+        return charId;
     }
 
     public void modifyTemp(int value) {
