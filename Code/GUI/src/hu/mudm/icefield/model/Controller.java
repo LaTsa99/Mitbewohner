@@ -47,6 +47,7 @@ public class Controller extends MVCModell {
                 for (int i = 0; i < 4; i++) {
                     //gui.startTurn(); ??
                     validateActions(ch);
+                    ch.setActionsLeft(4-i);
                     updateViews();
                     Action action = null;
                     //gui.see(ch);
