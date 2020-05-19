@@ -119,6 +119,7 @@ public class Game {
         MenuView menuView = new MenuView(controller);
         MessageView messageView = new MessageView(controller, menuView);
         FieldView fieldView = new FieldView(controller, menuView);
+        menuView.packMainFrame();
         ((MVCController)gui).setViews(menuView, fieldView, messageView);
         controller.addView(messageView);
         controller.addView(fieldView);

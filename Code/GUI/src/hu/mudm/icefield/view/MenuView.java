@@ -17,6 +17,10 @@ public class MenuView extends MVCView {
 
     }
 
+    public void packMainFrame(){
+        mainFrame.pack();
+    }
+
     public JPanel getDataView(){
         return mainFrame.getDataView();
     }
