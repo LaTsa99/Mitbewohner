@@ -115,7 +115,10 @@ public class FieldView extends MVCView {
     }
 
     private IceFloat getIceFloat(int width, int height){
-        int row = height/128;
-        return null;
+        int row = height/FLOAT_DIMENSION;
+        if (Math.abs(row%2)==1) width -= HORIZONTAL_OFFSET;
+        int col = width/FLOAT_DIMENSION;
+        int id = 6*row + col;
+        return ((Controller)model).getIcefloats().get(id);
     }
 }
