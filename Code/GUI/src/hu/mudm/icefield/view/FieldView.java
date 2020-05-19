@@ -195,21 +195,13 @@ public class FieldView extends MVCView {
         }
 
         if(model.getSelectable() != null && model.getSelectable().contains(icefloat)) {
-            try {
-                BufferedImage b =ImageIO.read(this.getClass().getResource("/icons/forIceFloat/x.png"));
-                g_background.drawImage(b, 0, 0, null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            BufferedImage b =images.get("x");
+            g_background.drawImage(b, 0, 0, null);
         }
 
         if(((Controller)model).getActiveCharacter().getPosition().equals(icefloat)) {
-            try {
-                BufferedImage b =ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rectangle.png"));
-                g_background.drawImage(b, 0, 0, null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            BufferedImage b = images.get("rectangle");
+            g_background.drawImage(b, 0, 0, null);
         }
 
 
@@ -218,11 +210,7 @@ public class FieldView extends MVCView {
 
     private int drawPolarBear(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        try {
-            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/polarBear.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        imageToBeDrawn = images.get("polarBear");
         if (imageToBeDrawn != null)
         {
             g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
@@ -233,11 +221,8 @@ public class FieldView extends MVCView {
 
     private int drawTent(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        try {
-            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tent.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        imageToBeDrawn = images.get("tent");
+
         if (imageToBeDrawn != null)
         {
             g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
@@ -248,11 +233,7 @@ public class FieldView extends MVCView {
 
     private int drawIglu(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        try {
-            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/igloo.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        imageToBeDrawn = images.get("igloo");
 
         if (imageToBeDrawn != null)
         {
