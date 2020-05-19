@@ -11,6 +11,10 @@ public class FieldView extends MVCView {
     public FieldView(Controller controller, MenuView menuView) {
         super(controller);
         panel = menuView.getField();
+
+        panel.setBackground(java.awt.SystemColor.window);
+        panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel.setMinimumSize(new java.awt.Dimension(810, 805)); // :(
     }
 
     @Override

@@ -179,11 +179,11 @@ public class Controller extends MVCModell {
         Controller.rocketPartsCnt++;
     }
 
-    public boolean getisWon() {
+    public boolean getIsWon() {
         return isWon;
     }
 
-    public boolean getisLost() {
+    public boolean getIsLost() {
         return isLost;
     }
 

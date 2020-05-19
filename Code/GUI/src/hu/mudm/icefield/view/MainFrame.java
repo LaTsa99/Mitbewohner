@@ -45,7 +45,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         pField = new javax.swing.JPanel();
-        lDemoField = new javax.swing.JLabel();
         lMessage = new javax.swing.JLabel();
 
         pDataView = new javax.swing.JPanel();
@@ -56,33 +55,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Icefield");
-
-        pField.setBackground(java.awt.SystemColor.window);
-        pField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pField.setMinimumSize(new java.awt.Dimension(810, 805)); // :(
-
-
-        lDemoField.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/icons/forIceFloat/field_final.png"))); // NOI18N
-        lDemoField.setToolTipText("");
-
-        //Ez a sok sor csak az lDemoFieldet helyezi el, ki lehet szedni később
-        /////////////////////////////////////////////////////////////////////////////////
-        javax.swing.GroupLayout pFieldLayout = new javax.swing.GroupLayout(pField);
-        pField.setLayout(pFieldLayout);
-        pFieldLayout.setHorizontalGroup(
-                pFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pFieldLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(lDemoField)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pFieldLayout.setVerticalGroup(
-                pFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pFieldLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lDemoField)
-                                .addContainerGap(22, Short.MAX_VALUE))
-        );
 
         /////////////////////////////////////////////////////////////////////////////////
 
@@ -212,7 +184,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lActionsLeft;
     private javax.swing.JLabel lCharIcon;
     private javax.swing.JLabel lCharTurn;
-    private javax.swing.JLabel lDemoField;
     private javax.swing.JLabel lMessage;
     private javax.swing.JLabel lSnowIcon;
     private javax.swing.JLabel lSnowInfo;
