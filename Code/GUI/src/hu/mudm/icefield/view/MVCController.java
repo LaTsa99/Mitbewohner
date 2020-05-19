@@ -18,6 +18,19 @@ public class MVCController implements GUI {
 
     private WelcomeFrame welcomeFrame;
     private Random rand = new Random();
+    public Object lock = new Object();
+    public Object fieldLock = new Object();
+    private int selectedAction = -1;
+    private int selectedNeighbour = -1;
+
+    public void setSelectedAction(int selectedAction) {
+        this.selectedAction = selectedAction;
+    }
+
+    public void setSelectedNeighbour(int selectedNeighbour){
+        this.selectedNeighbour = selectedNeighbour;
+    }
+
     public MVCController(){
     }
 
@@ -34,17 +47,35 @@ public class MVCController implements GUI {
 
     @Override
     public int getAction(Character character) throws NoActionException {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized (lock) {
+            while (selectedAction == -1) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return rand.nextInt(3);
+        int selected = selectedAction;
+        selectedAction = -1;
+        return selected;
     }
 
     @Override
     public int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException {
-        return 0;
+        int neighbourCount = icefloat.getNeighbors().size();
+        synchronized (fieldLock){
+            while(selectedNeighbour == -1 || neighbourCount < selectedNeighbour){
+                try {
+                    fieldLock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        int selected = selectedNeighbour;
+        selectedNeighbour = -1;
+        return selected;
     }
 
     @Override
@@ -108,11 +139,11 @@ public class MVCController implements GUI {
 
     @Override
     public void endRound() {
-
+        showMessage("Round ended.");
     }
 
     @Override
     public void startTurn() {
-
+        showMessage("Next player's turn.");
     }
 }

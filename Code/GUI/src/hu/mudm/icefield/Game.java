@@ -124,6 +124,7 @@ public class Game {
         controller.addView(fieldView);
         controller.addView(menuView);
         controller.createViews(menuView);
+        controller.setMvcController((MVCController) gui);
     }
 
     public void start(){ this.controller.gameLoop(); }

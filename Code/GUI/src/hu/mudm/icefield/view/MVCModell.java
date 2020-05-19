@@ -25,4 +25,12 @@ public abstract class MVCModell {
     }
 
     public abstract void createViews(MenuView mv);
+
+    public MVCController getMvcController(){
+        return mvcController;
+    }
+
+    public void setMvcController(MVCController controller){
+        this.mvcController = controller;
+    }
 }

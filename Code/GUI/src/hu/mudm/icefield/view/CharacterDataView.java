@@ -7,6 +7,8 @@ import hu.mudm.icefield.model.player.Character;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,6 +112,12 @@ public class CharacterDataView extends MVCView {
         );
 
         bFireAction.setText("OK");
+        bFireAction.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                onFireButtonClick();
+            }
+        });
 
         spItems.setBorder(null);
 
@@ -309,6 +317,17 @@ public class CharacterDataView extends MVCView {
             JLabel label = (JLabel) super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
             label.setIcon(icons.get((String)value));
             return label;
+        }
+    }
+
+    private void onFireButtonClick(){
+        int index = cbActions.getSelectedIndex();
+        if(index == 0) return;
+        index -= 1;
+        Object lock = model.getMvcController().lock;
+        synchronized (lock){
+            model.getMvcController().setSelectedAction(index);
+            lock.notify();
         }
     }
 }
