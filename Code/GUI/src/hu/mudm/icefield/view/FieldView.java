@@ -245,45 +245,41 @@ public class FieldView extends MVCView {
 
     private int drawItem(Item item, Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        try {
             switch (item.getClass().getSimpleName()) {
                 case "BreakableShovel":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/breakableShovel.png"));
+                    imageToBeDrawn = images.get("breakableShovel");
                     break;
                 case "DiverSuit":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/diverSuit.png"));
+                    imageToBeDrawn = images.get("diverSuit");
                     break;
                 case "Food":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/food.png"));
+                    imageToBeDrawn = images.get("food");
                     break;
                 case "RocketPart":
                     switch(((RocketPart)item).getID()+1) {
                         case 1:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_1.png"));
+                            imageToBeDrawn = images.get("rocketPart_1");
                             break;
                         case 2:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_2.png"));
+                            imageToBeDrawn = images.get("rocketPart_2");
                             break;
                         case 3:
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rocketPart_3.png"));
+                            imageToBeDrawn = images.get("rocketPart_3");
                             break;
                     }
                     break;
                 case "Rope":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/rope.png"));
+                    imageToBeDrawn = images.get("rope");
                     break;
                 case "Shovel":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/shovel.png"));
+                    imageToBeDrawn = images.get("shovel");
                     break;
                 case "Tent":
-                    imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/items/tent.png"));
+                    imageToBeDrawn = images.get("tent");
                     break;
                 default:
                     return 0;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         if (imageToBeDrawn != null)
         {
