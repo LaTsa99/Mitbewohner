@@ -226,6 +226,7 @@ public class CharacterDataView extends MVCView {
         setCharacterDisplay();
 
         lActionsLeft.setIcon(new ImageIcon(images.get("action" + character.getActionsLeft())));
+        if (((Controller)model).isNextTurnStartsSoon()) lActionsLeft.setIcon(null);
         tfTempNum.setText(((Integer)(character.getTemp())).toString());
 
         ArrayList<String> actionNames = new ArrayList<String>();
