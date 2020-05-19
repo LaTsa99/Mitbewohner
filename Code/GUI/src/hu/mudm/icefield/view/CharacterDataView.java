@@ -3,6 +3,7 @@ package hu.mudm.icefield.view;
 import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.item.Item;
+import hu.mudm.icefield.model.item.RocketPart;
 import hu.mudm.icefield.model.player.Character;
 
 import javax.swing.*;
@@ -275,7 +276,6 @@ public class CharacterDataView extends MVCView {
 
     private void updateCharacterInventory(){
         listModel.clear();
-        int rp = 1;
         ArrayList<Item> items = character.getItems();
         String[] strings;
         if(items.size()<5) strings = new String[5];
@@ -286,7 +286,7 @@ public class CharacterDataView extends MVCView {
         {
             strings[i]=new String(items.get(i).getClass().getSimpleName());
             if(strings[i].equals("RocketPart"))
-                strings[i] = "rp" + rp++;
+                strings[i] = "rp" + ((RocketPart)items.get(i)).getID();
         }
         if(items.size()<5) {
           for(int i=items.size(); i<5; i++) {
