@@ -104,7 +104,7 @@ public class FieldView extends MVCView {
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
         boolean showhole = false;
         if(true || ((Controller)model).getIsLost()) {
-            if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
+            if(icefloat.getClass().getSimpleName().equals("Hole") /*&& icefloat.getCharacters().size()>0*/)
                 showhole = true;
             if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
                 showhole = true;
@@ -318,50 +318,46 @@ public class FieldView extends MVCView {
         for (Character ch : characterList) {
             int id = ch.getId();
 
-            try {
-                switch (id) {
-                    case 0:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_blue.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_blue.png"));
-                        break;
-                    case 1:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_green.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_green.png"));
-                        break;
-                    case 2:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_orange.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_orange.png"));
-                        break;
-                    case 3:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_purple.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_purple.png"));
-                        break;
-                    case 4:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_red.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_red.png"));
-                        break;
-                    case 5:
-                        if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_yellow.png"));
-                        else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_yellow.png"));
-                        break;
-                    default:
-                        return count;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+             switch (id) {
+                 case 0:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_blue");
+                     else
+                         imageToBeDrawn = images.get("eskimo_blue");
+                     break;
+                 case 1:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_green");
+                     else
+                         imageToBeDrawn = images.get("eskimo_green");
+                     break;
+                 case 2:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_orange");
+                     else
+                         imageToBeDrawn = images.get("eskimo_orange");
+                     break;
+                 case 3:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_purple");
+                     else
+                         imageToBeDrawn = images.get("eskimo_purple");
+                     break;
+                 case 4:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_red");
+                     else
+                         imageToBeDrawn = images.get("eskimo_red");
+                     break;
+                 case 5:
+                     if (ch.getClass().getSimpleName().equals("Researcher"))
+                         imageToBeDrawn = images.get("researcher_yellow");
+                     else
+                         imageToBeDrawn = images.get("eskimo_yellow");
+                     break;
+                 default:
+                     return count;
+             }
 
             if (imageToBeDrawn != null)
             {

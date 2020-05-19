@@ -140,7 +140,8 @@ public class Controller extends MVCModell {
         //get index of action class
         int actionIndex = gui.getAction(ch);
         Class<? extends Action> classofaction = ch.getActions().get(actionIndex);
-
+        System.out.println(actionIndex);
+        System.out.println(classofaction.getSimpleName());
         //get constructor of the chosen action class
         Constructor<? extends Action>[] constructors = (Constructor<? extends Action>[]) classofaction.getConstructors();
         Constructor<? extends Action> constructor = constructors[0];
