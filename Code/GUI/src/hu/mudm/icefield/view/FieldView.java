@@ -69,12 +69,17 @@ public class FieldView extends MVCView {
                 int x = e.getX();
                 int y = e.getY();
                 IceFloat i = getIceFloat(x, y);
-                if(i == null) return;
+                if(i == null) {
+                    return;
+                }
 
                 ArrayList<IceFloat> neighbours = ((Controller)model).getActiveCharacter().getPosition().getNeighbors();
                 boolean isNeighbour = false;
                 for(IceFloat iceFloat : neighbours){
-                    if(iceFloat.getID() == i.getID()) isNeighbour = true;
+                    if(iceFloat.getID() == i.getID()) {
+                        isNeighbour = true;
+                        break;
+                    }
                 }
 
                 if(isNeighbour){
@@ -84,7 +89,6 @@ public class FieldView extends MVCView {
                         lock.notify();
                     }
                 }
-
             }
         });
     }

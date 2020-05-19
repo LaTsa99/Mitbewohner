@@ -63,9 +63,8 @@ public class MVCController implements GUI {
 
     @Override
     public int getChosenNeighborID(IceFloat icefloat) throws NoNeighborException {
-        int neighbourCount = icefloat.getNeighbors().size();
         synchronized (fieldLock){
-            while(selectedNeighbour == -1 || neighbourCount < selectedNeighbour){
+            while(selectedNeighbour == -1){
                 try {
                     fieldLock.wait();
                 } catch (InterruptedException e) {
