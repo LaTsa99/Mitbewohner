@@ -71,7 +71,6 @@ public class CharacterDataView extends MVCView {
 
         lCharTurn.setFont(new Font("Century Schoolbook", 0, 14));
 
-
         tfTempNum.setEditable(false);
         tfTempNum.setBackground(new Color(240, 240, 240));
         tfTempNum.setFont(new Font("Tahoma", 1, 11)); // NOI18N
@@ -143,8 +142,6 @@ public class CharacterDataView extends MVCView {
 
         panel.setBorder(BorderFactory.createEtchedBorder());
 
-
-
         GroupLayout pDataViewLayout = new GroupLayout(panel);
         panel.setLayout(pDataViewLayout);
         pDataViewLayout.setHorizontalGroup(
@@ -194,6 +191,8 @@ public class CharacterDataView extends MVCView {
                                 .addComponent(spItems, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+
+
     }
     @Override
     public void update() {
