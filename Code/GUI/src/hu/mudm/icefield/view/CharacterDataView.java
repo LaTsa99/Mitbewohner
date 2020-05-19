@@ -218,6 +218,14 @@ public class CharacterDataView extends MVCView {
 
     @Override
     public void update() {
+        if (((Controller)model).isNextTurnStartsSoon()) {
+            bFireAction.setEnabled(false);
+            cbActions.setEnabled(false);
+        }
+        else {
+            bFireAction.setEnabled(true);
+            cbActions.setEnabled(true);
+        }
         character = ((Controller)model).getActiveCharacter();
         if (character == null) return;
 
@@ -226,7 +234,10 @@ public class CharacterDataView extends MVCView {
         setCharacterDisplay();
 
         lActionsLeft.setIcon(new ImageIcon(images.get("action" + character.getActionsLeft())));
-        if (((Controller)model).isNextTurnStartsSoon()) lActionsLeft.setIcon(null);
+        if (((Controller)model).isNextTurnStartsSoon()) {
+            lActionsLeft.setIcon(null);
+            lActionsLeft.setMinimumSize(new Dimension(72,72));
+        }
         tfTempNum.setText(((Integer)(character.getTemp())).toString());
 
         ArrayList<String> actionNames = new ArrayList<String>();
