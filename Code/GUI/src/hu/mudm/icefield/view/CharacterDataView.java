@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,7 +84,7 @@ public class CharacterDataView extends MVCView {
 
         lTempIcon.setBackground(SystemColor.window);
         lTempIcon.setHorizontalAlignment(SwingConstants.CENTER);
-        lTempIcon.setIcon(new ImageIcon(this.getClass().getResource("/icons/forIceFloat/thermometer.png")));
+        lTempIcon.setIcon(new ImageIcon(images.get("thermometer")));
 
         GroupLayout pTempLayout = new GroupLayout(pTemp);
         pTemp.setLayout(pTempLayout);
@@ -224,20 +225,7 @@ public class CharacterDataView extends MVCView {
 
         setCharacterDisplay();
 
-        switch(character.getActionsLeft()){
-            case 1:
-                lActionsLeft.setIcon(new ImageIcon(this.getClass().getResource("/icons/actionNumbers/1.png")));
-                break;
-            case 2:
-                lActionsLeft.setIcon(new ImageIcon(this.getClass().getResource("/icons/actionNumbers/2.png")));
-                break;
-            case 3:
-                lActionsLeft.setIcon(new ImageIcon(this.getClass().getResource("/icons/actionNumbers/3.png")));
-                break;
-            case 4:
-                lActionsLeft.setIcon(new ImageIcon(this.getClass().getResource("/icons/actionNumbers/4.png")));
-                break;
-        }
+        lActionsLeft.setIcon(new ImageIcon(images.get("action" + character.getActionsLeft())));
         tfTempNum.setText(((Integer)(character.getTemp())).toString());
 
         ArrayList<String> actionNames = new ArrayList<String>();
@@ -355,26 +343,26 @@ public class CharacterDataView extends MVCView {
     }
 
     private void setCharacterDisplay(){
-        StringBuilder path = new StringBuilder("/icons/characters/display/");
+        StringBuilder path = new StringBuilder();
         if (character.getClass().getSimpleName().equals("Eskimo")){
-            path.append("eskimo_mini_");
+            path.append("eskimo_display_");
         }
         else if(character.getClass().getSimpleName().equals("Researcher")){
-            path.append("researcher_mini_");
+            path.append("researcher_display_");
         }
         switch(character.getId()){
-            case 0: path.append("kek.png");
+            case 0: path.append("kek");
                     break;
-            case 1: path.append("zold.png");
+            case 1: path.append("zold");
                     break;
-            case 2: path.append("narancs.png");
+            case 2: path.append("narancs");
             break;
-            case 3: path.append("lila.png");
+            case 3: path.append("lila");
             break;
-            case 4: path.append("piros.png");
+            case 4: path.append("piros");
             break;
-            default: path.append("sarga.png");
+            default: path.append("sarga");
         }
-        lCharIcon.setIcon(new ImageIcon(this.getClass().getResource(path.toString())));
+        lCharIcon.setIcon(new ImageIcon(images.get(path.toString())));
     }
 }

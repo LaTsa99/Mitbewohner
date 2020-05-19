@@ -40,7 +40,7 @@ public abstract class MVCView {
                 images.put("tent", ImageIO.read(this.getClass().getResource("/icons/items/tent.png")));
 
                 images.put("igloo",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/igloo.png")));
-                images.put("tent",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tentOnIce.png")));
+                images.put("tentOnIce",ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tentOnIce.png")));
                 images.put("polarBear", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/polarBear.png")));
 
                 images.put("rectangle", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rectangle.png")));
