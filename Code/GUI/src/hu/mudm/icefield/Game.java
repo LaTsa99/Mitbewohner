@@ -57,8 +57,8 @@ public class Game {
         for (int j=1; j<36; j++){
             type = rand.nextInt(100);
             if (type < 50)                  ices.add(new StableIceFloat(i.get(j)));
-            if (type >= 50 && type < 90)    ices.add(new UnstableIceFloat(rand.nextInt(1)+1, i.get(j)));
-            if (type >= 90 )                ices.add(new Hole());
+            if (type >= 50 && type < 95)    ices.add(new UnstableIceFloat(rand.nextInt(1)+1, i.get(j)));
+            if (type >= 95 )                ices.add(new Hole());
         }
 
         int[] rd = new int[3];
@@ -69,13 +69,13 @@ public class Game {
         while (rd[2]<0||rd[0]==rd[2] || rd[1]==rd[2]) rd[2] = rand.nextInt(35) + 1;
 
         for(int j= 0; j<3; j++){
-        type = rand.nextInt(90);
+        type = rand.nextInt(95);
         if (type < 50 )            {        // or rd[j]==0
             int id = ices.get(rd[j]).getID();
             ices.set(rd[j], new StableIceFloat(new RocketPart()));
             ices.get(rd[j]).setID(id);
         }
-        else if (type >= 50 && type < 90)    {
+        else if (type >= 50 && type < 95)    {
             int id = ices.get(rd[j]).getID();
             ices.set(rd[j], new UnstableIceFloat(rand.nextInt(1)+1, new RocketPart()));
             ices.get(rd[j]).setID(id);

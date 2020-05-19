@@ -1,5 +1,7 @@
 package hu.mudm.icefield.view;
 
+import hu.mudm.icefield.model.field.IceFloat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ public abstract class MVCModell {
     protected GUI gui;
 
     private MVCController mvcController;
+
+    private ArrayList<IceFloat> selectable;
 
     public MVCModell(GUI gui){
         this.gui = gui;
@@ -32,5 +36,18 @@ public abstract class MVCModell {
 
     public void setMvcController(MVCController controller){
         this.mvcController = controller;
+    }
+
+    public void setSelectable(ArrayList<IceFloat> selectable) {
+        this.selectable = selectable;
+
+        for (MVCView view: views ) {
+            if(view instanceof FieldView)
+                view.update();
+        }
+    }
+
+    public ArrayList<IceFloat> getSelectable() {
+        return selectable;
     }
 }

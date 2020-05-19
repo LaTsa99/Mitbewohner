@@ -15,6 +15,9 @@ public class UnstableIceFloat extends IceFloat {
         this.item = item;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     @Override
     public void stepOn(Character ch) {

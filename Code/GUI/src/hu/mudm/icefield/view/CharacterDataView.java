@@ -120,6 +120,13 @@ public class CharacterDataView extends MVCView {
             }
         });
 
+        cbActions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onListChanged();
+            }
+        });
+
         spItems.setBorder(null);
 
         itemList.setBackground(new Color(240, 240, 240));
@@ -196,6 +203,18 @@ public class CharacterDataView extends MVCView {
 
 
     }
+
+    private void onListChanged() {
+        int index = cbActions.getSelectedIndex();
+        if(index == 0) return;
+        index -= 1;
+        Class<? extends Action> action = ((Controller)model).getActiveCharacter().getActions().get(index);
+        if(action.getSimpleName().equals("MoveAction") || action.getSimpleName().equals("CheckAction"))
+            model.setSelectable(character.getIceFloat().getNeighbors());
+        else
+            model.setSelectable(null);
+    }
+
     @Override
     public void update() {
         character = ((Controller)model).getActiveCharacter();
@@ -284,7 +303,7 @@ public class CharacterDataView extends MVCView {
         }
         for(int i=0; i<items.size();i++)
         {
-            strings[i]=new String(items.get(i).getClass().getSimpleName());
+            strings[i]= items.get(i).getClass().getSimpleName();
             if(strings[i].equals("RocketPart"))
                 strings[i] = "rp" + ((RocketPart)items.get(i)).getID();
         }
@@ -319,7 +338,7 @@ public class CharacterDataView extends MVCView {
             boolean isSelected, boolean cellHasFocus) {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-            label.setIcon(icons.get((String)value));
+            label.setIcon(icons.get(value));
             label.setText("");
 
             return label;
@@ -336,4 +355,5 @@ public class CharacterDataView extends MVCView {
             lock.notify();
         }
     }
+
 }

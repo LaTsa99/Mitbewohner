@@ -102,6 +102,15 @@ public class FieldView extends MVCView {
     }
 
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
+        boolean showhole = false;
+        if(((Controller)model).getIsLost()) {
+            if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
+                showhole = true;
+            if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
+                showhole = true;
+        }
+
+
         //icefloat
         PolarBear pb = ((Controller)model).getPolarBear();
 
@@ -112,20 +121,24 @@ public class FieldView extends MVCView {
 
         BufferedImage background = null;
         try {
-            int r = rnd.nextInt(4);
-            switch(r+1) {
-                case 1:
-                    background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_1.png"));
-                    break;
-                case 2:
-                    background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_2.png"));
-                    break;
-                case 3:
-                    background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_3.png"));
-                    break;
-                case 4:
-                    background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_4.png"));
-                    break;
+            if(showhole)
+                background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/hole.png"));
+            else {
+                int r = rnd.nextInt(4);
+                switch (r + 1) {
+                    case 1:
+                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_1.png"));
+                        break;
+                    case 2:
+                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_2.png"));
+                        break;
+                    case 3:
+                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_3.png"));
+                        break;
+                    case 4:
+                        background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_4.png"));
+                        break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,6 +166,15 @@ public class FieldView extends MVCView {
             if(icefloat.hasIglu()) alreadyDrawn+=drawIglu(g_background, alreadyDrawn, offset_y);
             if(icefloat.hasTent()) alreadyDrawn+=drawTent(g_background, alreadyDrawn, offset_y);
             if(pb.getPosition().equals(icefloat)) alreadyDrawn+=drawPolarBear(g_background, alreadyDrawn, offset_y);
+        }
+
+        if(model.getSelectable() != null && model.getSelectable().contains(this)) {
+            try {
+                BufferedImage b =ImageIO.read(this.getClass().getResource("/icons/forIceFloat/x.png"));
+                g_background.drawImage(b, 0, 0, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return background;
