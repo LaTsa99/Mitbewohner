@@ -20,6 +20,8 @@ public class Controller extends MVCModell {
     private static int rocketPartsCnt = 0;
     private boolean duringstorm = false;
 
+    private boolean nextTurnStartsSoon = false;
+
     public ArrayList<IceFloat> getIcefloats() {
         return icefloats;
     }
@@ -43,6 +45,7 @@ public class Controller extends MVCModell {
         while (!isWon && !isLost) {
             for (Character ch : characters) {
                 activeCharacter = ch;
+                nextTurnStartsSoon = false;
                 gui.startTurn();
                 gui.showMessage("<html>The turn of <b>" + ch.getName() + "</b> has started.</html>");
                 for (int i = 0; i < 4; i++) {
@@ -61,6 +64,7 @@ public class Controller extends MVCModell {
                         gui.showMessage("Player " + ch.getName() + " has no possible Actions left, ending turn");
                     }
                     action.performAction();
+                    if (i==3) nextTurnStartsSoon = true;
                     updateViews();
                     if(isLost || isWon) return;
                 }
@@ -226,5 +230,9 @@ public class Controller extends MVCModell {
 
     public Character getActiveCharacter(){
         return activeCharacter;
+    }
+
+    public boolean isNextTurnStartsSoon() {
+        return nextTurnStartsSoon;
     }
 }
