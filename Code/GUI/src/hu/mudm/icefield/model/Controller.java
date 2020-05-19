@@ -18,6 +18,7 @@ public class Controller extends MVCModell {
     private static boolean isWon;
     private static boolean isLost;
     private static int rocketPartsCnt = 0;
+    private boolean duringstorm = false;
 
     public ArrayList<IceFloat> getIcefloats() {
         return icefloats;
@@ -82,6 +83,7 @@ public class Controller extends MVCModell {
     }
 
     public void snowstorm() {
+        duringstorm = true;
         if (icefloats != null) {
             for (IceFloat ice : icefloats) {
                 if (r.nextFloat() < 0.5f) {
@@ -89,8 +91,18 @@ public class Controller extends MVCModell {
                 }
             }
         }
+        for (int i=0; i<3; i++)
+        {
+            for (MVCView view: views ) {
+                if(view instanceof FieldView)  view.update();
+            }
+        }
+        duringstorm = false;
     }
 
+    public boolean getDuringStorm() {
+        return duringstorm;
+    }
     public void showMessage(String message) {
         gui.showMessage(message);
     }

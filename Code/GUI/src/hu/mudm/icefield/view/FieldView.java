@@ -124,7 +124,14 @@ public class FieldView extends MVCView {
             if(showhole)
                 background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/hole.png"));
             else {
-                int r = rnd.nextInt(4);
+                int r =0;
+                if(((Controller) model).getDuringStorm())
+                    r = rnd.nextInt(4);
+                else
+                {
+                    r = icefloat.getID()%4;
+                    if(r<0) throw new Exception("Giga");
+                }
                 switch (r + 1) {
                     case 1:
                         background = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/iceFloat_1.png"));
@@ -142,6 +149,9 @@ public class FieldView extends MVCView {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.gc();
         }
         Graphics g_background = background.getGraphics();
 
@@ -159,16 +169,32 @@ public class FieldView extends MVCView {
 
         if(rowcount == 1)
         {
-            int offset_y = 128/2-32/2; //kozepvonal
+            ArrayList<Integer> offsets_y = new ArrayList<Integer>();
+            offsets_y.add(128/2-32/2); //kozepvonal
+            offsets_y.add(16);
+            offsets_y.add(16);
 
-            alreadyDrawn+=drawCharacters(icefloat.getCharacters(), g_background, alreadyDrawn, offset_y);
-            if(icefloat.getSnowLevel()==0 && icefloat.hasItem()) alreadyDrawn+=drawItem(icefloat.getItem(), g_background, alreadyDrawn, offset_y);
-            if(icefloat.hasIglu()) alreadyDrawn+=drawIglu(g_background, alreadyDrawn, offset_y);
-            if(icefloat.hasTent()) alreadyDrawn+=drawTent(g_background, alreadyDrawn, offset_y);
-            if(pb.getPosition().equals(icefloat)) alreadyDrawn+=drawPolarBear(g_background, alreadyDrawn, offset_y);
+            alreadyDrawn+=drawCharacters(icefloat.getCharacters(), g_background, alreadyDrawn, offsets_y);
+            if(icefloat.getSnowLevel()==0 && icefloat.hasItem()) alreadyDrawn+=drawItem(icefloat.getItem(), g_background, alreadyDrawn, offsets_y);
+            if(icefloat.hasIglu()) alreadyDrawn+=drawIglu(g_background, alreadyDrawn, offsets_y);
+            if(icefloat.hasTent()) alreadyDrawn+=drawTent(g_background, alreadyDrawn, offsets_y);
+            if(pb.getPosition().equals(icefloat)) alreadyDrawn+=drawPolarBear(g_background, alreadyDrawn, offsets_y);
+        }
+        if(rowcount == 2)
+        {
+            ArrayList<Integer> offsets_y = new ArrayList<Integer>();
+            offsets_y.add(128/2-32);
+            offsets_y.add(128/2);
+            offsets_y.add(16);
+
+            alreadyDrawn+=drawCharacters(icefloat.getCharacters(), g_background, alreadyDrawn, offsets_y);
+            if(icefloat.getSnowLevel()==0 && icefloat.hasItem()) alreadyDrawn+=drawItem(icefloat.getItem(), g_background, alreadyDrawn, offsets_y);
+            if(icefloat.hasIglu()) alreadyDrawn+=drawIglu(g_background, alreadyDrawn, offsets_y);
+            if(icefloat.hasTent()) alreadyDrawn+=drawTent(g_background, alreadyDrawn, offsets_y);
+            if(pb.getPosition().equals(icefloat)) alreadyDrawn+=drawPolarBear(g_background, alreadyDrawn, offsets_y);
         }
 
-        if(model.getSelectable() != null && model.getSelectable().contains(this)) {
+        if(model.getSelectable() != null && model.getSelectable().contains(icefloat)) {
             try {
                 BufferedImage b =ImageIO.read(this.getClass().getResource("/icons/forIceFloat/x.png"));
                 g_background.drawImage(b, 0, 0, null);
@@ -177,10 +203,20 @@ public class FieldView extends MVCView {
             }
         }
 
+        if(((Controller)model).getActiveCharacter().getPosition().equals(icefloat)) {
+            try {
+                BufferedImage b =ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rectangle.png"));
+                g_background.drawImage(b, 0, 0, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         return background;
     }
 
-    private int drawPolarBear(Graphics g_background, int alreadyDrawn, int offset_y) {
+    private int drawPolarBear(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
         try {
             imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/polarBear.png"));
@@ -189,13 +225,13 @@ public class FieldView extends MVCView {
         }
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offset_y, null);
+            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
     }
 
-    private int drawTent(Graphics g_background, int alreadyDrawn, int offset_y) {
+    private int drawTent(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
         try {
             imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/tent.png"));
@@ -204,13 +240,13 @@ public class FieldView extends MVCView {
         }
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offset_y, null);
+            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
     }
 
-    private int drawIglu(Graphics g_background, int alreadyDrawn, int offset_y) {
+    private int drawIglu(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
         try {
             imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/igloo.png"));
@@ -220,13 +256,13 @@ public class FieldView extends MVCView {
 
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offset_y, null);
+            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
     }
 
-    private int drawItem(Item item, Graphics g_background, int alreadyDrawn, int offset_y) {
+    private int drawItem(Item item, Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
         try {
             switch (item.getClass().getSimpleName()) {
@@ -270,13 +306,13 @@ public class FieldView extends MVCView {
 
         if (imageToBeDrawn != null)
         {
-            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offset_y, null);
+            g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn, offsets_y.get(alreadyDrawn/4), null);
             return 1;
         }
         return 0;
     }
 
-    private int drawCharacters(ArrayList<Character> characterList, Graphics g_background, int alreadyDrawn, int offset_y) {
+    private int drawCharacters(ArrayList<Character> characterList, Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
         int count = 0;
         for (Character ch : characterList) {
@@ -329,7 +365,7 @@ public class FieldView extends MVCView {
 
             if (imageToBeDrawn != null)
             {
-                g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn+count), offset_y, null);
+                g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn+count), offsets_y.get(alreadyDrawn/4), null);
                 count++;
             }
         }

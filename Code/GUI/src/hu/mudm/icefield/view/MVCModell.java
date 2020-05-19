@@ -41,9 +41,9 @@ public abstract class MVCModell {
     public void setSelectable(ArrayList<IceFloat> selectable) {
         this.selectable = selectable;
 
+
         for (MVCView view: views ) {
-            if(view instanceof FieldView)
-                view.update();
+            if(view instanceof FieldView)  view.update();
         }
     }
 

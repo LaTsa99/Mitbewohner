@@ -203,7 +203,10 @@ public class CharacterDataView extends MVCView {
 
     private void onListChanged() {
         int index = cbActions.getSelectedIndex();
-        if(index == 0) return;
+        if(index <= 0) {
+            model.setSelectable(null);
+            return;
+        }
         index -= 1;
         Class<? extends Action> action = ((Controller)model).getActiveCharacter().getActions().get(index);
         if(action.getSimpleName().equals("MoveAction") || action.getSimpleName().equals("CheckAction"))
@@ -332,7 +335,7 @@ public class CharacterDataView extends MVCView {
             boolean isSelected, boolean cellHasFocus) {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-            label.setIcon(icons.get((String)value));
+            label.setIcon(icons.get(value));
             label.setText("");
 
             return label;
@@ -348,6 +351,7 @@ public class CharacterDataView extends MVCView {
             model.getMvcController().setSelectedAction(index);
             lock.notify();
         }
+        model.setSelectable(null);
     }
 
     private void setCharacterDisplay(){
