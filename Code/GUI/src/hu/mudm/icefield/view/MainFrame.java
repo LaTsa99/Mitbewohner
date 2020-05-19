@@ -50,8 +50,6 @@ public class MainFrame extends javax.swing.JFrame {
         pDataView = new javax.swing.JPanel();
 
         pIceFloat = new javax.swing.JPanel();
-        lSnowInfo = new javax.swing.JLabel();
-        lSnowIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Icefield");
@@ -61,38 +59,6 @@ public class MainFrame extends javax.swing.JFrame {
         lMessage.setFont(new java.awt.Font("Century Schoolbook", 0, 14)); // NOI18N
         lMessage.setText("<html><b>TestBunny</b>'s turn has started.</html>");
         lMessage.setToolTipText("");
-
-        pIceFloat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lSnowInfo.setFont(new java.awt.Font("Century Schoolbook", 0, 14)); // NOI18N
-        lSnowInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lSnowInfo.setText("<html>The icefloat you are standing on <br>\nhas 2 layers of snow.</html>");
-
-        lSnowIcon.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/icons/layers/layer2.png"))); // NOI18N
-        lSnowIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout pIceFloatLayout = new javax.swing.GroupLayout(pIceFloat);
-        pIceFloat.setLayout(pIceFloatLayout);
-        pIceFloatLayout.setHorizontalGroup(
-                pIceFloatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pIceFloatLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(lSnowIcon)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pIceFloatLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lSnowInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21))
-        );
-        pIceFloatLayout.setVerticalGroup(
-                pIceFloatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pIceFloatLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lSnowInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lSnowIcon)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,8 +151,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lCharIcon;
     private javax.swing.JLabel lCharTurn;
     private javax.swing.JLabel lMessage;
-    private javax.swing.JLabel lSnowIcon;
-    private javax.swing.JLabel lSnowInfo;
     private javax.swing.JLabel lTempIcon;
     private javax.swing.JLabel lTempText;
     private javax.swing.JPanel pDataView;

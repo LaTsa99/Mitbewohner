@@ -24,6 +24,7 @@ public abstract class Character {
     private String name;
     protected int actionsLeft;
 
+
     public Character(String name, StableIceFloat startingposition) {
         this.name = name;
         startingposition.stepOn(this);
