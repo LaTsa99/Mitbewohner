@@ -13,6 +13,7 @@ public class Controller extends MVCModell {
     private PolarBear p;
     private ArrayList<IceFloat> icefloats;
     private ArrayList<Character> characters;
+    private Character activeCharacter;
     private Random r;
     private static boolean isWon;
     private static boolean isLost;
@@ -40,15 +41,16 @@ public class Controller extends MVCModell {
     public void gameLoop() {
         while (!isWon && !isLost) {
             for (Character ch : characters) {
-
+                activeCharacter = ch;
                 gui.startTurn();
                 gui.showMessage("The turn of " + ch.getName() + " has started");
                 for (int i = 0; i < 4; i++) {
-                    gui.startTurn();
+                    //gui.startTurn(); ??
                     validateActions(ch);
+                    updateViews();
                     Action action = null;
-                    gui.see(ch);
-                    gui.showMessage((4-i)+" actions left");
+                    //gui.see(ch);
+                    //gui.showMessage((4-i)+" actions left");
                     try {
                         action = createAction(ch);
                     } catch (NoActionException e) {
@@ -57,6 +59,7 @@ public class Controller extends MVCModell {
                         gui.showMessage("Player " + ch.getName() + " has no possible Actions left, ending turn");
                     }
                     action.performAction();
+                    updateViews();
                     if(isLost || isWon) return;
                 }
             }
@@ -69,6 +72,7 @@ public class Controller extends MVCModell {
             }
             gui.endRound();
         }
+        updateViews();
     }
 
     public void snowstorm() {
@@ -199,5 +203,9 @@ public class Controller extends MVCModell {
     public void createViews(MenuView mv) {
         views.add(new CharacterDataView(this, mv));
         views.add(new IceFloatView(this, mv));
+    }
+
+    public Character getActiveCharacter(){
+        return activeCharacter;
     }
 }

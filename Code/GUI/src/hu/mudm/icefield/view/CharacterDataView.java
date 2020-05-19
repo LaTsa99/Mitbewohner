@@ -1,11 +1,13 @@
 package hu.mudm.icefield.view;
 
+import hu.mudm.icefield.model.Controller;
 import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.item.Item;
 import hu.mudm.icefield.model.player.Character;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,12 +30,18 @@ public class CharacterDataView extends MVCView {
     public CharacterDataView(MVCModell model, MenuView mv) {
         super(model);
         panel = mv.getDataView();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                initializePanel();
-            }
-        });
+        try {
+            EventQueue.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    initializePanel();
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializePanel(){
@@ -181,7 +189,10 @@ public class CharacterDataView extends MVCView {
     }
     @Override
     public void update() {
-        lCharTurn.setText(character.getName()+ "'s turn.");
+        character = ((Controller)model).getActiveCharacter();
+        if (character == null) return;
+
+        lCharTurn.setText("<html><b>" + character.getName()+"</b>" + "'s turn.</html>");
 
         if (character.getClass().getSimpleName().equals("Eskimo"))
             lCharIcon.setIcon(new ImageIcon(this.getClass().getResource("/icons/characters/eskimo_mini.png")));
@@ -211,7 +222,7 @@ public class CharacterDataView extends MVCView {
         String[] actionStrings = new String[1+actionNames.size()];
 
         int i = 0;
-        actionStrings[i++] = "<html><i>-Choose your next move-</i></html>";
+        actionStrings[i++] = "<html><i>-Choose your next action-</i></html>";
         for (String s: actionNames) {
             switch(s) {
                 case "BuildAction":
@@ -239,6 +250,7 @@ public class CharacterDataView extends MVCView {
             }
         }
         //cbActions.setModel(new DefaultComboBoxModel<>(actionStrings));
+        actionsModel.removeAllElements();
         for(i=0;i<actionStrings.length;i++) actionsModel.addElement(actionStrings[i]);
 
         updateCharacterInventory();

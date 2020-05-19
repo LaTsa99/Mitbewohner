@@ -2,10 +2,10 @@ package hu.mudm.icefield.view;
 
 public abstract class MVCView {
 
-    private MVCModell modell;
+    protected MVCModell model;
 
-    public MVCView(MVCModell modell){
-        this.modell = modell;
+    public MVCView(MVCModell model){
+        this.model = model;
     }
 
     public abstract void update();
