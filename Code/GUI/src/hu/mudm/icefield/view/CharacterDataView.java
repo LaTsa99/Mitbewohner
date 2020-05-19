@@ -68,7 +68,6 @@ public class CharacterDataView extends MVCView {
 
         lCharIcon.setHorizontalAlignment(SwingConstants.CENTER);
 
-        lCharIcon.setToolTipText("");
         lCharIcon.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
         lCharTurn.setFont(new Font("Century Schoolbook", 0, 14));
@@ -85,7 +84,6 @@ public class CharacterDataView extends MVCView {
         lTempIcon.setBackground(SystemColor.window);
         lTempIcon.setHorizontalAlignment(SwingConstants.CENTER);
         lTempIcon.setIcon(new ImageIcon(this.getClass().getResource("/icons/forIceFloat/thermometer.png")));
-        lTempIcon.setToolTipText("");
 
         GroupLayout pTempLayout = new GroupLayout(pTemp);
         pTemp.setLayout(pTempLayout);
@@ -194,7 +192,6 @@ public class CharacterDataView extends MVCView {
                                 .addContainerGap())
         );
 
-
     }
     @Override
     public void update() {
@@ -203,10 +200,7 @@ public class CharacterDataView extends MVCView {
 
         lCharTurn.setText("<html><b>" + character.getName()+"</b>" + "'s turn.</html>");
 
-        if (character.getClass().getSimpleName().equals("Eskimo"))
-            lCharIcon.setIcon(new ImageIcon(this.getClass().getResource("/icons/characters/eskimo_mini.png")));
-        else if (character.getClass().getSimpleName().equals("Researcher"))
-            lCharIcon.setIcon(new ImageIcon(this.getClass().getResource("/icons/characters/researcher_mini.png")));
+        setCharacterDisplay();
 
         switch(character.getActionsLeft()){
             case 1:
@@ -335,5 +329,29 @@ public class CharacterDataView extends MVCView {
             model.getMvcController().setSelectedAction(index);
             lock.notify();
         }
+    }
+
+    private void setCharacterDisplay(){
+        StringBuilder path = new StringBuilder("/icons/characters/display/");
+        if (character.getClass().getSimpleName().equals("Eskimo")){
+            path.append("eskimo_mini_");
+        }
+        else if(character.getClass().getSimpleName().equals("Researcher")){
+            path.append("researcher_mini_");
+        }
+        switch(character.getId()){
+            case 0: path.append("kek.png");
+                    break;
+            case 1: path.append("zold.png");
+                    break;
+            case 2: path.append("narancs.png");
+            break;
+            case 3: path.append("lila.png");
+            break;
+            case 4: path.append("piros.png");
+            break;
+            default: path.append("sarga.png");
+        }
+        lCharIcon.setIcon(new ImageIcon(this.getClass().getResource(path.toString())));
     }
 }
