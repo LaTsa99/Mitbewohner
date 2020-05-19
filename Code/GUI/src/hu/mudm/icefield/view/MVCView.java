@@ -46,8 +46,6 @@ public abstract class MVCView {
                 images.put("rectangle", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/rectangle.png")));
                 images.put("x", ImageIO.read(this.getClass().getResource("/icons/forIceFloat/x.png")));
 
-
-
                 images.put("action1", ImageIO.read(this.getClass().getResource("/icons/actionNumbers/1.png")));
                 images.put("action2", ImageIO.read(this.getClass().getResource("/icons/actionNumbers/2.png")));
                 images.put("action3", ImageIO.read(this.getClass().getResource("/icons/actionNumbers/3.png")));
