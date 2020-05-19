@@ -255,8 +255,6 @@ public class FieldView extends MVCView {
             g_background.drawImage(imageToBeDrawn, 32 * alreadyDrawn++, offset_y, null);
     }
 
-
-
     private void drawCharacters(ArrayList<Character> characterList, Graphics g_background, Integer alreadyDrawn, int offset_y) {
         BufferedImage imageToBeDrawn = null;
         for (Character ch : characterList) {
@@ -266,39 +264,39 @@ public class FieldView extends MVCView {
                 switch (r) {
                     case 0:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_blue.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_blue.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_blue.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_blue.png"));
                         break;
                     case 1:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_green.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_green.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_green.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_green.png"));
                         break;
                     case 2:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_orange.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_orange.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_orange.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_orange.png"));
                         break;
                     case 3:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_purple.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_purple.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_purple.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_purple.png"));
                         break;
                     case 4:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_red.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_red.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_red.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_red.png"));
                         break;
                     case 5:
                         if (ch.getClass().getSimpleName().equals("Researcher"))
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/researcher_yellow.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/researcher_yellow.png"));
                         else
-                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/forIceFloat/eskimo_yellow.png"));
+                            imageToBeDrawn = ImageIO.read(this.getClass().getResource("/icons/characters/eskimo_yellow.png"));
                         break;
                     default:
                         return;
