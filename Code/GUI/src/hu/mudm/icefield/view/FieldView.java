@@ -6,6 +6,8 @@ import hu.mudm.icefield.model.field.IceFloat;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -60,6 +62,13 @@ public class FieldView extends MVCView {
         //}
         panel.add(icon);
         menuView.packMainFrame();
+        icon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+            }
+        });
     }
 
     @Override
@@ -96,5 +105,11 @@ public class FieldView extends MVCView {
         y = y*FLOAT_DIMENSION;
         if (doesNeedOffset) x+=HORIZONTAL_OFFSET;
         return new Dimension(x,y);
+    }
+
+    private class MyLabel extends JLabel{
+        public MyLabel(){
+            super();
+        }
     }
 }
