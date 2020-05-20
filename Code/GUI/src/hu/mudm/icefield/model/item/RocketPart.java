@@ -6,7 +6,7 @@ import hu.mudm.icefield.model.player.Character;
 //aufgenommen wurden.
 public class RocketPart extends Item {
 
-    RocketPart() {
+    public RocketPart() {
         id = count++;
     }
 
