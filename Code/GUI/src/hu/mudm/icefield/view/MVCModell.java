@@ -12,7 +12,7 @@ public abstract class MVCModell {
 
     private MVCController mvcController;
 
-    protected ArrayList<IceFloat> selectable;
+    protected static ArrayList<IceFloat> selectable;
 
     public MVCModell(GUI gui){
         this.gui = gui;
@@ -39,7 +39,7 @@ public abstract class MVCModell {
     }
 
     public void setSelectable(ArrayList<IceFloat> selectable) {
-        this.selectable = selectable;
+        MVCModell.selectable = selectable;
 
 
         for (MVCView view: views ) {

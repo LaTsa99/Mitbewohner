@@ -235,6 +235,7 @@ public class Controller extends MVCModell {
         //GUI_Prototype.printMessage("You lost :(\n" + cause);
         isLost = true;
         isWon = false;
+        selectable =null;
     }
 
     @Override
