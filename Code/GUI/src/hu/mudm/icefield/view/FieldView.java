@@ -103,8 +103,8 @@ public class FieldView extends MVCView {
 
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
         boolean showhole = false;
-        if(((Controller)model).getIsLost()) {
-            if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
+        if(true/*((Controller)model).getIsLost()*/) {
+            if(icefloat.getClass().getSimpleName().equals("Hole") /*&& icefloat.getCharacters().size()>0*/)
                 showhole = true;
             if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
                 showhole = true;
