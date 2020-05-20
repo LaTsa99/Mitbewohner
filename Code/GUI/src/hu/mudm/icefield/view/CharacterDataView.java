@@ -217,7 +217,7 @@ public class CharacterDataView extends MVCView {
 
     @Override
     public void update() {
-        if (((Controller)model).isNextTurnStartsSoon()) {
+        if (((Controller)model).isNextTurnStartsSoon() || ((Controller)model).getIsLost()) {
             bFireAction.setEnabled(false);
             cbActions.setEnabled(false);
         }
