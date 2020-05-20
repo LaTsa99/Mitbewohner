@@ -168,7 +168,8 @@ public class Controller extends MVCModell {
                         icefloat = icefloats.get(i);
                     i++;
                 }
-                if (i == icefloats.size()) throw new IDNotFoundException();
+                if (icefloat == null && i == icefloats.size())
+                    throw new IDNotFoundException();
 
                 action = constructor.newInstance(ch, icefloat, this);
             }
@@ -182,7 +183,8 @@ public class Controller extends MVCModell {
                         icefloat = icefloats.get(i);
                     i++;
                 }
-                if (i == icefloats.size()) throw new IDNotFoundException();
+                if (icefloat == null && i == icefloats.size())
+                    throw new IDNotFoundException();
 
                 action = constructor.newInstance(ch, icefloat);
             }
