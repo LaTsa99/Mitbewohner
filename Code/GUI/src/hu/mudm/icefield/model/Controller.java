@@ -1,10 +1,12 @@
 package hu.mudm.icefield.model;
 
 import hu.mudm.icefield.model.action.*;
+import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.*;
 
+import javax.swing.*;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Random;
@@ -84,6 +86,7 @@ public class Controller extends MVCModell {
             gui.endRound();
         }
         updateViews();
+
     }
 
     public void snowstorm() {

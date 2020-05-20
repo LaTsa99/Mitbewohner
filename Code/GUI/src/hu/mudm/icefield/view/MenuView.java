@@ -1,5 +1,7 @@
 package hu.mudm.icefield.view;
 
+import hu.mudm.icefield.model.Controller;
+
 import javax.swing.*;
 
 public class MenuView extends MVCView {
@@ -14,7 +16,12 @@ public class MenuView extends MVCView {
 
     @Override
     public void update() {
-
+        if (((Controller)model).getIsLost()) {
+            JOptionPane.showMessageDialog(mainFrame,"Game is lost. :( Better luck next time.","Game over",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if (((Controller)model).getIsWon()){
+            JOptionPane.showMessageDialog(mainFrame,"Congratulations on winning the game!","Game over",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void packMainFrame(){
