@@ -26,6 +26,7 @@ public class MenuView extends MVCView {
 
     public void packMainFrame(){
         mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null);
     }
 
     public JPanel getDataView(){

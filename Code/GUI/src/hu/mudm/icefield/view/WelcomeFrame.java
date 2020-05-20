@@ -186,6 +186,7 @@ public class WelcomeFrame extends javax.swing.JFrame {
         getContentPane().add(pCenter, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>
 
     private void addNewCharacter(){
