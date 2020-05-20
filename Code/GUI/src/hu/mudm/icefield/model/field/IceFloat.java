@@ -47,6 +47,7 @@ public abstract class IceFloat {
 
     public void removeSnow(int layerCount){
         snowLevel = snowLevel - layerCount;
+        if(snowLevel<0) snowLevel= 0;
     }
 
     public void addSnow() {

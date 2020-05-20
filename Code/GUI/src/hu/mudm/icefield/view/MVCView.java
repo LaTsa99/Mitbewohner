@@ -2,6 +2,8 @@ package hu.mudm.icefield.view;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,18 @@ public abstract class MVCView {
 
     public MVCView(MVCModell model){
         this.model = model;
+        loadImages();
+    }
 
+    protected static BufferedImage getImage(String s) {
+        BufferedImage bi = images.get(s);
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+
+    protected void loadImages() {
         if(images.size()==0)
         {
             try {

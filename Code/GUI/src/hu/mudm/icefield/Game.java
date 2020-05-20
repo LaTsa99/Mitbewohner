@@ -108,7 +108,7 @@ public class Game {
 
         controller.setIcefloats(iceFloats);
         //initial snow level
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
             controller.snowstorm();
         controller.setPolarBear(maci);
         ArrayList<Character> characters = gui.getCharacters((StableIceFloat) iceFloats.get(0));   //getCharacters() uses iceFloats! (startPosition)

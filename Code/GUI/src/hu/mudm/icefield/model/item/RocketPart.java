@@ -6,6 +6,11 @@ import hu.mudm.icefield.model.player.Character;
 //aufgenommen wurden.
 public class RocketPart extends Item {
 
+    RocketPart() {
+        id = count++;
+    }
+
+
     static int count = 0;
 
     int id;
@@ -14,7 +19,6 @@ public class RocketPart extends Item {
     public void onPickup(Character ch) {
         Controller.rocketPartPickedUp();
         ch.addItem(this);
-        id = count++;
     }
 
     public int getID(){

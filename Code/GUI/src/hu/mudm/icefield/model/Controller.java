@@ -1,12 +1,10 @@
 package hu.mudm.icefield.model;
 
 import hu.mudm.icefield.model.action.*;
-import hu.mudm.icefield.model.action.Action;
 import hu.mudm.icefield.model.field.IceFloat;
 import hu.mudm.icefield.model.player.Character;
 import hu.mudm.icefield.view.*;
 
-import javax.swing.*;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Random;
@@ -71,10 +69,11 @@ public class Controller extends MVCModell {
                     if(isLost || isWon) return;
                 }
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println("endround");
             }
             gui.showMessage("The polar bear is moving");
             p.Wake();
@@ -98,10 +97,15 @@ public class Controller extends MVCModell {
                 }
             }
         }
-        for (int i=0; i<3; i++)
+        for (int i=0; i<5; i++)
         {
             for (MVCView view: views ) {
                 if(view instanceof FieldView)  view.update();
+            }
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         duringstorm = false;

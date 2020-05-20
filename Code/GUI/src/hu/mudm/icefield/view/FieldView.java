@@ -120,38 +120,31 @@ public class FieldView extends MVCView {
         //if(countOfDrawables==0) return null;
 
         BufferedImage background = null;
-        try {
-            if(showhole)
-                background = images.get("hole");
-            else {
-                int r =0;
-                if(((Controller) model).getDuringStorm())
-                    r = rnd.nextInt(4);
-                else
-                {
-                    r = icefloat.getID()%4;
-                    if(r<0) throw new Exception("Giga");
-                }
-                switch (r + 1) {
-                    case 1:
-                        background = images.get("iceFloat_1");
-                        break;
-                    case 2:
-                        background = images.get("iceFloat_2");
-                        break;
-                    case 3:
-                        background = images.get("iceFloat_3");
-                        break;
-                    case 4:
-                        background = images.get("iceFloat_4");
-                        break;
-                }
+
+        if(showhole)
+            background = getImage("hole");
+        else {
+            int r =0;
+            if(((Controller) model).getDuringStorm())
+                r = rnd.nextInt(4);
+            else
+            {
+                r = icefloat.getID()%4;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.gc();
+            switch (r + 1) {
+                case 1:
+                    background = getImage("iceFloat_1");
+                    break;
+                case 2:
+                    background = getImage("iceFloat_2");
+                    break;
+                case 3:
+                    background = getImage("iceFloat_3");
+                    break;
+                case 4:
+                    background = getImage("iceFloat_4");
+                    break;
+            }
         }
         Graphics g_background = background.getGraphics();
 
@@ -195,12 +188,12 @@ public class FieldView extends MVCView {
         }
 
         if(model.getSelectable() != null && model.getSelectable().contains(icefloat)) {
-            BufferedImage b =images.get("x");
+            BufferedImage b =getImage("x");
             g_background.drawImage(b, 0, 0, null);
         }
 
         if(((Controller)model).getActiveCharacter().getPosition().equals(icefloat)) {
-            BufferedImage b = images.get("rectangle");
+            BufferedImage b = getImage("rectangle");
             g_background.drawImage(b, 0, 0, null);
         }
 
@@ -210,7 +203,7 @@ public class FieldView extends MVCView {
 
     private int drawPolarBear(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        imageToBeDrawn = images.get("polarBear");
+        imageToBeDrawn = getImage("polarBear");
         if (imageToBeDrawn != null)
         {
             g_background.drawImage(imageToBeDrawn, 32 * (alreadyDrawn%4), offsets_y.get(alreadyDrawn/4), null);
@@ -221,7 +214,7 @@ public class FieldView extends MVCView {
 
     private int drawTent(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        imageToBeDrawn = images.get("tent");
+        imageToBeDrawn = getImage("tentOnIce");
 
         if (imageToBeDrawn != null)
         {
@@ -233,7 +226,7 @@ public class FieldView extends MVCView {
 
     private int drawIglu(Graphics g_background, int alreadyDrawn, ArrayList<Integer> offsets_y) {
         BufferedImage imageToBeDrawn = null;
-        imageToBeDrawn = images.get("igloo");
+        imageToBeDrawn = getImage("igloo");
 
         if (imageToBeDrawn != null)
         {
@@ -247,35 +240,35 @@ public class FieldView extends MVCView {
         BufferedImage imageToBeDrawn = null;
             switch (item.getClass().getSimpleName()) {
                 case "BreakableShovel":
-                    imageToBeDrawn = images.get("breakableShovel");
+                    imageToBeDrawn = getImage("breakableShovel");
                     break;
                 case "DiverSuit":
-                    imageToBeDrawn = images.get("diverSuit");
+                    imageToBeDrawn = getImage("diverSuit");
                     break;
                 case "Food":
-                    imageToBeDrawn = images.get("food");
+                    imageToBeDrawn = getImage("food");
                     break;
                 case "RocketPart":
                     switch(((RocketPart)item).getID()+1) {
                         case 1:
-                            imageToBeDrawn = images.get("rocketPart_1");
+                            imageToBeDrawn = getImage("rocketPart_1");
                             break;
                         case 2:
-                            imageToBeDrawn = images.get("rocketPart_2");
+                            imageToBeDrawn = getImage("rocketPart_2");
                             break;
                         case 3:
-                            imageToBeDrawn = images.get("rocketPart_3");
+                            imageToBeDrawn = getImage("rocketPart_3");
                             break;
                     }
                     break;
                 case "Rope":
-                    imageToBeDrawn = images.get("rope");
+                    imageToBeDrawn = getImage("rope");
                     break;
                 case "Shovel":
-                    imageToBeDrawn = images.get("shovel");
+                    imageToBeDrawn = getImage("shovel");
                     break;
                 case "Tent":
-                    imageToBeDrawn = images.get("tent");
+                    imageToBeDrawn = getImage("tent");
                     break;
                 default:
                     return 0;
@@ -294,47 +287,46 @@ public class FieldView extends MVCView {
         int count = 0;
         for (Character ch : characterList) {
             int id = ch.getId();
-
-             switch (id) {
-                 case 0:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_blue");
-                     else
-                         imageToBeDrawn = images.get("eskimo_blue");
-                     break;
-                 case 1:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_green");
-                     else
-                         imageToBeDrawn = images.get("eskimo_green");
-                     break;
-                 case 2:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_orange");
-                     else
-                         imageToBeDrawn = images.get("eskimo_orange");
-                     break;
-                 case 3:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_purple");
-                     else
-                         imageToBeDrawn = images.get("eskimo_purple");
-                     break;
-                 case 4:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_red");
-                     else
-                         imageToBeDrawn = images.get("eskimo_red");
-                     break;
-                 case 5:
-                     if (ch.getClass().getSimpleName().equals("Researcher"))
-                         imageToBeDrawn = images.get("researcher_yellow");
-                     else
-                         imageToBeDrawn = images.get("eskimo_yellow");
-                     break;
-                 default:
-                     return count;
-             }
+            switch (id) {
+                case 0:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_blue");
+                    else
+                        imageToBeDrawn = getImage("eskimo_blue");
+                    break;
+                case 1:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_green");
+                    else
+                        imageToBeDrawn = getImage("eskimo_green");
+                    break;
+                case 2:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_orange");
+                    else
+                        imageToBeDrawn = getImage("eskimo_orange");
+                    break;
+                case 3:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_purple");
+                    else
+                        imageToBeDrawn = getImage("eskimo_purple");
+                    break;
+                case 4:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_red");
+                    else
+                        imageToBeDrawn = getImage("eskimo_red");
+                    break;
+                case 5:
+                    if (ch.getClass().getSimpleName().equals("Researcher"))
+                        imageToBeDrawn = getImage("researcher_yellow");
+                    else
+                        imageToBeDrawn = getImage("eskimo_yellow");
+                    break;
+                default:
+                    return count;
+            }
 
             if (imageToBeDrawn != null)
             {

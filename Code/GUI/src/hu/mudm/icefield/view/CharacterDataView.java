@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +83,7 @@ public class CharacterDataView extends MVCView {
 
         lTempIcon.setBackground(SystemColor.window);
         lTempIcon.setHorizontalAlignment(SwingConstants.CENTER);
-        lTempIcon.setIcon(new ImageIcon(images.get("thermometer")));
+        lTempIcon.setIcon(new ImageIcon(getImage("thermometer")));
 
         GroupLayout pTempLayout = new GroupLayout(pTemp);
         pTemp.setLayout(pTempLayout);
@@ -233,6 +232,7 @@ public class CharacterDataView extends MVCView {
 
         setCharacterDisplay();
 
+        lActionsLeft.setIcon(new ImageIcon(getImage("action" + character.getActionsLeft())));
         lActionsLeft.setIcon(new ImageIcon(images.get("action" + character.getActionsLeft())));
         if (((Controller)model).isNextTurnStartsSoon()) {
             lActionsLeft.setIcon(null);
@@ -375,6 +375,6 @@ public class CharacterDataView extends MVCView {
             break;
             default: path.append("sarga");
         }
-        lCharIcon.setIcon(new ImageIcon(images.get(path.toString())));
+        lCharIcon.setIcon(new ImageIcon(getImage(path.toString())));
     }
 }
