@@ -73,7 +73,6 @@ public class Controller extends MVCModell {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("endround");
             }
             gui.showMessage("The polar bear is moving");
             p.Wake();
@@ -149,10 +148,9 @@ public class Controller extends MVCModell {
         Action action=null;
 
         //get index of action class
+        enableOKButton();
         int actionIndex = gui.getAction(ch);
         Class<? extends Action> classofaction = ch.getActions().get(actionIndex);
-        System.out.println(actionIndex);
-        System.out.println(classofaction.getSimpleName());
         //get constructor of the chosen action class
         Constructor<? extends Action>[] constructors = (Constructor<? extends Action>[]) classofaction.getConstructors();
         Constructor<? extends Action> constructor = constructors[0];
@@ -198,6 +196,14 @@ public class Controller extends MVCModell {
         return action;
     }
 
+    private void enableOKButton() {
+        for (MVCView view: views) {
+            if(view instanceof CharacterDataView)
+                ((CharacterDataView)view).enableInput();
+        }
+        selectable = null;
+    }
+
     public boolean canRocketBeBuilt(){
         //the same with the "canWin" method in documentation
         if(rocketPartsCnt < 3) return false;
@@ -236,6 +242,7 @@ public class Controller extends MVCModell {
         views.add(new CharacterDataView(this, mv));
         views.add(new IceFloatView(this, mv));
     }
+
 
     public Character getActiveCharacter(){
         return activeCharacter;

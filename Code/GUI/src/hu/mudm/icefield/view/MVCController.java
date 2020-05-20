@@ -25,6 +25,7 @@ public class MVCController implements GUI {
 
     public void setSelectedAction(int selectedAction) {
         this.selectedAction = selectedAction;
+        this.selectedNeighbour = -1;
     }
 
     public void setSelectedNeighbour(int selectedNeighbour){

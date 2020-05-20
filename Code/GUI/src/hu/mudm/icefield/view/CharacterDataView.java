@@ -210,9 +210,13 @@ public class CharacterDataView extends MVCView {
         index -= 1;
         Class<? extends Action> action = ((Controller)model).getActiveCharacter().getActions().get(index);
         if(action.getSimpleName().equals("MoveAction") || action.getSimpleName().equals("CheckAction"))
+        {
             model.setSelectable(character.getIceFloat().getNeighbors());
+        }
         else
+        {
             model.setSelectable(null);
+        }
     }
 
     @Override
@@ -279,7 +283,6 @@ public class CharacterDataView extends MVCView {
         for(i=0;i<actionStrings.length;i++) actionsModel.addElement(actionStrings[i]);
 
         updateCharacterInventory();
-
     }
 
     public void setCharacter(Character ch){character = ch;}
@@ -314,6 +317,16 @@ public class CharacterDataView extends MVCView {
         }
     }
 
+    public void enableInput() {
+        cbActions.setEnabled(true);
+        bFireAction.setEnabled(true);
+    }
+
+    private void disableInput() {
+        cbActions.setEnabled(false);
+        bFireAction.setEnabled(false);
+    }
+
     public class ItemCellRenderer extends DefaultListCellRenderer {
 
         private Map<String, Icon> icons = new HashMap<String,Icon>();
@@ -343,6 +356,7 @@ public class CharacterDataView extends MVCView {
     }
 
     private void onFireButtonClick(){
+        disableInput();
         int index = cbActions.getSelectedIndex();
         if(index == 0) return;
         index -= 1;
@@ -351,8 +365,8 @@ public class CharacterDataView extends MVCView {
             model.getMvcController().setSelectedAction(index);
             lock.notify();
         }
-        model.setSelectable(null);
     }
+
 
     private void setCharacterDisplay(){
         StringBuilder path = new StringBuilder();

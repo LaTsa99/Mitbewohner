@@ -12,7 +12,7 @@ public abstract class MVCModell {
 
     private MVCController mvcController;
 
-    private ArrayList<IceFloat> selectable;
+    protected ArrayList<IceFloat> selectable;
 
     public MVCModell(GUI gui){
         this.gui = gui;
