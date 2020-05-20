@@ -103,8 +103,8 @@ public class FieldView extends MVCView {
 
     private BufferedImage createImageOfIceFloat(IceFloat icefloat) {
         boolean showhole = false;
-        if(true/*((Controller)model).getIsLost()*/) {
-            if(icefloat.getClass().getSimpleName().equals("Hole") /*&& icefloat.getCharacters().size()>0*/)
+        if(((Controller)model).getIsLost()) {
+            if(icefloat.getClass().getSimpleName().equals("Hole") && icefloat.getCharacters().size()>0)
                 showhole = true;
             if(icefloat.getClass().getSimpleName().equals("UnstableIceFloat") && icefloat.getCharacters().size()> icefloat.getCapacity())
                 showhole = true;
@@ -192,7 +192,7 @@ public class FieldView extends MVCView {
             g_background.drawImage(b, 0, 0, null);
         }
 
-        if(((Controller)model).getActiveCharacter().getPosition().equals(icefloat) ||  (icefloat.getItem() != null && icefloat.getItem().getClass().getSimpleName().equals("RocketPart"))) {
+        if(((Controller)model).getActiveCharacter().getPosition().equals(icefloat)) {
             BufferedImage b = getImage("rectangle");
             g_background.drawImage(b, 0, 0, null);
         }
